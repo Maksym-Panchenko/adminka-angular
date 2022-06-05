@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { IconsService } from './services/icons/icons.service'
 
 @Component({
   selector: 'app-root',
@@ -7,4 +8,7 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'adminka_na_kolenke';
+
+  constructor(icons: IconsService) {
+  }
 }

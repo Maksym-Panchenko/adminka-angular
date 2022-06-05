@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<svg width="18px" height="18px" viewBox="0 0 18 18" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <path d="M0 14.2019L0 18L3.79811 18L15 6.79811L11.2019 3L0 14.2019ZM17.7011 4.13027C18.0996 3.7318 18.0996 3.08812 17.7011 2.68966L15.3103 0.298851C14.9119 -0.0996169 14.2682 -0.0996169 13.8697 0.298851L12 2.16858L15.8314 6L17.7011 4.13027Z" id="path_1" />
+    <clipPath id="mask_1">
+      <use xlink:href="#path_1" />
+    </clipPath>
+  </defs>
+  <g id="ic_mode_edit_24px">
+    <path d="M0 14.2019L0 18L3.79811 18L15 6.79811L11.2019 3L0 14.2019ZM17.7011 4.13027C18.0996 3.7318 18.0996 3.08812 17.7011 2.68966L15.3103 0.298851C14.9119 -0.0996169 14.2682 -0.0996169 13.8697 0.298851L12 2.16858L15.8314 6L17.7011 4.13027Z" id="Shape" fill="none" stroke="none" />
+    <g clip-path="url(#mask_1)">
+      <g id="🎨-Color" transform="translate(-3 -3)">
+        <path d="M0 0L24 0L24 24L0 24L0 0Z" id="Shape" fill="#9EA0A5" fill-rule="evenodd" stroke="none" />
+      </g>
+    </g>
+  </g>
+</svg>
