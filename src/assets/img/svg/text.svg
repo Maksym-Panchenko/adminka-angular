@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<svg width="18.104492px" height="14.292847px" viewBox="0 0 18.104492 14.292847" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <path d="M0 0L0 2.85857L4.76429 2.85857L4.76429 14.2929L7.62286 14.2929L7.62286 2.85857L12.3871 2.85857L12.3871 0L0 0ZM18.1045 4.76428L9.52881 4.76428L9.52881 7.62285L12.3874 7.62285L12.3874 14.2929L15.246 14.2929L15.246 7.62285L18.1045 7.62285L18.1045 4.76428Z" id="path_13" />
+    <clipPath id="mask_13">
+      <use xlink:href="#path_13" />
+    </clipPath>
+  </defs>
+  <g id="iconsicoutline-dashboard-24px">
+    <path d="M0 0L0 2.85857L4.76429 2.85857L4.76429 14.2929L7.62286 14.2929L7.62286 2.85857L12.3871 2.85857L12.3871 0L0 0ZM18.1045 4.76428L9.52881 4.76428L9.52881 7.62285L12.3874 7.62285L12.3874 14.2929L15.246 14.2929L15.246 7.62285L18.1045 7.62285L18.1045 4.76428Z" id="iconsicoutline-text_fields-24px" fill="none" stroke="none" />
+    <g clip-path="url(#mask_13)">
+      <g id="🎨-color" transform="translate(-2.8637695 -4.8535767)">
+        <path d="M0 0L24 0L24 24L0 24L0 0Z" id="BG" fill="#66788A" fill-rule="evenodd" stroke="none" />
+      </g>
+    </g>
+  </g>
+</svg>

@@ -1,0 +1,43 @@
+.nav {
+  &__list {
+    margin: 0;
+    padding: 0;
+  }
+
+  &__list-item {
+    display: block;
+    margin-bottom: 0.8rem;
+  }
+
+  &__link {
+    display: flex;
+    align-content: center;
+    min-height: 4.6rem;
+    padding: 1rem 1.8rem;
+    text-decoration: none;
+    font-size: 1.4rem;
+    font-weight: var(--fw-medium);
+    border-radius: 0.4rem;
+
+    span {
+      display: inline-flex;
+      align-items: center;
+      color: var(--color-slate-gray);
+    }
+
+    &:hover {
+      background-color: var(--color-ghost-white);
+    }
+
+    &.active {
+      background-color: var(--color-ghost-white);
+      box-shadow: inset 3px 0 0 var(--color-denim);
+    }
+  }
+
+  &__icon {
+    margin-right: 1rem;
+    height: 2.4rem;
+    flex: 0 0 2.4rem;
+  }
+}
