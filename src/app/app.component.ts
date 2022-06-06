@@ -8,7 +8,15 @@ import { IconsService } from './services/icons/icons.service'
 })
 export class AppComponent {
   title = 'adminka_na_kolenke';
+  isLogined: boolean = false;
 
-  constructor(icons: IconsService) {
+  constructor(
+    // for icons register
+    icons: IconsService
+  ) {
+  }
+
+  loggedIn(): void {
+    this.isLogined = true;
   }
 }

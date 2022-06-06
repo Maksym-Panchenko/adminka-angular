@@ -1,0 +1,38 @@
+@use "sass:map";
+@use "@angular/material" as mat;
+@use "modules/form-field-theme" as form-field;
+@use "modules/checkbox-theme" as form-checkbox;
+@use "modules/button-theme" as form-button;
+@use "palettes/custom-blue" as custom-blue-palette;
+
+@include mat.core();
+
+$primary-palette: mat.define-palette(custom-blue-palette.$custom-blue);
+$accent-palette: mat.define-palette(mat.$grey-palette);
+
+$custom-theme: mat.define-light-theme($primary-palette, $accent-palette);
+
+:root {
+  $mat-theme-background: map-get($map: $custom-theme, $key: background);
+  $mat-theme-foreground: map-get($map: $custom-theme, $key: foreground);
+  $primary-color: mat.get-color-from-palette($primary-palette, 500);
+
+  --material-base-background-color:
+    #{map-get(
+      $map: $mat-theme-background,
+      $key: background
+  )};
+}
+
+// Include theme styles for core and each component used in your app.
+// Alternatively, you can import and @include the theme mixins for each component
+// that you are using.
+
+@mixin custom-material-theme($custom-theme: $custom-theme) {
+  @include mat.all-component-themes($custom-theme);
+  @include form-field.theme($custom-theme);
+  @include form-checkbox.theme($custom-theme);
+  @include form-button.theme($custom-theme);
+}
+
+@include custom-material-theme($custom-theme: $custom-theme);
