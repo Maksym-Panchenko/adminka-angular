@@ -30,6 +30,7 @@
       background-position: center;
       background-repeat: no-repeat;
       background-size: cover;
+      overflow-y: auto;
     }
   }
 
@@ -49,5 +50,22 @@
 
   &__button {
     margin-top: 2.4rem;
+  }
+
+  &__mail-list {
+    height: 100%;
+    width: 70%;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+  }
+
+  &__email-button {
+    background-color: var(--color-white-semi-transparent);
+    font-size: 1.2rem;
+    height: 3rem;
+    line-height: 3rem;
+    margin: 0.4rem 0;
   }
 }

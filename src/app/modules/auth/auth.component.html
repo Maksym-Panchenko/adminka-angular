@@ -30,5 +30,14 @@
     </form>
   </div>
 
-  <div class="auth__column auth__column_img" [style]="{ backgroundImage: 'url(' + bgUrl + ')' }"></div>
+  <div class="auth__column auth__column_img" [style]="{ backgroundImage: 'url(' + bgUrl + ')' }">
+    <div class="auth__mail-list">
+      <button
+        *ngFor="let email of emailList"
+        (click)="selectEmail(email)"
+        mat-button
+        class="auth__email-button"
+      >{{ email }}</button>
+    </div>
+  </div>
 </div>

@@ -1,14 +1,20 @@
+<load-spinner [isLoading]="isLoading"></load-spinner>
+
 <ng-container *ngIf="isLogined; else login">
-  <main-header></main-header>
+  <main-header (logOutUser)="logOut()"></main-header>
 
   <div class="content">
     <side-nav></side-nav>
+
+    <div class="content__main">
+      <router-outlet></router-outlet>
+    </div>
   </div>
 
-  <router-outlet></router-outlet>
 </ng-container>
 
 <ng-template #login>
-  <auth (login)="loggedIn()"></auth>
+  <auth (login)="loggedIn($event)"></auth>
 </ng-template>
+
 

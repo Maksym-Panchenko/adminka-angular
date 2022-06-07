@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 
 @Component({
   selector: 'main-header',
@@ -6,10 +6,14 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./main-header.component.scss']
 })
 export class MainHeaderComponent implements OnInit {
+  @Output() logOutUser: EventEmitter<void> = new EventEmitter();
 
   constructor() { }
 
   ngOnInit(): void {
   }
 
+  logOut(): void {
+    this.logOutUser.emit();
+  }
 }

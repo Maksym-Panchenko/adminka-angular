@@ -1,3 +1,9 @@
 .content {
   display: flex;
+
+  &__main {
+    background-color: var(--color-ghost-white);
+    flex-grow: 1;
+    padding: 2.4rem;
+  }
 }
