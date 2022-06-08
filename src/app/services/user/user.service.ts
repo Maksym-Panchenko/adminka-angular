@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {User} from "@models/interfaces/user.interface";
+import {IUser} from "@models/interfaces/user.interface";
 import {UsersService} from "../users/users.service";
 
 @Injectable({
@@ -10,19 +10,19 @@ export class UserService {
   constructor(private _users: UsersService) { }
 
   setUserByEmail(email: string): void {
-    const user: User | undefined = this._users.users.find(e => e.email === email);
+    const user: IUser | undefined = this._users.users.find(e => e.email === email);
     if (user) {
       this.setUser(user);
     }
   }
 
-  setUser(user: User): void {
+  setUser(user: IUser): void {
     localStorage.setItem('currentUser', JSON.stringify(user));
   }
 
   getUserId(): number {
     const value: string | null = localStorage.getItem('currentUser');
-    let user: User;
+    let user: IUser;
     if (value) {
       user = JSON.parse(value);
       return user.id;
@@ -31,7 +31,7 @@ export class UserService {
     }
   }
 
-  getUser(): User | null {
+  getUser(): IUser | null {
     const value: string | null = localStorage.getItem('currentUser');
     if (value) {
       return JSON.parse(value);

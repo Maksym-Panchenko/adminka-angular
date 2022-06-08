@@ -1,5 +1,5 @@
 import {AfterViewInit, Component, OnInit, ViewChild} from '@angular/core';
-import {User} from "@models/interfaces/user.interface";
+import {IUser} from "@models/interfaces/user.interface";
 import {MatPaginator} from "@angular/material/paginator";
 
 @Component({
@@ -11,8 +11,8 @@ export class UsersComponent implements OnInit, AfterViewInit {
   startUser: number;
   numberOfUsers: number = 3;
 
-  users: User[];
-  showedUsers: User[];
+  users: IUser[];
+  showedUsers: IUser[];
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
   constructor() { }

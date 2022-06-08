@@ -1,5 +1,4 @@
 <div class="users">
-<!--  <user *ngFor="let user of users" [user]="user"></user>-->
   <user *ngFor="let user of showedUsers" [user]="user"></user>
 
   <mat-paginator
@@ -8,7 +7,5 @@
     [pageSizeOptions]="[3, 5, 10]"
     aria-label="Select page"
     class="users__paginator"
-  >
-
-  </mat-paginator>
+  ></mat-paginator>
 </div>

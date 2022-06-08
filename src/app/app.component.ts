@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import { IconsService } from './services/icons/icons.service'
 import {UserService} from "./services/user/user.service";
 import {UsersService} from "./services/users/users.service";
-import {User} from "@models/interfaces/user.interface";
+import {IUser} from "@models/interfaces/user.interface";
 
 @Component({
   selector: 'app-root',
@@ -13,7 +13,7 @@ export class AppComponent implements OnInit {
   title = 'adminka_na_kolenke';
   isLogined: boolean = false;
   isLoading: boolean = true;
-  currentUser: User;
+  currentUser: IUser;
 
   constructor(
     // for icons register

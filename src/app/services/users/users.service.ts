@@ -1,13 +1,13 @@
 import { Injectable } from '@angular/core';
-import {User} from "@models/interfaces/user.interface";
+import {IUser} from "@models/interfaces/user.interface";
 import {Observable, Subject} from "rxjs";
 
 @Injectable({
   providedIn: 'root'
 })
 export class UsersService {
-  users: User[];
-  load$: Subject<User[]> = new Subject();
+  users: IUser[];
+  load$: Subject<IUser[]> = new Subject();
 
   constructor() {
     this.load();
@@ -23,6 +23,6 @@ export class UsersService {
   }
 
   getEmailList(): string[] {
-    return this.users.map((e: User): string => e.email);
+    return this.users.map((e: IUser): string => e.email);
   }
 }

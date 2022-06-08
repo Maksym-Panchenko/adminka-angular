@@ -1,10 +1,12 @@
 .spinner-wrapper {
-  position: fixed;
+  position: absolute;
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 100vw;
-  height: 100vh;
+  width: 100%;
+  height: 100%;
+  left: 0;
+  top: 0;
 
   background-color: var(--color-white-semi-transparent);
   user-select: none;
