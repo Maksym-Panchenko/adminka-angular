@@ -11,6 +11,7 @@ import {filter} from "rxjs/operators";
 import {Router} from "@angular/router";
 import {PostDialogComponent} from "../../common/modules/modals/post-dialog/post-dialog.component";
 import {IPostModal} from "@models/interfaces/modal/post-modal.inteface";
+import {UserService} from "@services/user/user.service";
 
 @Component({
   selector: 'posts',
@@ -29,14 +30,14 @@ export class PostsComponent implements OnInit {
 
   displayedColumns: string[] = ['id', 'title', 'text', 'actions'];
 
-  constructor(private _postsApi: PostApiService, protected dialog: MatDialog, private _router: Router) { }
+  constructor(private _postsApi: PostApiService, protected dialog: MatDialog, private _router: Router, private _user: UserService) { }
 
   ngOnInit(): void {
     this.getPosts();
   }
 
   getPosts(): void {
-    this._postsApi.getPosts(1)
+    this._postsApi.getPosts(this._user.getUserId())
       .then((posts: IPost[]): void => {
         this.posts = posts;
         this.dataSource = new MatTableDataSource(this.posts);
