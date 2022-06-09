@@ -1,0 +1,27 @@
+<div class="post">
+  <load-spinner [isLoading]="isLoading">posts loading</load-spinner>
+
+  <ng-container *ngIf="!isLoading">
+    <div class="post__content">
+      <h2 class="post__title">
+        ({{ post.id }}) {{ post.title }}
+      </h2>
+      <p class="post__text">{{ post.body }}</p>
+      <div class="actions">
+        <button (click)="editPost()" class="post__button" mat-stroked-button [color]="'primary'" >Edit Post</button>
+      </div>
+    </div>
+
+    <div class="post__comments">
+      <h2 class="post__title post__title_underlined">Comments:</h2>
+      <ul class="post__comments-list">
+        <li *ngFor="let comment of comments" class="post__comment">
+          <h3 class="post__comment-title">({{ comment.id }}) {{ comment.name }}</h3>
+          <p class="post__comment-text">{{ comment.body }}</p>
+          <footer class="post__comment-email">{{ comment.email }}</footer>
+        </li>
+      </ul>
+    </div>
+
+  </ng-container>
+</div>

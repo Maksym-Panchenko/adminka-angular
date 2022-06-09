@@ -3,6 +3,23 @@
   width: 100%;
   min-height: 100%;
   padding: 2.4rem;
+
+  &__actions {
+    margin-bottom: 2.4rem;
+    display: flex;
+    justify-content: flex-end;
+  }
+
+  &__button {
+    box-shadow: var(--shadow-button);
+    --button-height: 3.6rem;
+    padding: 0 1.6rem;
+
+
+    ::ng-deep .mat-button-wrapper {
+      gap: 1.2rem;
+    }
+  }
 }
 
 .mat-table {
