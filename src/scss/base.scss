@@ -5,3 +5,93 @@
 :root {
   font-size: 10px;
 }
+
+.items {
+  position: relative;
+  width: 100%;
+  min-height: 100%;
+  padding: 2.4rem;
+
+  &__actions {
+    margin-bottom: 2.4rem;
+    display: flex;
+    justify-content: flex-end;
+  }
+
+  &__button.mat-flat-button.mat-primary {
+    --button-height: 3.6rem;
+    padding: 0 1.6rem;
+    box-shadow: var(--shadow-button);
+  }
+}
+
+.table {
+  width: 100%;
+
+  &__column {
+    &_id {
+      width: 6rem;
+    }
+
+    &_title {
+      max-width: 20rem;
+
+      text-overflow: ellipsis;
+      overflow: hidden;
+      height: 1.2em;
+      white-space: nowrap;
+
+      &:first-letter {
+        text-transform: uppercase;
+      }
+    }
+
+    &_text {
+      width: 20rem;
+    }
+  }
+
+  &__button-group {
+    min-width: 7.2rem;
+    display: flex;
+    gap: 0.4rem;
+
+    display: flex;
+    justify-content: flex-end;
+  }
+
+  &__button.mat-button-base.mat-icon-button {
+    --button-height: 3.2rem;
+    --button-width: 3.2rem;
+
+    &_delete {
+      color: var(--color-carmine-pink);
+    }
+  }
+
+  &__toggle-button.mat-button-base.mat-button {
+    height: auto;
+    line-height: 1.2;
+    text-transform: lowercase;
+    font-weight: var(--fw-normal);
+    letter-spacing: normal;
+    font-size: 1.4rem;
+    color: var(--color-spanish-gray);
+    padding: 0 0.4rem;
+  }
+}
+
+.mat-table {
+  .mat-cell,
+  .mat-header-cell {
+    padding: 0.8rem 1.6rem;
+    vertical-align: top;
+    color: var(--color-onyx);
+  }
+
+  .mat-button-wrapper .mat-icon svg {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+}

@@ -2,9 +2,9 @@
   <load-spinner [isLoading]="isLoading"></load-spinner>
 
   <div class="items__actions">
-    <button (click)="createPost()" class="items__button" mat-flat-button color="primary">
+    <button (click)="createItem()" class="items__button" mat-flat-button color="primary">
       <mat-icon>add</mat-icon>
-      Add Post
+      Add Album
     </button>
   </div>
 
@@ -18,25 +18,8 @@
 
     <!-- Title -->
     <ng-container matColumnDef="title">
-      <th mat-header-cell *matHeaderCellDef class="table__column table__column_title"> Title </th>
+      <th mat-header-cell *matHeaderCellDef class="table__column table__column_title"> Album title </th>
       <td mat-cell *matCellDef="let element" class="table__column table__column_title"> {{ element.title }} </td>
-    </ng-container>
-
-    <!-- Text -->
-    <ng-container matColumnDef="text">
-      <th mat-header-cell *matHeaderCellDef> Text </th>
-      <td mat-cell *matCellDef="let element">
-        <span *ngIf="element.showAll || element.body.length <= maxLengthPostBody">{{ element.body }}</span>
-        <span *ngIf="!element.showAll && element.body.length > maxLengthPostBody">{{ element.body?.substring(0, maxLengthPostBody) }}...</span>
-        <button
-          *ngIf="element.body.length > maxLengthPostBody"
-          (click)="element.showAll = !element.showAll"
-          mat-button
-          class="table__toggle-button"
-        >
-          {{ element.showAll ? 'Show less' : 'Show more' }}
-        </button>
-      </td>
     </ng-container>
 
     <!-- Action -->
@@ -45,10 +28,10 @@
       <td mat-cell *matCellDef="let element">
         <div class="table__button-group">
           <button mat-icon-button class="table__button table__button_arrow">
-            <mat-icon (click)="openPost(element.id)" [svgIcon]="'arrow-right'" class="nav__icon"></mat-icon>
+            <mat-icon (click)="openAlbum(element.id)" [svgIcon]="'arrow-right'" class="nav__icon"></mat-icon>
           </button>
           <button mat-icon-button class="table__button table__button_delete">
-            <mat-icon class="nav__icon" (click)="deletePost(element.id)">delete_forever</mat-icon>
+            <mat-icon class="nav__icon" (click)="deleteItem(element.id)">delete_forever</mat-icon>
           </button>
         </div>
       </td>

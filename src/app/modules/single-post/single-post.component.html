@@ -1,7 +1,7 @@
 <div class="post">
-  <load-spinner [isLoading]="isLoading">posts loading</load-spinner>
+  <load-spinner [isLoading]="isLoadingPost || isLoadingComments">posts loading</load-spinner>
 
-  <ng-container *ngIf="!isLoading">
+  <ng-container *ngIf="!isLoadingPost && !isLoadingComments">
     <div class="post__content">
       <h2 class="post__title">
         ({{ post.id }}) {{ post.title }}

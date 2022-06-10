@@ -6,6 +6,8 @@ import {PostsComponent} from "./modules/posts/posts.component";
 import {PostsModule} from "./modules/posts/posts.module";
 import {SinglePostComponent} from "./modules/single-post/single-post.component";
 import {SinglePostModule} from "./modules/single-post/single-post.module";
+import {AlbumsComponent} from "./modules/albums/albums.component";
+import {AlbumsModule} from "./modules/albums/albums.module";
 
 const routes: Routes = [
   {
@@ -20,10 +22,14 @@ const routes: Routes = [
     path: 'posts/:id',
     component: SinglePostComponent
   },
+  {
+    path: 'albums',
+    component: AlbumsComponent
+  },
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes), UsersModule, PostsModule, SinglePostModule],
+  imports: [RouterModule.forRoot(routes), UsersModule, PostsModule, SinglePostModule, AlbumsModule],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }

@@ -1,8 +1,8 @@
 import { NgModule } from '@angular/core';
 import {MessageDialogModule} from "./message-dialog/message-dialog.module";
-import {PostDialogModule} from "./post-dialog/post-dialog.module";
+import {EntityDialogModule} from "./entity-dialog/entity-dialog.module";
 
 @NgModule({
-  exports: [MessageDialogModule, PostDialogModule]
+  exports: [MessageDialogModule, EntityDialogModule]
 })
 export class ModalsModule {}
