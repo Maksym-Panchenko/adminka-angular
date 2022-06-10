@@ -6,7 +6,6 @@ import {ApiBaseAbstractService} from "../../../misc/abstracts/api-base.abstract.
   providedIn: 'root'
 })
 export class PostApiService extends ApiBaseAbstractService<IPost> {
-  readonly path = 'https://jsonplaceholder.typicode.com/';
   readonly entityUrl: string = 'posts';
   readonly parentEntityUrl: string = 'users';
 

@@ -67,10 +67,10 @@
   &__button.mat-button-base.mat-icon-button {
     --button-height: 3.2rem;
     --button-width: 3.2rem;
+  }
 
-    &_delete {
-      color: var(--color-carmine-pink);
-    }
+  &__button_delete.mat-button-base.mat-icon-button {
+    color: var(--color-carmine-pink);
   }
 
   &__toggle-button.mat-button-base.mat-button {

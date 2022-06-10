@@ -74,7 +74,7 @@ export class AlbumsComponent implements OnInit {
   }
 
   openAlbum(id: number): void {
-    // this._router.navigate(['posts', id]);
+    this._router.navigate(['albums', id]);
   }
 
   createItem(): void {

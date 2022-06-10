@@ -31,7 +31,7 @@
             <mat-icon (click)="openAlbum(element.id)" [svgIcon]="'arrow-right'" class="nav__icon"></mat-icon>
           </button>
           <button mat-icon-button class="table__button table__button_delete">
-            <mat-icon class="nav__icon" (click)="deleteItem(element.id)">delete_forever</mat-icon>
+            <mat-icon (click)="deleteItem(element.id)" class="nav__icon">delete_forever</mat-icon>
           </button>
         </div>
       </td>
