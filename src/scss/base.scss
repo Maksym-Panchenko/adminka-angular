@@ -23,6 +23,10 @@
     padding: 0 1.6rem;
     box-shadow: var(--shadow-button);
   }
+
+  &__paginator {
+    box-shadow: var(--shadow-block);
+  }
 }
 
 .table {
