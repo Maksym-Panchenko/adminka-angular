@@ -1,8 +1,7 @@
 <div class="album">
   <load-spinner [isLoading]="isLoadingAlbum || isLoadingPhotos">albums loading</load-spinner>
 
-  <ng-container *ngIf="!isLoadingAlbum && !isLoadingPhotos">
-    <div class="album__content">
+    <div class="album__content" *ngIf="!isLoadingAlbum">
       <h2 class="album__title">
         ({{ album.id }}) {{ album.title }}
       </h2>
@@ -12,15 +11,21 @@
     </div>
 
     <div class="album__photos">
-      <h2 class="album__title album__title_underlined">Photos:</h2>
-<!--      <ul class="album__comments-list">-->
-<!--        <li *ngFor="let comment of comments" class="album__comment">-->
-<!--          <h3 class="album__comment-title">({{ comment.id }}) {{ comment.name }}</h3>-->
-<!--          <p class="album__comment-text">{{ comment.body }}</p>-->
-<!--          <footer class="album__comment-email">{{ comment.email }}</footer>-->
-<!--        </li>-->
-<!--      </ul>-->
+      <h2 class="album__title album__title_underlined">
+        Photos:
+        <button class="album__button" mat-stroked-button [color]="'primary'" (click)="addPhoto()">
+          <mat-icon>add</mat-icon> add photo
+        </button>
+      </h2>
+
+      <gallery [photos]="showedPhotos" *ngIf="!isLoadingPhotos" (removePhoto)="deletePhoto($event)"></gallery>
+      <mat-paginator
+        [length]="photos?.length || 0"
+        [pageSize]="numberOfPhotos"
+        [pageSizeOptions]="[10, 25, 50]"
+        aria-label="Select page"
+        class="album__paginator"
+      ></mat-paginator>
     </div>
 
-  </ng-container>
 </div>

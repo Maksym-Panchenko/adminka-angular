@@ -8,6 +8,7 @@ import {IEntityModal} from "@models/interfaces/modal/entity-modal.inteface";
 import {EntityModalType} from "@models/enums/entity-modal-type";
 import {IAlbum} from "@models/interfaces/album.interface";
 import {ITodo} from "@models/interfaces/todo.interface";
+import {IPhoto} from "@models/interfaces/photo.interface";
 
 @Component({
   selector: 'entity-dialog',
@@ -20,7 +21,8 @@ export class EntityDialogComponent implements OnInit {
   formGroup: FormGroup;
   post: IPost;
   album: IAlbum;
-  todo: ITodo
+  todo: ITodo;
+  photo: IPhoto;
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: IEntityModal,
@@ -42,6 +44,11 @@ export class EntityDialogComponent implements OnInit {
 
     if (this.data.entityType === EntityModalType.post) {
       this.formGroup.addControl('body',this._formBuilder.control(this.data.post?.body || '', Validators.required));
+    }
+
+    if (this.data.entityType === EntityModalType.photo) {
+      this.formGroup.addControl('url',this._formBuilder.control('https://via.placeholder.com/600/92c952', Validators.required));
+      this.formGroup.addControl('thumbnailUrl',this._formBuilder.control('https://via.placeholder.com/150/92c952', Validators.required));
     }
   }
 
@@ -93,6 +100,17 @@ export class EntityDialogComponent implements OnInit {
         }
         this.todo.title = this.formGroup.controls['title'].value;
         this._dialog.close(this.todo);
+        break;
+
+      // add only
+      case this.EntityModalType.photo:
+        this.photo = {
+          title: this.formGroup.controls['title'].value,
+          albumId: this.data.albumId || 0,
+          url: this.formGroup.controls['url'].value,
+          thumbnailUrl: this.formGroup.controls['thumbnailUrl'].value
+        };
+        this._dialog.close(this.photo);
         break;
     }
   }

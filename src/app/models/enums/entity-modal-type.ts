@@ -1,5 +1,6 @@
 export enum EntityModalType {
   post = 'post',
   album = 'album',
-  todo = 'todo'
+  todo = 'todo',
+  photo = 'photo'
 }

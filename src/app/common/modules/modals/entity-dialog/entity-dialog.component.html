@@ -17,6 +17,21 @@
       [control]="formGroup.controls['body']"
     ></app-mat-form-textarea>
 
+    <ng-container *ngIf="data.entityType === EntityModalType.photo">
+      <app-mat-form-field
+        [inputType]="InputType.text"
+        [required]="true"
+        [placeholder]="'Enter Image Url'"
+        [control]="formGroup.controls['url']"
+      ></app-mat-form-field>
+      <app-mat-form-field
+        [inputType]="InputType.text"
+        [required]="true"
+        [placeholder]="'Enter Thumbnail Url'"
+        [control]="formGroup.controls['thumbnailUrl']"
+      ></app-mat-form-field>
+    </ng-container>
+
     <div class="dialog__actions" mat-dialog-actions>
       <button type="submit" class="dialog__button" color="primary" mat-flat-button>
         {{ approveName }}

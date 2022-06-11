@@ -10,6 +10,7 @@ export interface IEntityModal {
   post?: IPost;
   album?: IAlbum;
   todo?: ITodo;
+  albumId?: number;
   buttonsNames?: {
     approve?: string;
     decline?: string;

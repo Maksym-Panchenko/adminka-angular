@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {AfterViewInit, Component, OnInit, ViewChild} from '@angular/core';
 import {ActivatedRoute} from "@angular/router";
 import {MatDialog} from "@angular/material/dialog";
 import {EntityDialogComponent} from "../../common/modules/modals/entity-dialog/entity-dialog.component";
@@ -9,18 +9,28 @@ import {IPhoto} from "@models/interfaces/photo.interface";
 import {AlbumApiService} from "@services/api/album-api/album-api.service";
 import {PhotoApiService} from "@services/api/photo-api/photo-api.service";
 import {UserService} from "@services/user/user.service";
+import {MatPaginator} from "@angular/material/paginator";
+import {MessageDialogComponent} from "../../common/modules/modals/message-dialog/message-dialog.component";
+import {MessageModalType} from "@models/enums/message-modal-type.enum";
+import {IMessageModal} from "@models/interfaces/modal/message-modal.inteface";
+import {filter} from "rxjs/operators";
 
 @Component({
   selector: 'app-single-album',
   templateUrl: './single-album.component.html',
   styleUrls: ['./single-album.component.scss']
 })
-export class SingleAlbumComponent implements OnInit {
+export class SingleAlbumComponent implements OnInit, AfterViewInit {
   albumId: number;
   album: IAlbum;
   photos: IPhoto[];
   isLoadingAlbum: boolean = true;
   isLoadingPhotos: boolean = true;
+
+  startPhoto: number;
+  numberOfPhotos: number = 10;
+  showedPhotos: IPhoto[];
+  @ViewChild(MatPaginator) paginator: MatPaginator;
 
   constructor(
     private route: ActivatedRoute,
@@ -34,7 +44,7 @@ export class SingleAlbumComponent implements OnInit {
 
   ngOnInit(): void {
     this.getAlbum();
-    this.getPhotos();
+    this.getPhotos();console.log(this.albumId, this.album?.id)
   }
 
   getAlbum(): void {
@@ -45,8 +55,9 @@ export class SingleAlbumComponent implements OnInit {
   }
 
   getPhotos(): void {
-    this._photoApi.getItems(this._user.getUserId()).subscribe((photos) => {
+    this._photoApi.getItems(this.albumId).subscribe((photos) => {
       this.photos = photos;
+      this.showPhotos();
     }, (error) => console.log(error), () => this.isLoadingPhotos = false);
   }
 
@@ -72,6 +83,71 @@ export class SingleAlbumComponent implements OnInit {
             this.album = updatedAlbum;
           });
         }
+      });
+  }
+
+  ngAfterViewInit(): void {
+    this.paginator.page
+      .subscribe(() => {
+        this.showPhotos()
+      });
+  }
+
+  showPhotos(): void {
+    if (this.paginator && this.photos?.length) {
+      this.startPhoto = this.paginator.pageIndex * this.paginator.pageSize;
+      this.showedPhotos = this.photos.filter((e, index) => (index) >= this.startPhoto && index < (this.startPhoto + this.paginator.pageSize));
+    }
+  }
+
+  addPhoto(): void {
+    this.dialog
+      .open(EntityDialogComponent, {
+        autoFocus: false,
+        disableClose: true,
+        data: {
+          title: 'Add photo',
+          entityType: EntityModalType.photo,
+          albumId: this.albumId,
+          buttonsNames: {
+            approve: 'Add',
+            decline: 'Cancel'
+          }
+        } as IEntityModal
+      })
+      .afterClosed()
+      .subscribe((newPhoto): void => {
+        if (newPhoto) {
+          this._photoApi.createItem(newPhoto).subscribe((addedPhoto) => {
+            this.photos = [addedPhoto, ...this.photos];
+            this.showPhotos()
+          });
+        }
+      });
+  }
+
+  deletePhoto(id: number): void {
+    this.dialog
+      .open(MessageDialogComponent, {
+        autoFocus: false,
+        data: {
+          title: 'Delete this Photo?',
+          type: MessageModalType.confirm,
+          buttonsNames: {
+            approve: 'Delete',
+            decline: 'Cancel'
+          }
+        } as IMessageModal
+      })
+      .afterClosed()
+      .pipe(
+        filter((res: boolean): boolean => res)
+      )
+      .subscribe((): void => {
+        this._photoApi.deleteItem(id).subscribe(() => {
+          this.photos = this.photos.filter((e: IPhoto): boolean => e.id !== id);
+          this.showPhotos()
+        });
       });
   }
 

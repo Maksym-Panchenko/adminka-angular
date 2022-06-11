@@ -20,6 +20,9 @@
     line-height: 2.8rem;
 
     &_underlined {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
       padding-bottom: 1.2rem;
       border-bottom: 1px solid var(--color-platinum);
       margin-bottom: 1.4rem;
@@ -39,6 +42,11 @@
 
   &__photos-list {
     padding: 0;
+  }
+
+  &__button.mat-stroked-button.mat-primary {
+    --button-height: 3.6rem;
+    padding: 0 1.6rem;
   }
 
   &__comment {
