@@ -7,7 +7,8 @@ enum ApiOperation {
   create = 'create',
   update = 'update',
   singleItem = 'singleItem',
-  items = 'items'
+  items = 'items',
+  patch = 'patch'
 }
 
 export interface IEntity {
@@ -29,6 +30,7 @@ export abstract class ApiBaseAbstractService<T> {
     switch (operation) {
       case ApiOperation.delete:
       case ApiOperation.update:
+      case ApiOperation.patch:
       case ApiOperation.singleItem:
         return `${this.basePath}${this.entityUrl}/${id}`;
 
@@ -50,6 +52,10 @@ export abstract class ApiBaseAbstractService<T> {
 
   updateItem(item: Partial<T> & IEntity): Observable<any> {
     return this.http.put(this.getFullPath(ApiOperation.update, item['id']), item);
+  }
+
+  patchItem(id: number, item: Partial<T>): Observable<any> {
+    return this.http.put(this.getFullPath(ApiOperation.update, id), item);
   }
 
   getItem(id: number): Observable<any> {

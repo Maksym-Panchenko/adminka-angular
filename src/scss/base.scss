@@ -89,8 +89,12 @@
   .mat-cell,
   .mat-header-cell {
     padding: 0.8rem 1.6rem;
-    vertical-align: top;
+    vertical-align: middle;
     color: var(--color-onyx);
+
+    &.completed {
+      text-decoration: line-through;
+    }
   }
 
   .mat-button-wrapper .mat-icon svg {
