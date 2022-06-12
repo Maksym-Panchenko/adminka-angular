@@ -12,11 +12,17 @@ import {SingleAlbumComponent} from "./modules/single-album/single-album.componen
 import {SingleAlbumModule} from "./modules/single-album/single-album.module";
 import {TodosComponent} from "./modules/todos/todos.component";
 import {TodosModule} from "./modules/todos/todos.module";
+import {SingleUserComponent} from "./modules/single-user/single-user.component";
+import {SingleUserModule} from "./modules/single-user/single-user.module";
 
 const routes: Routes = [
   {
     path: 'users',
     component: UsersComponent
+  },
+  {
+    path: 'users/:id',
+    component: SingleUserComponent
   },
   {
     path: 'posts',
@@ -47,7 +53,8 @@ const routes: Routes = [
     SinglePostModule,
     AlbumsModule,
     SingleAlbumModule,
-    TodosModule
+    TodosModule,
+    SingleUserModule
   ],
   exports: [RouterModule]
 })

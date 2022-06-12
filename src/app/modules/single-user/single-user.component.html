@@ -1,0 +1,33 @@
+<div class="">
+  <load-spinner [isLoading]="isLoading"></load-spinner>
+
+  <mat-tab-group [(selectedIndex)]="selectedTabIndex" class="user__tabs">
+    <mat-tab>
+      <ng-template mat-tab-label>
+        <span class="">Albums</span>
+      </ng-template>
+      <albums
+        *ngIf="usersAlbumState === UsersAlbumState.albums"
+        [mode]="ModeType.view"
+        [userId]="userId"
+        (showSelectedAlbum)="showSingleAlbum($event)"
+      ></albums>
+      <single-album
+        *ngIf="usersAlbumState === UsersAlbumState.singleAlbum"
+        [mode]="ModeType.view"
+        [albumId]="albumId"
+        (showAlbums)="showAlbums()"
+      ></single-album>
+    </mat-tab>
+    <mat-tab>
+      <ng-template mat-tab-label>
+        <span class="">Todos</span>
+      </ng-template>
+      <todos
+        [mode]="ModeType.view"
+        [userId]="userId"
+      ></todos>
+    </mat-tab>
+  </mat-tab-group>
+
+</div>

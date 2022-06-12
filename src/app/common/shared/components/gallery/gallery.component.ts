@@ -1,8 +1,9 @@
 import {Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges} from '@angular/core';
-import {BeforeSlideDetail, InitDetail} from "lightgallery/lg-events";
+import {InitDetail} from "lightgallery/lg-events";
 import {LightGallery} from "lightgallery/lightgallery";
 import lgZoom from 'lightgallery/plugins/zoom';
 import {IPhoto} from "@models/interfaces/photo.interface";
+import {ModeType} from "@models/enums/mode-type";
 
 interface IGalleryPhoto {
   id: string;
@@ -20,6 +21,8 @@ interface IGalleryPhoto {
 export class GalleryComponent implements OnInit, OnChanges {
   @Output() removePhoto: EventEmitter<number> = new EventEmitter()
   @Input() photos: IPhoto[] = [];
+  @Input() mode: ModeType = ModeType.view;
+  readonly ModeType: typeof ModeType = ModeType;
   items: IGalleryPhoto[] = [];
   private lightGallery!: LightGallery;
 

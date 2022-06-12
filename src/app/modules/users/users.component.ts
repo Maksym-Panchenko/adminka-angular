@@ -1,6 +1,7 @@
 import {AfterViewInit, Component, OnInit, ViewChild} from '@angular/core';
 import {IUser} from "@models/interfaces/user.interface";
 import {MatPaginator} from "@angular/material/paginator";
+import {UsersApiService} from "@services/api/users-api/users-api.service";
 
 @Component({
   selector: 'users',
@@ -9,25 +10,24 @@ import {MatPaginator} from "@angular/material/paginator";
 })
 export class UsersComponent implements OnInit, AfterViewInit {
   startUser: number;
-  numberOfUsers: number = 3;
+  numberOfUsers: number = 5;
+  pageSizeOption: number[] = [5, 10];
 
   users: IUser[];
   showedUsers: IUser[];
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
-  constructor() { }
+  constructor(private _usersApi: UsersApiService) { }
 
   ngOnInit(): void {
     this.getUsers();
   }
 
   getUsers(): void {
-    fetch('https://jsonplaceholder.typicode.com/users')
-      .then(response => response.json())
-      .then(json => {
-        this.users = json;
-        this.showUsers()
-      });
+    this._usersApi.getUsers().subscribe((users: IUser[]) => {
+      this.users = users;
+      this.showUsers()
+    })
   }
 
   ngAfterViewInit(): void {

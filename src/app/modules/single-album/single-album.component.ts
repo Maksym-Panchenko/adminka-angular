@@ -1,4 +1,4 @@
-import {AfterViewInit, Component, OnInit, ViewChild} from '@angular/core';
+import {AfterViewInit, Component, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
 import {ActivatedRoute} from "@angular/router";
 import {MatDialog} from "@angular/material/dialog";
 import {EntityDialogComponent} from "../../common/modules/modals/entity-dialog/entity-dialog.component";
@@ -14,14 +14,19 @@ import {MessageDialogComponent} from "../../common/modules/modals/message-dialog
 import {MessageModalType} from "@models/enums/message-modal-type.enum";
 import {IMessageModal} from "@models/interfaces/modal/message-modal.inteface";
 import {filter} from "rxjs/operators";
+import {ModeType} from "@models/enums/mode-type";
+import { Location } from '@angular/common'
 
 @Component({
-  selector: 'app-single-album',
+  selector: 'single-album',
   templateUrl: './single-album.component.html',
   styleUrls: ['./single-album.component.scss']
 })
 export class SingleAlbumComponent implements OnInit, AfterViewInit {
-  albumId: number;
+  @Output() showAlbums: EventEmitter<void> = new EventEmitter();
+  @Input() mode: ModeType = ModeType.edit;
+  @Input() albumId: number;
+  readonly ModeType: typeof ModeType = ModeType;
   album: IAlbum;
   photos: IPhoto[];
   isLoadingAlbum: boolean = true;
@@ -37,14 +42,15 @@ export class SingleAlbumComponent implements OnInit, AfterViewInit {
     private _albumApi: AlbumApiService,
     private _photoApi: PhotoApiService,
     private _user: UserService,
-    protected dialog: MatDialog
+    protected dialog: MatDialog,
+    private location: Location
   ) {
     this.route.params.subscribe(params => this.albumId = parseInt(params['id']));
   }
 
   ngOnInit(): void {
     this.getAlbum();
-    this.getPhotos();console.log(this.albumId, this.album?.id)
+    this.getPhotos();
   }
 
   getAlbum(): void {
@@ -149,6 +155,14 @@ export class SingleAlbumComponent implements OnInit, AfterViewInit {
           this.showPhotos()
         });
       });
+  }
+
+  getBack(): void {
+    this.location.back()
+  }
+
+  showAlbumList() {
+    this.showAlbums.emit();
   }
 
 }

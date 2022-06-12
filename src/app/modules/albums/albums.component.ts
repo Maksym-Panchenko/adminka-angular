@@ -1,4 +1,4 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
 import {PostApiService} from "@services/api/post-api/post-api.service";
 import {MatDialog} from "@angular/material/dialog";
 import {Router} from "@angular/router";
@@ -14,13 +14,18 @@ import {AlbumApiService} from "@services/api/album-api/album-api.service";
 import {IEntityModal} from "@models/interfaces/modal/entity-modal.inteface";
 import {EntityDialogComponent} from "../../common/modules/modals/entity-dialog/entity-dialog.component";
 import {EntityModalType} from "@models/enums/entity-modal-type";
+import {ModeType} from "@models/enums/mode-type";
 
 @Component({
-  selector: 'app-albums',
+  selector: 'albums',
   templateUrl: './albums.component.html',
   styleUrls: ['./albums.component.scss']
 })
 export class AlbumsComponent implements OnInit {
+  @Output() showSelectedAlbum: EventEmitter<number> = new EventEmitter();
+  @Input() mode: ModeType = ModeType.edit;
+  readonly ModeType: typeof ModeType = ModeType;
+  @Input() userId: number;
   isLoading: boolean = true;
   pageSizes: number[] = [5];
 
@@ -39,14 +44,21 @@ export class AlbumsComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.getItems();
+    if (!this.userId) {
+      this.userId = this._user.getUserId();
+    }
+    this.getAlbums();
   }
 
-  getItems(): void {
-    this._albumApi.getItems(this._user.getUserId()).subscribe((albums) => {
+  getAlbums(): void {
+    this._albumApi.getItems(this.userId).subscribe((albums) => {
       this.dataSource = new MatTableDataSource(albums);
       this.dataSource.paginator = this.paginator;
-    }, (error) => console.log(error), () => this.isLoading = false);
+      this.isLoading = false
+    }, (error) => {
+      console.log(error);
+      this.isLoading = false
+    });
   }
 
   deleteItem(id: number): void {
@@ -77,6 +89,10 @@ export class AlbumsComponent implements OnInit {
     this._router.navigate(['albums', id]);
   }
 
+  showAlbum(id: number): void {
+    this.showSelectedAlbum.emit(id);
+  }
+
   createItem(): void {
     this.dialog
       .open(EntityDialogComponent, {
@@ -100,5 +116,4 @@ export class AlbumsComponent implements OnInit {
         }
       });
   }
-
 }

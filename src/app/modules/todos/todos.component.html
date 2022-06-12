@@ -1,7 +1,7 @@
 <div class="items">
   <load-spinner [isLoading]="isLoading"></load-spinner>
 
-  <div class="items__actions">
+  <div *ngIf="mode === ModeType.edit" class="items__actions">
     <button (click)="createTodo()" class="items__button" mat-flat-button color="primary">
       <mat-icon>add</mat-icon>
       Add Todo
@@ -23,6 +23,7 @@
           <mat-checkbox
             (click)="toggleState(element.id, element.completed)"
             [checked]="element.completed"
+            [disabled]="mode === ModeType.view"
             color="primary"
           >
           </mat-checkbox>
@@ -40,7 +41,7 @@
     <ng-container matColumnDef="actions">
       <th mat-header-cell *matHeaderCellDef></th>
       <td mat-cell *matCellDef="let element">
-        <div class="table__button-group">
+        <div *ngIf="mode === ModeType.edit" class="table__button-group">
           <button mat-icon-button class="table__button table__button_delete">
             <mat-icon class="nav__icon" (click)="deleteTodo(element.id)">delete_forever</mat-icon>
           </button>

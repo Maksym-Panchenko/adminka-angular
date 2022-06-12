@@ -1,10 +1,10 @@
-<div class="users">
+<div class="items">
   <user *ngFor="let user of showedUsers" [user]="user"></user>
 
   <mat-paginator
     [length]="users?.length || 0"
     [pageSize]="numberOfUsers"
-    [pageSizeOptions]="[3, 5, 10]"
+    [pageSizeOptions]="pageSizeOption"
     aria-label="Select page"
     class="users__paginator"
   ></mat-paginator>

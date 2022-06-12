@@ -1,4 +1,4 @@
-import {AfterViewInit, Component, OnInit, ViewChild} from '@angular/core';
+import {Component, Input, OnInit, ViewChild} from '@angular/core';
 import {MatTableDataSource} from "@angular/material/table";
 import {MatPaginator} from "@angular/material/paginator";
 import {PostApiService} from "@services/api/post-api/post-api.service";
@@ -14,14 +14,18 @@ import {EntityModalType} from "@models/enums/entity-modal-type";
 import {IEntityModal} from "@models/interfaces/modal/entity-modal.inteface";
 import {ITodo} from "@models/interfaces/todo.interface";
 import {TodoApiService} from "@services/api/todo-api/todo-api.service";
+import {ModeType} from "@models/enums/mode-type";
 
 @Component({
-  selector: 'app-todos',
+  selector: 'todos',
   templateUrl: './todos.component.html',
   styleUrls: ['./todos.component.scss']
 })
 export class TodosComponent implements OnInit {
   @ViewChild('paginator') paginator: MatPaginator;
+  @Input() userId: number;
+  @Input() mode: ModeType = ModeType.edit;
+  readonly ModeType: typeof ModeType = ModeType;
   displayedColumns: string[] = ['id', 'checkbox', 'title', 'actions'];
   dataSource: MatTableDataSource<ITodo>;
 
@@ -33,15 +37,19 @@ export class TodosComponent implements OnInit {
     private _todosApi: TodoApiService,
     protected dialog: MatDialog,
     private _router: Router,
-    private _user: UserService
+    private _user: UserService,
   ) {}
 
   ngOnInit(): void {
+    if (!this.userId) {
+      this.userId = this._user.getUserId();
+    }
+
     this.getTodos();
   }
 
   getTodos(): void {
-    this._todosApi.getItems(this._user.getUserId()).subscribe((todos: ITodo[]): void => {
+    this._todosApi.getItems(this.userId).subscribe((todos: ITodo[]): void => {
       this.dataSource = new MatTableDataSource(todos);
       this.dataSource.paginator = this.paginator;
       this.isLoading = false
@@ -100,14 +108,16 @@ export class TodosComponent implements OnInit {
   }
 
   toggleState(id: number, value: boolean): void {
-    this.isLoading = true;
-    this._todosApi.patchItem(id, {completed: !value}).subscribe((value) => {
-      const index: number = this.dataSource.data.findIndex(e => e.id === value.id);
-      this.dataSource.data[index].completed = value.completed;
-      this.isLoading = false;
-    }, (error) => {
-      console.log('Error: ', error);
-      this.isLoading = false;
-    });
+    if (this.mode === ModeType.edit) {
+      this.isLoading = true;
+      this._todosApi.patchItem(id, {completed: !value}).subscribe((value) => {
+        const index: number = this.dataSource.data.findIndex(e => e.id === value.id);
+        this.dataSource.data[index].completed = value.completed;
+        this.isLoading = false;
+      }, (error) => {
+        console.log('Error: ', error);
+        this.isLoading = false;
+      });
+    }
   }
 }
