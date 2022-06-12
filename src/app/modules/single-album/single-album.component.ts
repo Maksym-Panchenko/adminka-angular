@@ -57,6 +57,9 @@ export class SingleAlbumComponent implements OnInit, AfterViewInit {
     this._albumApi.getItem(this.albumId).subscribe((album) => {
       this.album = album;
       this.isLoadingAlbum = false;
+    }, (error) => {
+      console.log(error);
+      this.isLoadingPhotos = false;
     });
   }
 
@@ -64,7 +67,11 @@ export class SingleAlbumComponent implements OnInit, AfterViewInit {
     this._photoApi.getItems(this.albumId).subscribe((photos) => {
       this.photos = photos;
       this.showPhotos();
-    }, (error) => console.log(error), () => this.isLoadingPhotos = false);
+      this.isLoadingPhotos = false;
+    }, (error) => {
+      console.log(error);
+      this.isLoadingPhotos = false;
+    });
   }
 
   editAlbum(): void {
@@ -164,5 +171,4 @@ export class SingleAlbumComponent implements OnInit, AfterViewInit {
   showAlbumList() {
     this.showAlbums.emit();
   }
-
 }

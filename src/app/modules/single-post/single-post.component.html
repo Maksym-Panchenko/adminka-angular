@@ -1,13 +1,20 @@
 <div class="post">
   <load-spinner [isLoading]="isLoadingPost || isLoadingComments">posts loading</load-spinner>
 
+  <div class="items__actions items__actions_left-pos">
+    <button (click)="mode === ModeType.edit ? getBack() : showPostList()" class="items__button" mat-flat-button color="primary">
+      <mat-icon>arrow_back</mat-icon>
+      Back
+    </button>
+  </div>
+
   <ng-container *ngIf="!isLoadingPost && !isLoadingComments">
     <div class="post__content">
       <h2 class="post__title">
         ({{ post.id }}) {{ post.title }}
       </h2>
       <p class="post__text">{{ post.body }}</p>
-      <div class="actions">
+      <div *ngIf="mode === ModeType.edit" class="actions">
         <button (click)="editPost()" class="post__button" mat-stroked-button [color]="'primary'" >Edit Post</button>
       </div>
     </div>

@@ -1,4 +1,4 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
 import {PostApiService} from "@services/api/post-api/post-api.service";
 import {IPost} from "@models/interfaces/post.interface";
 import {MatPaginator} from "@angular/material/paginator";
@@ -13,6 +13,7 @@ import {EntityDialogComponent} from "../../common/modules/modals/entity-dialog/e
 import {IEntityModal} from "@models/interfaces/modal/entity-modal.inteface";
 import {UserService} from "@services/user/user.service";
 import {EntityModalType} from "@models/enums/entity-modal-type";
+import {ModeType} from "@models/enums/mode-type";
 
 @Component({
   selector: 'posts',
@@ -20,6 +21,10 @@ import {EntityModalType} from "@models/enums/entity-modal-type";
   styleUrls: ['./posts.component.scss']
 })
 export class PostsComponent implements OnInit {
+  @Output() showSelectedPost: EventEmitter<number> = new EventEmitter();
+  @Input() userId: number;
+  @Input() mode: ModeType = ModeType.edit;
+  readonly ModeType: typeof ModeType = ModeType;
   isLoading: boolean = true;
   posts: IPost[];
   pageSizes: number[] = [5];
@@ -39,11 +44,14 @@ export class PostsComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    if (!this.userId) {
+      this.userId = this._user.getUserId();
+    }
     this.getPosts();
   }
 
   getPosts(): void {
-    this._postsApi.getItems(this._user.getUserId()).subscribe((posts) => {
+    this._postsApi.getItems(this.userId).subscribe((posts) => {
       this.posts = posts;
       this.dataSource = new MatTableDataSource(this.posts);
       this.dataSource.paginator = this.paginator;
@@ -76,6 +84,10 @@ export class PostsComponent implements OnInit {
 
   openPost(id: number): void {
     this._router.navigate(['posts', id]);
+  }
+
+  showPost(id: number): void {
+    this.showSelectedPost.emit(id);
   }
 
   createPost(): void {

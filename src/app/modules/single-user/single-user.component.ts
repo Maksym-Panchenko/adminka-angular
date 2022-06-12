@@ -10,7 +10,7 @@ export enum UsersAlbumState {
 
 export enum UsersPostState {
   posts= 'posts',
-  comments = 'comments'
+  singlePost = 'singlePost'
 }
 
 @Component({
@@ -21,10 +21,13 @@ export enum UsersPostState {
 export class SingleUserComponent implements OnInit {
   readonly ModeType: typeof ModeType = ModeType;
   readonly UsersAlbumState: typeof UsersAlbumState = UsersAlbumState;
+  readonly UsersPostState: typeof UsersPostState = UsersPostState;
   selectedTabIndex: number = 0;
   usersAlbumState: UsersAlbumState = UsersAlbumState.albums;
+  usersPostState: UsersPostState = UsersPostState.posts;
   userId: number;
   albumId: number;
+  postId: number;
   isLoading: boolean = true;
   constructor(private _route: ActivatedRoute) { }
 
@@ -35,7 +38,6 @@ export class SingleUserComponent implements OnInit {
       .subscribe(id => {
         this.userId = +id;
         this.isLoading = false;
-        console.log('SingleUser GET - ', this.userId)
       });
   }
 
@@ -46,5 +48,14 @@ export class SingleUserComponent implements OnInit {
 
   showAlbums(): void {
     this.usersAlbumState = UsersAlbumState.albums;
+  }
+
+  showSinglePost(id: number): void {
+    this.postId = id;
+    this.usersPostState = UsersPostState.singlePost;
+  }
+
+  showPosts(): void {
+    this.usersPostState = UsersPostState.posts;
   }
 }

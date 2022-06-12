@@ -4,6 +4,23 @@
   <mat-tab-group [(selectedIndex)]="selectedTabIndex" class="user__tabs">
     <mat-tab>
       <ng-template mat-tab-label>
+        <span class="">Posts</span>
+      </ng-template>
+      <posts
+        *ngIf="usersPostState === UsersPostState.posts"
+        [mode]="ModeType.view"
+        [userId]="userId"
+        (showSelectedPost)="showSinglePost($event)"
+      ></posts>
+      <single-post
+        *ngIf="usersPostState === UsersPostState.singlePost"
+        [mode]="ModeType.view"
+        [postId]="postId"
+        (showPosts)="showPosts()"
+      ></single-post>
+    </mat-tab>
+    <mat-tab>
+      <ng-template mat-tab-label>
         <span class="">Albums</span>
       </ng-template>
       <albums
@@ -29,5 +46,4 @@
       ></todos>
     </mat-tab>
   </mat-tab-group>
-
 </div>
