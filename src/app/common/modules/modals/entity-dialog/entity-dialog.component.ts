@@ -84,7 +84,7 @@ export class EntityDialogComponent implements OnInit {
           }
         }
         this.post.title = this.formGroup.controls['title'].value;
-        this.post.body = this.formGroup.controls['body'].value;console.log(this.post)
+        this.post.body = this.formGroup.controls['body'].value;
         this._dialog.close(this.post);
         break;
 

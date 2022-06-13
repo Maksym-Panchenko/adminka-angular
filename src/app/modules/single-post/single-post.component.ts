@@ -68,7 +68,7 @@ export class SinglePostComponent implements OnInit {
         data: {
           title: 'Edit post',
           entityType: EntityModalType.post,
-          post: this.post,
+          post: Object.assign({}, this.post),
           buttonsNames: {
             approve: 'Save',
             decline: 'Cancel'
