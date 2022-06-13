@@ -5,18 +5,30 @@
     box-shadow: var(--shadow-block);
     border-right: 0.4rem;
 
-    ::ng-deep .mat-tab-label.mat-tab-label-active {
-      background-color: var(--color-denim);
-      color: var(--color-white);
-      opacity: 1;
-    }
+    ::ng-deep {
+      .mat-tab-label.mat-tab-label-active {
+        background-color: var(--color-denim);
+        color: var(--color-white);
+        opacity: 1;
+      }
 
-    ::ng-deep .mat-tab-body-wrapper {
-      margin: 0 -2.4rem -2.4rem;
-    }
+      .mat-tab-body-wrapper {
+        margin: 0 -2.4rem -2.4rem;
+      }
 
-    ::ng-deep .items__actions {
-      margin: 0 2.4rem;
+      .items__actions {
+        margin: 0 2.4rem;
+      }
+
+      .mat-tab-label .mat-tab-label-content {
+        display: inline-flex;
+        justify-content: center;
+        align-items: center;
+        white-space: nowrap;
+        font-size: 1.6rem;
+        text-transform: uppercase;
+        letter-spacing: 0.15rem;
+      }
     }
   }
 }

@@ -42,9 +42,19 @@
       <th mat-header-cell *matHeaderCellDef></th>
       <td mat-cell *matCellDef="let element">
         <div *ngIf="mode === ModeType.edit" class="table__button-group">
-          <button mat-icon-button class="table__button table__button_delete">
-            <mat-icon class="nav__icon" (click)="deleteTodo(element.id)">delete_forever</mat-icon>
+          <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+            <mat-icon>more_vert</mat-icon>
           </button>
+          <mat-menu #menu="matMenu">
+            <button mat-menu-item (click)="editTodo(element)">
+              <mat-icon [color]="'primary'">edit</mat-icon>
+              <span>Edit</span>
+            </button>
+            <button mat-menu-item (click)="deleteTodo(element.id)">
+              <mat-icon [color]="'warn'">delete_forever</mat-icon>
+              <span>Remove</span>
+            </button>
+          </mat-menu>
         </div>
       </td>
     </ng-container>

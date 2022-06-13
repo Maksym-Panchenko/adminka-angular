@@ -53,10 +53,7 @@ export class TodosComponent implements OnInit {
       this.dataSource = new MatTableDataSource(todos);
       this.dataSource.paginator = this.paginator;
       this.isLoading = false
-    }, (error) => {
-      console.log(error)
-      this.isLoading = false
-    });
+    }, (error) => this.errorAction(error));
   }
 
   deleteTodo(id: number): void {
@@ -77,9 +74,11 @@ export class TodosComponent implements OnInit {
         filter((res: boolean): boolean => res)
       )
       .subscribe((): void => {
+        this.isLoading = true;
         this._todosApi.deleteItem(id).subscribe(() => {
           this.dataSource.data = this.dataSource.data.filter((e: ITodo): boolean => e.id !== id);
-        });
+          this.isLoading = false;
+        }, (error) => this.errorAction(error));
       });
   }
 
@@ -100,9 +99,38 @@ export class TodosComponent implements OnInit {
       .afterClosed()
       .subscribe((newTodo): void => {
         if (newTodo) {
+          this.isLoading = true;
           this._todosApi.createItem(newTodo).subscribe((addedTodo: ITodo) => {
             this.dataSource.data = [...this.dataSource.data, addedTodo];
-          });
+            this.isLoading = false;
+          }, (error) => this.errorAction(error));
+        }
+      });
+  }
+
+  editTodo(selectedTodo: ITodo): void {
+    this.dialog
+      .open(EntityDialogComponent, {
+        autoFocus: false,
+        disableClose: true,
+        data: {
+          title: 'Edit todo',
+          entityType: EntityModalType.todo,
+          todo: selectedTodo,
+          buttonsNames: {
+            approve: 'Edit',
+            decline: 'Cancel'
+          }
+        } as IEntityModal
+      })
+      .afterClosed()
+      .subscribe((editedTodo): void => {
+        if (editedTodo) {
+          this.isLoading = true;
+          this._todosApi.updateItem(editedTodo).subscribe((updatedTodo: ITodo) => {
+            this.dataSource.data = [...this.dataSource.data, updatedTodo];
+            this.isLoading = false;
+          }, (error) => this.errorAction(error));
         }
       });
   }
@@ -114,10 +142,12 @@ export class TodosComponent implements OnInit {
         const index: number = this.dataSource.data.findIndex(e => e.id === value.id);
         this.dataSource.data[index].completed = value.completed;
         this.isLoading = false;
-      }, (error) => {
-        console.log('Error: ', error);
-        this.isLoading = false;
-      });
+      }, (error) => this.errorAction(error));
     }
+  }
+
+  errorAction(error: Error): void {
+    console.log('Error: ', error);
+    this.isLoading = false;
   }
 }
