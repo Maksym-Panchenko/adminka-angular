@@ -1,0 +1,38 @@
+.user {
+  padding: 1.6rem;
+  box-shadow: var(--shadow-block);
+  background-color: var(--color-white);
+  border-radius: 0.4rem;
+  display: flex;
+  align-items: baseline;
+  margin-bottom: 1.2rem;
+  cursor: pointer;
+  text-decoration: none;
+  transition: 0.3s background-color;
+
+  &:hover {
+    background-color: var(--color-ghost-white);
+  }
+
+  &__id {
+    width: 4rem;
+    font-size: 1.8rem;
+    line-height: 1.2;
+    font-weight: var(--fw-regular);
+    color: var(--color-denim);
+  }
+
+  &__name {
+    font-size: 1.8rem;
+    line-height: 1.2;
+    font-weight: var(--fw-medium);
+    color: var(--color-dark-gunmetal);
+    width: 24rem;
+  }
+
+  &__address {
+    font-size: 1.4rem;
+    font-weight: var(--fw-regular);
+    color: var(--color-quick-silver);
+  }
+}

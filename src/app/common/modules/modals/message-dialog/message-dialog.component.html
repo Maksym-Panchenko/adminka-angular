@@ -1,0 +1,25 @@
+<div class="dialog">
+  <h3 *ngIf="data?.title" class="dialog__title" mat-dialog-title>{{ data?.title }}</h3>
+
+  <div *ngIf="data?.message" [innerHTML]="data?.message" class="dialog__text"></div>
+
+  <div *ngIf="isAlertModal" class="dialog__actions" mat-dialog-actions>
+    <button
+      [mat-dialog-close]="true"
+      class="dialog__button"
+      color="primary"
+      mat-flat-button
+    >
+      {{ approveName }}
+    </button>
+  </div>
+
+  <div *ngIf="isConfirmModal" class="dialog__actions" mat-dialog-actions>
+    <button [mat-dialog-close]="true" class="dialog__button" color="primary" mat-flat-button>
+      {{ approveName }}
+    </button>
+    <button [mat-dialog-close]="false" class="dialog__button" color="primary" mat-stroked-button>
+      {{ declineName }}
+    </button>
+  </div>
+</div>

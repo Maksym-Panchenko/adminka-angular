@@ -1,7 +1,15 @@
-<main-header></main-header>
+<ng-container *ngIf="isLogined; else login">
+  <main-header (logOutUser)="logOut()"></main-header>
 
-<div class="content">
-  <side-nav></side-nav>
-</div>
+  <div class="content">
+    <side-nav></side-nav>
 
-<router-outlet></router-outlet>
+    <div class="content__main">
+      <router-outlet></router-outlet>
+    </div>
+  </div>
+</ng-container>
+
+<ng-template #login>
+  <auth (login)="loggedIn()"></auth>
+</ng-template>

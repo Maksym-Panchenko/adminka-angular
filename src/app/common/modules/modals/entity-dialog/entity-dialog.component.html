@@ -1,0 +1,44 @@
+<div class="dialog">
+  <h3 class="dialog__title">{{ data.title }}</h3>
+
+  <form (submit)="submit()">
+    <app-mat-form-field
+      [inputType]="InputType.text"
+      [required]="true"
+      [placeholder]="'Enter Post Title'"
+      [control]="formGroup.controls['title']"
+    ></app-mat-form-field>
+
+    <app-mat-form-textarea
+      *ngIf="data.entityType === EntityModalType.post"
+      [inputType]="InputType.text"
+      [required]="true"
+      [placeholder]="'Enter Post Body'"
+      [control]="formGroup.controls['body']"
+    ></app-mat-form-textarea>
+
+    <ng-container *ngIf="data.entityType === EntityModalType.photo">
+      <app-mat-form-field
+        [inputType]="InputType.text"
+        [required]="true"
+        [placeholder]="'Enter Image Url'"
+        [control]="formGroup.controls['url']"
+      ></app-mat-form-field>
+      <app-mat-form-field
+        [inputType]="InputType.text"
+        [required]="true"
+        [placeholder]="'Enter Thumbnail Url'"
+        [control]="formGroup.controls['thumbnailUrl']"
+      ></app-mat-form-field>
+    </ng-container>
+
+    <div class="dialog__actions" mat-dialog-actions>
+      <button type="submit" class="dialog__button" color="primary" mat-flat-button>
+        {{ approveName }}
+      </button>
+      <button [mat-dialog-close]="false" class="dialog__button" color="primary" mat-stroked-button>
+        {{ declineName }}
+      </button>
+    </div>
+  </form>
+</div>

@@ -1,0 +1,83 @@
+:host {
+  background-color: var(--color-ghost-white);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-content: center;
+  height: 100vh;
+  width: 100vw;
+}
+
+.auth {
+  display: flex;
+  width: 96rem;
+  height: 48rem;
+  margin: 0 auto;
+
+  background-color: var(--color-white);
+  box-shadow: var(--shadow-block);
+  border-radius: 0.4rem;
+  overflow: hidden;
+
+  &__column {
+    flex: 0 0 50%;
+
+    &_form {
+      padding: 9.5rem 6.4rem;
+    }
+
+    &_img {
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: cover;
+      overflow-y: auto;
+    }
+  }
+
+  &__title {
+    margin-bottom: 0.4rem;
+    color: var(--color-dark-gunmetal);
+    font-size: 2.4rem;
+    font-weight: var(--fw-medium);
+  }
+
+  &__subtitle {
+    margin-bottom: 4rem;
+    color: var(--color-quick-silver);
+    font-size: 1.4rem;
+    font-weight: var(--fw-regular);
+  }
+
+  &__button {
+    margin-top: 2.4rem;
+  }
+
+  &__mail-list {
+    height: 100%;
+    width: 70%;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+  }
+
+  &__email-button {
+    background-color: var(--color-white-semi-transparent);
+    font-size: 1.2rem;
+    height: 3rem;
+    line-height: 3rem;
+    margin: 0.4rem 0;
+  }
+
+  &__message {
+    display: flex;
+    align-items: center;
+    gap: 1.2rem;
+    margin-bottom: 1rem;
+    padding: 0.8rem;
+
+    border: 1px solid var(--color-carmine-pink);
+    border-radius: 0.4rem;
+    font-size: 1.4rem;
+  }
+}

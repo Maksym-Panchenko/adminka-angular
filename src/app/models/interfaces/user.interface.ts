@@ -1,7 +1,7 @@
-export interface User {
+export interface IUser {
   id: number;
   name: string;
-  userName: string;
+  username: string;
   email: string;
   address: {
     street: string;

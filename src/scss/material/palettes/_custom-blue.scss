@@ -1,0 +1,38 @@
+$base-blue: #1665d8;
+
+:root {
+  --color-blue: #{$base-blue};
+}
+
+$custom-blue: (
+  50: lighten($base-blue, 0.5),
+  100: lighten($base-blue, 0.4),
+  200: lighten($base-blue, 0.3),
+  300: lighten($base-blue, 0.2),
+  400: lighten($base-blue, 0.1),
+  500: $base-blue,
+  600: darken($base-blue, 0.1),
+  700: darken($base-blue, 0.2),
+  800: darken($base-blue, 0.3),
+  900: darken($base-blue, 0.4),
+  A100: #1665d8,
+  A200: #1665d8,
+  A400: #1665d8,
+  A700: #1665d8,
+  contrast: (
+    50: var(--color-white),
+    100: var(--color-white),
+    200: var(--color-white),
+    300: var(--color-white),
+    400: var(--color-white),
+    500: var(--color-white),
+    600: var(--color-white),
+    700: var(--color-white),
+    800: var(--color-white),
+    900: var(--color-white),
+    A100: var(--color-white),
+    A200: var(--color-white),
+    A400: var(--color-white),
+    A700: var(--color-white),
+  )
+);

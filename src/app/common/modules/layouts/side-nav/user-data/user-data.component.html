@@ -1,8 +1,8 @@
 <div class="user">
   <div class="user__img-wrapper">
-    <img [src]="userPhotoUrl" alt="Photo">
+    <mat-icon class="user__img">person_outline</mat-icon>
   </div>
 
-  <div class="user__name">Someone</div>
-  <div class="user__company">Samtisung</div>
+  <div class="user__name">{{ currentUser?.name || 'Unknown' }}</div>
+  <div class="user__company">{{ currentUser?.company?.name || 'Unknown' }}</div>
 </div>

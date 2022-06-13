@@ -1,0 +1,43 @@
+<div class="post">
+  <load-spinner [isLoading]="isLoadingPost || isLoadingComments">posts loading</load-spinner>
+
+  <div class="items__actions items__actions_left-pos">
+    <button (click)="mode === ModeType.edit ? getBack() : showPostList()" class="items__button" mat-flat-button color="primary">
+      <mat-icon>arrow_back</mat-icon>
+      Back
+    </button>
+  </div>
+
+  <div class="post__content">
+    <h2 class="post__title">
+      ({{ post?.id }}) {{ post?.title }}
+    </h2>
+    <p class="post__text">{{ post?.body }}</p>
+    <div *ngIf="mode === ModeType.edit" class="actions">
+      <button (click)="editPost()" class="post__button" mat-stroked-button [color]="'primary'" >Edit Post</button>
+    </div>
+  </div>
+
+  <div class="post__comments">
+    <h2 class="post__title post__title_underlined">Comments:</h2>
+    <ul *ngIf="comments?.length; else noComments" class="post__comments-list">
+      <li *ngFor="let comment of comments" class="post__comment">
+        <h3 class="post__comment-title">
+          <span>({{ comment.id }}) {{ comment.name }}</span>
+          <button
+            *ngIf="mode === ModeType.edit"
+            [color]="'warn'"
+            (click)="deleteComment(comment.id)"
+            mat-icon-button
+          ><mat-icon>delete_forever</mat-icon></button>
+        </h3>
+        <p class="post__comment-text">{{ comment.body }}</p>
+        <footer class="post__comment-email">{{ comment.email }}</footer>
+      </li>
+    </ul>
+    <ng-template #noComments>
+      <p>No comments yet</p>
+    </ng-template>
+  </div>
+
+</div>

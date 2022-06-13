@@ -14,16 +14,24 @@ type NavItem = {
 export class NavListComponent implements OnInit {
   navItems: NavItem[] = [
     {
+      icon: 'users',
+      title: 'Users',
+      link: '/users'
+    },
+    {
       icon: 'posts',
-      title: 'Posts'
+      title: 'My posts',
+      link: '/posts'
     },
     {
       icon: 'photo',
-      title: 'Albums'
+      title: 'My albums',
+      link: '/albums'
     },
     {
       icon: 'text',
-      title: 'Todos'
+      title: 'My todos',
+      link: '/todos'
     }
   ];
 

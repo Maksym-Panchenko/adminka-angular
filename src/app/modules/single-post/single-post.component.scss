@@ -1,0 +1,74 @@
+.post {
+  position: relative;
+  width: 100%;
+  min-height: 100%;
+  padding: 2.4rem;
+
+  &__content,
+  &__comments {
+    background-color: var(--color-white);
+    border-radius: 0.4rem;
+    padding: 2.4rem;
+    box-shadow: var(--shadow-block);
+    margin-bottom: 2.4rem;
+  }
+
+  &__title {
+    color: var(--color-dark-gunmetal);
+    font-size: 2.4rem;
+    font-weight: var(--fw-medium);
+    line-height: 2.8rem;
+
+    &_underlined {
+      padding-bottom: 1.2rem;
+      border-bottom: 1px solid var(--color-platinum);
+      margin-bottom: 1.4rem;
+    }
+  }
+
+  &__text, &__comment-text {
+    color: var(--color-slate-gray);
+    font-size: 1.4rem;
+    font-weight: var(--fw-light);
+  }
+
+  &__actions {
+    display: flex;
+    gap: 1rem;
+  }
+
+  &__comments-list {
+    padding: 0;
+  }
+
+  &__comment {
+    list-style-type: none;
+
+    &:not(:last-child) {
+      padding-bottom: 1.2rem;
+      border-bottom: 1px solid var(--color-platinum);
+      margin-bottom: 1.4rem;
+    }
+  }
+
+  &__comment-title {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: var(--color-dark-gunmetal);
+    font-size: 1.6rem;
+    font-weight: var(--fw-medium);
+    line-height: 1.8rem;
+
+    .mat-button-base.mat-icon-button {
+      --button-height: 3.2rem;
+      --button-width: 3.2rem;
+    }
+  }
+
+  &__comment-email {
+    color: var(--color-slate-gray);
+    font-size: 1.2rem;
+    font-weight: var(--fw-regular);
+  }
+}

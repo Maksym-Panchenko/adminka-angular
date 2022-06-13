@@ -14,13 +14,17 @@
   --color-electric-violet: #6202EE;
   --color-violet-blue: #3F51B5;
   --color-denim: #1665D8;
+  --color-chambray: #425a70;
   --color-carmine-pink: #EC4C47;
   --color-venetian-red: #BF0E08;
   --color-mustard: #F7D154;
 
+  --color-white-semi-transparent: rgba(255, 255, 255, 0.5);
+
   // shadows
-  --shadow-block: 0px 1px 3px rgba(63,63,68,0.15),  0px 0px 1px rgba(63,63,68,0.05);
+  --shadow-block: 0px 1px 3px rgba(63,63,68,0.15), 0px 0px 1px rgba(63,63,68,0.05);
   --shadow-input: 0px 0px 1px var(--color-platinum);
+  --shadow-button: 0px 1px 3px rgba(0,0,0,0.2), 0px 2px 1px -1px rgba(0,0,0,0.12), 0px 1px 1px rgba(0,0,0,0.14);
 
   // font-weight
   --fw-light: 300;

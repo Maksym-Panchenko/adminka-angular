@@ -23,8 +23,10 @@
       "dom"
     ],
     "paths": {
-      "@models/*": ["src/app/models/*"]
-    }
+      "@models/*": ["src/app/models/*"],
+      "@services/*": ["src/app/services/*"]
+    },
+    "strictPropertyInitialization": false
   },
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,

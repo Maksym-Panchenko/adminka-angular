@@ -1,0 +1,14 @@
+<label class="base-input">
+  <mat-form-field [appearance]="appearance" [floatLabel]="floatLabel" class="base-input__field">
+    <mat-label *ngIf="placeholder">{{ placeholder }}</mat-label>
+    <input
+      [formControl]="formControl"
+      [placeholder]="placeholder"
+      [required]="isRequired"
+      [type]="inputType"
+      (blur)="blur()"
+      matInput
+    />
+    <mat-error *ngIf="control?.invalid && errorMessage">{{ errorMessage }}</mat-error>
+  </mat-form-field>
+</label>

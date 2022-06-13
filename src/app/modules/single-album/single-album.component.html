@@ -1,0 +1,38 @@
+<div class="album">
+  <load-spinner [isLoading]="isLoadingAlbum || isLoadingPhotos">albums loading</load-spinner>
+
+  <div class="items__actions items__actions_left-pos">
+    <button (click)="mode === ModeType.edit ? getBack() : showAlbumList()" class="items__button" mat-flat-button color="primary">
+      <mat-icon>arrow_back</mat-icon>
+      Back
+    </button>
+  </div>
+
+  <div class="album__content">
+    <h2 class="album__title">
+      ({{ album?.id }}) {{ album?.title }}
+    </h2>
+    <div *ngIf="mode === ModeType.edit" class="actions">
+      <button (click)="editAlbum()" class="album__button" mat-stroked-button [color]="'primary'" >Edit Album</button>
+    </div>
+  </div>
+
+  <div class="album__photos">
+    <h2 class="album__title album__title_underlined">
+      Photos:
+      <button *ngIf="mode === ModeType.edit" class="album__button" mat-stroked-button [color]="'primary'" (click)="addPhoto()">
+        <mat-icon>add</mat-icon> add photo
+      </button>
+    </h2>
+
+    <gallery [photos]="showedPhotos" (removePhoto)="deletePhoto($event)" [mode]="mode"></gallery>
+    <mat-paginator
+      [length]="photos?.length || 0"
+      [pageSize]="numberOfPhotos"
+      [pageSizeOptions]="[10, 25, 50]"
+      aria-label="Select page"
+      class="album__paginator"
+    ></mat-paginator>
+  </div>
+
+</div>
