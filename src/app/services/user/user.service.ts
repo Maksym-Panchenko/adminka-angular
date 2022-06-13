@@ -1,20 +1,18 @@
 import { Injectable } from '@angular/core';
 import {IUser} from "@models/interfaces/user.interface";
-import {UsersService} from "../users/users.service";
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
+  constructor() { }
 
-  constructor(private _users: UsersService) { }
-
-  setUserByEmail(email: string): void {
-    const user: IUser | undefined = this._users.users.find(e => e.email === email);
-    if (user) {
-      this.setUser(user);
-    }
-  }
+  // setUserByEmail(email: string): void {
+  //   const user: IUser | undefined = this._users.users.find(e => e.email === email);
+  //   if (user) {
+  //     this.setUser(user);
+  //   }
+  // }
 
   setUser(user: IUser): void {
     localStorage.setItem('currentUser', JSON.stringify(user));
@@ -31,13 +29,8 @@ export class UserService {
     }
   }
 
-  getUser(): IUser | null {
-    const value: string | null = localStorage.getItem('currentUser');
-    if (value) {
-      return JSON.parse(value);
-    } else {
-      return null;
-    }
+  getUser(): IUser {
+    return JSON.parse(localStorage.getItem('currentUser')!);
   }
 
   isLogin(): boolean {

@@ -1,5 +1,3 @@
-<load-spinner [isLoading]="isLoading"></load-spinner>
-
 <ng-container *ngIf="isLogined; else login">
   <main-header (logOutUser)="logOut()"></main-header>
 
@@ -10,11 +8,8 @@
       <router-outlet></router-outlet>
     </div>
   </div>
-
 </ng-container>
 
 <ng-template #login>
-  <auth (login)="loggedIn($event)"></auth>
+  <auth (login)="loggedIn()"></auth>
 </ng-template>
-
-

@@ -68,4 +68,16 @@
     line-height: 3rem;
     margin: 0.4rem 0;
   }
+
+  &__message {
+    display: flex;
+    align-items: center;
+    gap: 1.2rem;
+    margin-bottom: 1rem;
+    padding: 0.8rem;
+
+    border: 1px solid var(--color-carmine-pink);
+    border-radius: 0.4rem;
+    font-size: 1.4rem;
+  }
 }

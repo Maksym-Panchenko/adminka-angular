@@ -9,11 +9,9 @@ import {UserService} from "@services/user/user.service";
 })
 export class UserDataComponent implements OnInit {
   currentUser: IUser | null;
-  userPhotoUrl: string = 'https://images.unsplash.com/photo-1564564321837-a57b7070ac4f?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Nnx8bWFufGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60';
-
-  constructor(public user: UserService) {}
+  constructor(private _user: UserService) {}
 
   ngOnInit(): void {
-    this.currentUser = this.user.getUser();
+    this.currentUser = this._user.getUser();
   }
 }

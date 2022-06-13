@@ -1,7 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import { IconsService } from './services/icons/icons.service'
 import {UserService} from "./services/user/user.service";
-import {UsersService} from "./services/users/users.service";
 import {IUser} from "@models/interfaces/user.interface";
 
 @Component({
@@ -12,22 +11,18 @@ import {IUser} from "@models/interfaces/user.interface";
 export class AppComponent implements OnInit {
   title = 'adminka_na_kolenke';
   isLogined: boolean = false;
-  isLoading: boolean = true;
   currentUser: IUser;
 
   constructor(
-    // for icons register
-    icons: IconsService,
-    private _user: UserService,
-    private _users: UsersService
-  ) {
-    this._users.load$.subscribe(() => {
-      this.isLoading = false;
-    })
+    icons: IconsService, // for icons register
+    private _user: UserService
+  ) {}
+
+  ngOnInit(): void {
+    this.isLogined = this._user.isLogin();
   }
 
-  loggedIn(email: string): void {
-    this._user.setUserByEmail(email);
+  loggedIn(): void {
     this.isLogined = true;
   }
 
@@ -36,7 +31,5 @@ export class AppComponent implements OnInit {
     this.isLogined = false;
   }
 
-  ngOnInit(): void {
-    this.isLogined = this._user.isLogin();
-  }
+
 }

@@ -8,13 +8,15 @@
     margin-left: auto;
     margin-bottom: 1.6rem;
     text-align: center;
+  }
 
-    img {
-      width: 10rem;
-      height: 10rem;
-      object-fit: cover;
-      border-radius: 100%;
-    }
+  &__img {
+    width: 10rem;
+    height: 10rem;
+    font-size: 10rem;
+    box-shadow: var(--shadow-block);
+    border-radius: 50%;
+    background-color: var(--color-ghost-white);
   }
 
   &__name {
