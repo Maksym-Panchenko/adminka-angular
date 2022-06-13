@@ -57,10 +57,7 @@ export class SingleAlbumComponent implements OnInit, AfterViewInit {
     this._albumApi.getItem(this.albumId).subscribe((album) => {
       this.album = album;
       this.isLoadingAlbum = false;
-    }, (error) => {
-      console.log(error);
-      this.isLoadingPhotos = false;
-    });
+    }, (error: Error) => this.errorAlbumAction(error));
   }
 
   getPhotos(): void {
@@ -68,10 +65,7 @@ export class SingleAlbumComponent implements OnInit, AfterViewInit {
       this.photos = photos;
       this.showPhotos();
       this.isLoadingPhotos = false;
-    }, (error) => {
-      console.log(error);
-      this.isLoadingPhotos = false;
-    });
+    }, (error: Error) => this.errorPhotoAction(error));
   }
 
   editAlbum(): void {
@@ -92,9 +86,11 @@ export class SingleAlbumComponent implements OnInit, AfterViewInit {
       .afterClosed()
       .subscribe((editedAlbum): void => {
         if (editedAlbum) {
+          this.isLoadingAlbum = true;
           this._albumApi.updateItem(editedAlbum).subscribe((updatedAlbum) => {
             this.album = updatedAlbum;
-          });
+            this.isLoadingAlbum = false;
+          }, (error: Error) => this.errorAlbumAction(error));
         }
       });
   }
@@ -131,10 +127,12 @@ export class SingleAlbumComponent implements OnInit, AfterViewInit {
       .afterClosed()
       .subscribe((newPhoto): void => {
         if (newPhoto) {
+          this.isLoadingPhotos = true;
           this._photoApi.createItem(newPhoto).subscribe((addedPhoto) => {
             this.photos = [addedPhoto, ...this.photos];
-            this.showPhotos()
-          });
+            this.showPhotos();
+            this.isLoadingPhotos = false;
+          }, (error) => this.errorPhotoAction(error));
         }
       });
   }
@@ -157,10 +155,12 @@ export class SingleAlbumComponent implements OnInit, AfterViewInit {
         filter((res: boolean): boolean => res)
       )
       .subscribe((): void => {
+        this.isLoadingPhotos = true;
         this._photoApi.deleteItem(id).subscribe(() => {
           this.photos = this.photos.filter((e: IPhoto): boolean => e.id !== id);
-          this.showPhotos()
-        });
+          this.showPhotos();
+          this.isLoadingPhotos = false;
+        }, (error) => this.errorPhotoAction(error));
       });
   }
 
@@ -170,5 +170,15 @@ export class SingleAlbumComponent implements OnInit, AfterViewInit {
 
   showAlbumList() {
     this.showAlbums.emit();
+  }
+
+  errorPhotoAction(error: Error): void {
+    console.log('Error: ', error);
+    this.isLoadingPhotos = false;
+  }
+
+  errorAlbumAction(error: Error): void {
+    console.log('Error: ', error);
+    this.isLoadingAlbum = false;
   }
 }

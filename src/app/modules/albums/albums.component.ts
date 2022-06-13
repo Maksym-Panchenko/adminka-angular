@@ -24,16 +24,13 @@ import {ModeType} from "@models/enums/mode-type";
 export class AlbumsComponent implements OnInit {
   @Output() showSelectedAlbum: EventEmitter<number> = new EventEmitter();
   @Input() mode: ModeType = ModeType.edit;
-  readonly ModeType: typeof ModeType = ModeType;
   @Input() userId: number;
+  readonly ModeType: typeof ModeType = ModeType;
   isLoading: boolean = true;
   pageSizes: number[] = [5];
-
-  dataSource: MatTableDataSource<IAlbum>;
-
   @ViewChild('paginator') paginator: MatPaginator;
-
   displayedColumns: string[] = ['id', 'title', 'actions'];
+  dataSource: MatTableDataSource<IAlbum>;
 
   constructor(
     private _postsApi: PostApiService,
@@ -55,10 +52,7 @@ export class AlbumsComponent implements OnInit {
       this.dataSource = new MatTableDataSource(albums);
       this.dataSource.paginator = this.paginator;
       this.isLoading = false
-    }, (error) => {
-      console.log(error);
-      this.isLoading = false
-    });
+    }, (error) => this.errorAction(error));
   }
 
   deleteItem(id: number): void {
@@ -79,9 +73,11 @@ export class AlbumsComponent implements OnInit {
         filter((res: boolean): boolean => res)
       )
       .subscribe((): void => {
+        this.isLoading = true;
         this._albumApi.deleteItem(id).subscribe(() => {
           this.dataSource.data = this.dataSource.data.filter((e: IAlbum): boolean => e.id !== id);
-        });
+          this.isLoading = false;
+        }, (error) => this.errorAction(error));
       });
   }
 
@@ -110,10 +106,17 @@ export class AlbumsComponent implements OnInit {
       .afterClosed()
       .subscribe((newAlbum): void => {
         if (newAlbum) {
+          this.isLoading = true;
           this._postsApi.createItem(newAlbum).subscribe((addedAlbum) => {
             this.dataSource.data = [...this.dataSource.data, addedAlbum];
-          });
+            this.isLoading = false;
+          }, (error) => this.errorAction(error));
         }
       });
+  }
+
+  errorAction(error: Error): void {
+    console.log('Error: ', error);
+    this.isLoading = false;
   }
 }

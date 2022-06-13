@@ -55,7 +55,8 @@ export class PostsComponent implements OnInit {
       this.posts = posts;
       this.dataSource = new MatTableDataSource(this.posts);
       this.dataSource.paginator = this.paginator;
-    }, (error) => console.log(error), () => this.isLoading = false);
+      this.isLoading = false;
+    }, (error) => this.errorAction(error));
   }
 
   deletePost(id: number): void {
@@ -76,9 +77,11 @@ export class PostsComponent implements OnInit {
         filter((res: boolean): boolean => res)
       )
       .subscribe((): void => {
+        this.isLoading = true;
         this._postsApi.deleteItem(id).subscribe(() => {
           this.dataSource.data = this.dataSource.data.filter((e: IPost): boolean => e.id !== id);
-        });
+          this.isLoading = false;
+        }, (error) => this.errorAction(error));
       });
   }
 
@@ -107,10 +110,17 @@ export class PostsComponent implements OnInit {
       .afterClosed()
       .subscribe((newPost): void => {
         if (newPost) {
+          this.isLoading = true;
           this._postsApi.createItem(newPost).subscribe((addedPost) => {
             this.dataSource.data = [...this.dataSource.data, addedPost];
-          });
+            this.isLoading = false;
+          }, (error) => this.errorAction(error));
         }
       });
+  }
+
+  errorAction(error: Error): void {
+    console.log('Error: ', error);
+    this.isLoading = false;
   }
 }

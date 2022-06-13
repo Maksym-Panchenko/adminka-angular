@@ -33,7 +33,9 @@ export class SinglePostComponent implements OnInit {
     private _commentApi: CommentApiService,
     protected dialog: MatDialog,
     private location: Location
-  ) {}
+  ) {
+    this.route.params.subscribe(params => this.postId = parseInt(params['id']));
+  }
 
   ngOnInit(): void {
     this.getPost();

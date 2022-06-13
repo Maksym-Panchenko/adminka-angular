@@ -8,9 +8,9 @@
     </button>
   </div>
 
-  <div class="album__content" *ngIf="!isLoadingAlbum">
+  <div class="album__content">
     <h2 class="album__title">
-      ({{ album.id }}) {{ album.title }}
+      ({{ album?.id }}) {{ album?.title }}
     </h2>
     <div *ngIf="mode === ModeType.edit" class="actions">
       <button (click)="editAlbum()" class="album__button" mat-stroked-button [color]="'primary'" >Edit Album</button>
@@ -25,7 +25,7 @@
       </button>
     </h2>
 
-    <gallery [photos]="showedPhotos" *ngIf="!isLoadingPhotos" (removePhoto)="deletePhoto($event)" [mode]="mode"></gallery>
+    <gallery [photos]="showedPhotos" (removePhoto)="deletePhoto($event)" [mode]="mode"></gallery>
     <mat-paginator
       [length]="photos?.length || 0"
       [pageSize]="numberOfPhotos"
