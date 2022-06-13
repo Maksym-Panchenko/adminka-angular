@@ -52,10 +52,18 @@
   }
 
   &__comment-title {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     color: var(--color-dark-gunmetal);
     font-size: 1.6rem;
     font-weight: var(--fw-medium);
     line-height: 1.8rem;
+
+    .mat-button-base.mat-icon-button {
+      --button-height: 3.2rem;
+      --button-width: 3.2rem;
+    }
   }
 
   &__comment-email {
