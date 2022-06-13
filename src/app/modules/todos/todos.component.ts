@@ -8,7 +8,7 @@ import {UserService} from "@services/user/user.service";
 import {MessageDialogComponent} from "../../common/modules/modals/message-dialog/message-dialog.component";
 import {MessageModalType} from "@models/enums/message-modal-type.enum";
 import {IMessageModal} from "@models/interfaces/modal/message-modal.inteface";
-import {filter} from "rxjs/operators";
+import {filter, map} from "rxjs/operators";
 import {EntityDialogComponent} from "../../common/modules/modals/entity-dialog/entity-dialog.component";
 import {EntityModalType} from "@models/enums/entity-modal-type";
 import {IEntityModal} from "@models/interfaces/modal/entity-modal.inteface";
@@ -128,7 +128,7 @@ export class TodosComponent implements OnInit {
         if (editedTodo) {
           this.isLoading = true;
           this._todosApi.updateItem(editedTodo).subscribe((updatedTodo: ITodo) => {
-            this.dataSource.data = [...this.dataSource.data, updatedTodo];
+            this.dataSource.data = [...this.dataSource.data];
             this.isLoading = false;
           }, (error) => this.errorAction(error));
         }

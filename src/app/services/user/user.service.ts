@@ -7,13 +7,6 @@ import {IUser} from "@models/interfaces/user.interface";
 export class UserService {
   constructor() { }
 
-  // setUserByEmail(email: string): void {
-  //   const user: IUser | undefined = this._users.users.find(e => e.email === email);
-  //   if (user) {
-  //     this.setUser(user);
-  //   }
-  // }
-
   setUser(user: IUser): void {
     localStorage.setItem('currentUser', JSON.stringify(user));
   }
