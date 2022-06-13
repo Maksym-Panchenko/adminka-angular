@@ -116,7 +116,7 @@ export class TodosComponent implements OnInit {
         data: {
           title: 'Edit todo',
           entityType: EntityModalType.todo,
-          todo: selectedTodo,
+          todo: Object.assign({}, selectedTodo),
           buttonsNames: {
             approve: 'Edit',
             decline: 'Cancel'
@@ -128,7 +128,9 @@ export class TodosComponent implements OnInit {
         if (editedTodo) {
           this.isLoading = true;
           this._todosApi.updateItem(editedTodo).subscribe((updatedTodo: ITodo) => {
-            this.dataSource.data = [...this.dataSource.data];
+            const index = this.dataSource.data.findIndex(e => e.id === updatedTodo.id);
+            this.dataSource.data.splice(index, 1, updatedTodo);
+            this.dataSource._updateChangeSubscription();
             this.isLoading = false;
           }, (error) => this.errorAction(error));
         }

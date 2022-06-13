@@ -76,7 +76,7 @@ export class SingleAlbumComponent implements OnInit, AfterViewInit {
         data: {
           title: 'Edit album',
           entityType: EntityModalType.album,
-          album: this.album,
+          album: Object.assign({}, this.album),
           buttonsNames: {
             approve: 'Save',
             decline: 'Cancel'
