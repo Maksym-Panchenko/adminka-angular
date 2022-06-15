@@ -26,7 +26,6 @@ export abstract class ApiBaseAbstractService<T> {
   protected constructor(protected http: HttpClient) {}
 
   getFullPath(operation: ApiOperation, id: number = 0, ): string {
-    // console.log('entityUrl: ', this.entityUrl, 'id: ', id)
     switch (operation) {
       case ApiOperation.delete:
       case ApiOperation.update:
@@ -42,27 +41,27 @@ export abstract class ApiBaseAbstractService<T> {
     }
   }
 
-  deleteItem(id: number): Observable<any> {
-    return this.http.delete(this.getFullPath(ApiOperation.delete, id), {});
+  deleteItem(id: number): Observable<Object> {
+    return this.http.delete(this.getFullPath(ApiOperation.delete, id));
   }
 
-  createItem(item: Partial<T>): Observable<any> {
-    return this.http.post(this.getFullPath(ApiOperation.create), item);
+  createItem(item: Partial<T>): Observable<T> {
+    return this.http.post<T>(this.getFullPath(ApiOperation.create), item);
   }
 
-  updateItem(item: Partial<T> & IEntity): Observable<any> {
-    return this.http.put(this.getFullPath(ApiOperation.update, item['id']), item);
+  updateItem(item: Partial<T> & IEntity): Observable<T> {
+    return this.http.put<T>(this.getFullPath(ApiOperation.update, item['id']), item);
   }
 
-  patchItem(id: number, item: Partial<T>): Observable<any> {
-    return this.http.put(this.getFullPath(ApiOperation.update, id), item);
+  patchItem(id: number, item: Partial<T>): Observable<T> {
+    return this.http.put<T>(this.getFullPath(ApiOperation.update, id), item);
   }
 
-  getItem(id: number): Observable<any> {
-    return this.http.get(this.getFullPath(ApiOperation.singleItem, id));
+  getItem(id: number): Observable<T> {
+    return this.http.get<T>(this.getFullPath(ApiOperation.singleItem, id));
   }
 
-  getItems(userId: number): Observable<any> {
-    return this.http.get(this.getFullPath(ApiOperation.items, userId));
+  getItems(userId: number): Observable<T[]> {
+    return this.http.get<T[]>(this.getFullPath(ApiOperation.items, userId));
   }
 }
