@@ -9,12 +9,12 @@ import {BreadcrumbsService} from "@services/breadcrumbs/breadcrumbs.service";
   styleUrls: ['./breadcrumbs.component.scss']
 })
 export class BreadcrumbsComponent implements OnInit {
-  // breadcrumbs$: BehaviorSubject<IBreadcrumb[]>;
+  breadcrumbs$: BehaviorSubject<IBreadcrumb[]>;
   @Input() hidden: boolean;
 
     constructor(private _breadcrumbsService: BreadcrumbsService) {}
 
     ngOnInit(): void {
-      // this.breadcrumbs$ = this._breadcrumbsService.breadcrumbs$;
+      this.breadcrumbs$ = this._breadcrumbsService.breadcrumbs$;
     }
 }
