@@ -14,6 +14,7 @@ import {TodosComponent} from "./modules/todos/todos.component";
 import {TodosModule} from "./modules/todos/todos.module";
 import {SingleUserComponent} from "./modules/single-user/single-user.component";
 import {SingleUserModule} from "./modules/single-user/single-user.module";
+import {NotFoundPageComponent} from "./modules/not-found-page/not-found-page.component";
 
 const routes: Routes = [
   {
@@ -76,14 +77,14 @@ const routes: Routes = [
     pathMatch: 'full',
     redirectTo: '/users'
   },
-  // {
-  //   path: '**',
-  //   redirectTo: '/404'
-  // },
-  // {
-  //   path: '404',
-  //   component: NotFoundPageComponent
-  // }
+  {
+    path: '**',
+    redirectTo: '/404'
+  },
+  {
+    path: '404',
+    component: NotFoundPageComponent
+  }
 ];
 
 @NgModule({
