@@ -11,7 +11,7 @@ import {MaterialModule} from "../../material/material.module";
     CommonModule,
     RouterModule,
     AppFormsModule,
-    MaterialModule
+    MaterialModule,
     // DirectivesModule,
     // PipesModule
   ],

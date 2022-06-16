@@ -1,12 +1,12 @@
 import { Injectable } from '@angular/core';
-import {ApiBaseAbstractService} from "../../../misc/abstracts/api-base.abstract.service";
-import {ITodo} from "@models/interfaces/todo.interface";
-import {Observable} from "rxjs";
+import { ApiBaseAbstractService } from "@misc/abstracts/api-base.abstract.service";
+import { Observable } from "rxjs";
+import { IUser } from "@models/interfaces/user.interface";
 
 @Injectable({
   providedIn: 'root'
 })
-export class UsersApiService extends ApiBaseAbstractService<ITodo> {
+export class UserApiService extends ApiBaseAbstractService<IUser> {
   readonly entityUrl: string = 'users';
   readonly parentEntityUrl: string = '';
 

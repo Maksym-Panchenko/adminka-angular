@@ -1,7 +1,7 @@
 import {Component, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
 import {PostApiService} from "@services/api/post-api/post-api.service";
 import {MatDialog} from "@angular/material/dialog";
-import {Router} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 import {UserService} from "@services/user/user.service";
 import {MatTableDataSource} from "@angular/material/table";
 import {MessageDialogComponent} from "../../common/modules/modals/message-dialog/message-dialog.component";
@@ -15,6 +15,9 @@ import {IEntityModal} from "@models/interfaces/modal/entity-modal.inteface";
 import {EntityDialogComponent} from "../../common/modules/modals/entity-dialog/entity-dialog.component";
 import {EntityModalType} from "@models/enums/entity-modal-type";
 import {ModeType} from "@models/enums/mode-type";
+import {BreadcrumbsService} from "@services/breadcrumbs/breadcrumbs.service";
+import {IUser} from "@models/interfaces/user.interface";
+import {UserApiService} from "@services/api/user-api/user-api.service";
 
 @Component({
   selector: 'albums',
@@ -24,26 +27,35 @@ import {ModeType} from "@models/enums/mode-type";
 export class AlbumsComponent implements OnInit {
   @Output() showSelectedAlbum: EventEmitter<number> = new EventEmitter();
   @Input() mode: ModeType = ModeType.edit;
-  @Input() userId: number;
+  // @Input() userId: number;
   readonly ModeType: typeof ModeType = ModeType;
   isLoading: boolean = true;
   pageSizes: number[] = [5];
   @ViewChild('paginator') paginator: MatPaginator;
   displayedColumns: string[] = ['id', 'title', 'actions'];
   dataSource: MatTableDataSource<IAlbum>;
+  user: IUser;
+  userId: number;
+  fullBreadCrumbs: boolean = true;
 
   constructor(
     private _postsApi: PostApiService,
     protected dialog: MatDialog,
     private _router: Router,
     private _user: UserService,
-    private _albumApi: AlbumApiService
+    private _albumApi: AlbumApiService,
+    private _breadcrumbs: BreadcrumbsService,
+    private _userApi: UserApiService,
+    private _route: ActivatedRoute,
   ) {}
 
   ngOnInit(): void {
+    this.userId = this._route?.parent?.snapshot.params['id'];
     if (!this.userId) {
+      this.fullBreadCrumbs = false;
       this.userId = this._user.getUserId();
     }
+
     this.getAlbums();
   }
 
@@ -51,7 +63,12 @@ export class AlbumsComponent implements OnInit {
     this._albumApi.getItems(this.userId).subscribe((albums) => {
       this.dataSource = new MatTableDataSource(albums);
       this.dataSource.paginator = this.paginator;
-      this.isLoading = false
+
+      this._userApi.getItem(this.userId).subscribe((user: IUser): void => {
+        this.user = user;
+        this._setBreadcrumbs();
+        this.isLoading = false;
+      }, (error) => this.errorAction(error));
     }, (error) => this.errorAction(error));
   }
 
@@ -118,5 +135,25 @@ export class AlbumsComponent implements OnInit {
   errorAction(error: Error): void {
     console.log('Error: ', error);
     this.isLoading = false;
+  }
+
+  private _setBreadcrumbs(): void {
+    if (!this._breadcrumbs.breadcrumbs$.value?.length) {
+      if (this.fullBreadCrumbs) {
+        this._breadcrumbs.add({
+          name: 'Users',
+          url: `/users`
+        });
+        this._breadcrumbs.add({
+          name: this.user.name,
+          url: `/users/${this.user.id}`
+        });
+      }
+
+      this._breadcrumbs.add({
+        name: 'Albums',
+        url: ''
+      });
+    }
   }
 }

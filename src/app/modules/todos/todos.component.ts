@@ -3,7 +3,7 @@ import {MatTableDataSource} from "@angular/material/table";
 import {MatPaginator} from "@angular/material/paginator";
 import {PostApiService} from "@services/api/post-api/post-api.service";
 import {MatDialog} from "@angular/material/dialog";
-import {Router} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 import {UserService} from "@services/user/user.service";
 import {MessageDialogComponent} from "../../common/modules/modals/message-dialog/message-dialog.component";
 import {MessageModalType} from "@models/enums/message-modal-type.enum";
@@ -15,6 +15,9 @@ import {IEntityModal} from "@models/interfaces/modal/entity-modal.inteface";
 import {ITodo} from "@models/interfaces/todo.interface";
 import {TodoApiService} from "@services/api/todo-api/todo-api.service";
 import {ModeType} from "@models/enums/mode-type";
+import {BreadcrumbsService} from "@services/breadcrumbs/breadcrumbs.service";
+import {IUser} from "@models/interfaces/user.interface";
+import {UserApiService} from "@services/api/user-api/user-api.service";
 
 @Component({
   selector: 'todos',
@@ -23,14 +26,16 @@ import {ModeType} from "@models/enums/mode-type";
 })
 export class TodosComponent implements OnInit {
   @ViewChild('paginator') paginator: MatPaginator;
-  @Input() userId: number;
+  // @Input() userId: number;
   @Input() mode: ModeType = ModeType.edit;
   readonly ModeType: typeof ModeType = ModeType;
   displayedColumns: string[] = ['id', 'checkbox', 'title', 'actions'];
   dataSource: MatTableDataSource<ITodo>;
-
+  userId: number;
+  user: IUser;
   isLoading: boolean = true;
   pageSizes: number[] = [10];
+  fullBreadCrumbs: boolean = true;
 
   constructor(
     private _postsApi: PostApiService,
@@ -38,21 +43,34 @@ export class TodosComponent implements OnInit {
     protected dialog: MatDialog,
     private _router: Router,
     private _user: UserService,
+    private _breadcrumbs: BreadcrumbsService,
+    private _route: ActivatedRoute,
+    private _userApi: UserApiService
   ) {}
 
   ngOnInit(): void {
+    this.userId = this._route?.parent?.snapshot.params['id'];
+
     if (!this.userId) {
+      this.fullBreadCrumbs = false;
       this.userId = this._user.getUserId();
     }
 
     this.getTodos();
+    // this._setBreadcrumbs();
   }
 
   getTodos(): void {
     this._todosApi.getItems(this.userId).subscribe((todos: ITodo[]): void => {
       this.dataSource = new MatTableDataSource(todos);
       this.dataSource.paginator = this.paginator;
-      this.isLoading = false
+
+      this._userApi.getItem(this.userId).subscribe((user: IUser): void => {
+        this.user = user;
+        this._setBreadcrumbs();
+        this.isLoading = false
+      }, (error) => this.errorAction(error));
+
     }, (error) => this.errorAction(error));
   }
 
@@ -151,5 +169,26 @@ export class TodosComponent implements OnInit {
   errorAction(error: Error): void {
     console.log('Error: ', error);
     this.isLoading = false;
+  }
+
+  private _setBreadcrumbs(): void {
+    if (!this._breadcrumbs.breadcrumbs$.value?.length) {
+
+      if (this.fullBreadCrumbs) {
+        this._breadcrumbs.add({
+          name: 'Users',
+          url: `/users`
+        });
+        this._breadcrumbs.add({
+          name: this.user.name,
+          url: `/users/${this.user.id}`
+        });
+      }
+
+      this._breadcrumbs.add({
+        name: 'Todos',
+        url: ''
+      });
+    }
   }
 }

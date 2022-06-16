@@ -1,17 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-
-type NavItem = {
-  icon: string;
-  title: string;
-  link?: string;
-}
+import { NavItem } from "@models/interfaces/nav-item.interface";
 
 @Component({
   selector: 'nav-list',
   templateUrl: './nav-list.component.html',
   styleUrls: ['./nav-list.component.scss']
 })
-export class NavListComponent implements OnInit {
+export class NavListComponent {
   navItems: NavItem[] = [
     {
       icon: 'users',
@@ -34,10 +29,4 @@ export class NavListComponent implements OnInit {
       link: '/todos'
     }
   ];
-
-  constructor() { }
-
-  ngOnInit(): void {
-  }
-
 }

@@ -22,7 +22,34 @@ const routes: Routes = [
   },
   {
     path: 'users/:id',
-    component: SingleUserComponent
+    component: SingleUserComponent,
+    children: [
+      {
+        path: '',
+        pathMatch: 'full',
+        redirectTo: 'posts'
+      },
+      {
+        path: 'posts',
+        component: PostsComponent
+      },
+      {
+        path: 'posts/:id',
+        component: SinglePostComponent
+      },
+      {
+        path: 'albums',
+        component: AlbumsComponent
+      },
+      {
+        path: 'albums/:id',
+        component: SingleAlbumComponent
+      },
+      {
+        path: 'todos',
+        component: TodosComponent
+      },
+    ]
   },
   {
     path: 'posts',
@@ -44,6 +71,19 @@ const routes: Routes = [
     path: 'todos',
     component: TodosComponent
   },
+  {
+    path: '',
+    pathMatch: 'full',
+    redirectTo: '/users'
+  },
+  // {
+  //   path: '**',
+  //   redirectTo: '/404'
+  // },
+  // {
+  //   path: '404',
+  //   component: NotFoundPageComponent
+  // }
 ];
 
 @NgModule({

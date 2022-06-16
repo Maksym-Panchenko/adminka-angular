@@ -24,7 +24,8 @@
     ],
     "paths": {
       "@models/*": ["src/app/models/*"],
-      "@services/*": ["src/app/services/*"]
+      "@services/*": ["src/app/services/*"],
+      "@misc*": ["src/app/misc/*"]
     },
     "strictPropertyInitialization": false
   },

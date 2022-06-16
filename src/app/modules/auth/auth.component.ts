@@ -2,7 +2,7 @@ import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import { InputType } from '@models/enums/input-type.enum';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {IUser} from "@models/interfaces/user.interface";
-import {UsersApiService} from "@services/api/users-api/users-api.service";
+import { UserApiService } from "@services/api/user-api/user-api.service";
 import {UserService} from "@services/user/user.service";
 
 @Component({
@@ -21,7 +21,7 @@ export class AuthComponent implements OnInit {
   bgUrl: string = 'https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80';
   emailList: string[];
 
-  constructor(private _formBuilder: FormBuilder, private _user: UserService, private _usersApi: UsersApiService) {}
+  constructor(private _formBuilder: FormBuilder, private _user: UserService, private _userApi: UserApiService) {}
 
   ngOnInit(): void {
     this.getEmails();
@@ -29,7 +29,7 @@ export class AuthComponent implements OnInit {
   }
 
   getEmails(): void {
-    this._usersApi.getUsers().subscribe(users => {
+    this._userApi.getUsers().subscribe(users => {
       this.users = users;
       this.emailList = users.map((e: IUser): string => e.email);
       this.isLoading = false;

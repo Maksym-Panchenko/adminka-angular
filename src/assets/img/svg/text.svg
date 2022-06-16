@@ -1,17 +1,12 @@
-<?xml version="1.0" encoding="utf-8"?>
-<svg width="18.104492px" height="14.292847px" viewBox="0 0 18.104492 14.292847" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg">
+<svg width="18.104492" height="14.292847" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg">
   <defs>
-    <path d="M0 0L0 2.85857L4.76429 2.85857L4.76429 14.2929L7.62286 14.2929L7.62286 2.85857L12.3871 2.85857L12.3871 0L0 0ZM18.1045 4.76428L9.52881 4.76428L9.52881 7.62285L12.3874 7.62285L12.3874 14.2929L15.246 14.2929L15.246 7.62285L18.1045 7.62285L18.1045 4.76428Z" id="path_13" />
-    <clipPath id="mask_13">
-      <use xlink:href="#path_13" />
+    <clipPath id="b13">
+      <use xlink:href="#a13"/>
     </clipPath>
+    <path d="M0 0v2.85857h4.76429V14.2929h2.85857V2.85857h4.76424V0H0Zm18.1045 4.76428H9.52881v2.85857h2.85859v6.67005h2.8586V7.62285h2.8585V4.76428Z" id="a13"/>
   </defs>
-  <g id="iconsicoutline-dashboard-24px">
-    <path d="M0 0L0 2.85857L4.76429 2.85857L4.76429 14.2929L7.62286 14.2929L7.62286 2.85857L12.3871 2.85857L12.3871 0L0 0ZM18.1045 4.76428L9.52881 4.76428L9.52881 7.62285L12.3874 7.62285L12.3874 14.2929L15.246 14.2929L15.246 7.62285L18.1045 7.62285L18.1045 4.76428Z" id="iconsicoutline-text_fields-24px" fill="none" stroke="none" />
-    <g clip-path="url(#mask_13)">
-      <g id="🎨-color" transform="translate(-2.8637695 -4.8535767)">
-        <path d="M0 0L24 0L24 24L0 24L0 0Z" id="BG" fill="#66788A" fill-rule="evenodd" stroke="none" />
-      </g>
-    </g>
+  <path d="M0 0v2.85857h4.76429V14.2929h2.85857V2.85857h4.76424V0H0Zm18.1045 4.76428H9.52881v2.85857h2.85859v6.67005h2.8586V7.62285h2.8585V4.76428Z" fill="none"/>
+  <g clip-path="url(#b13)">
+    <path d="M-2.8637695-4.8535767h24v24h-24v-24Z" fill="currentColor" fill-rule="evenodd"/>
   </g>
 </svg>

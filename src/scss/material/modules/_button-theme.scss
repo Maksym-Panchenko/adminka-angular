@@ -85,6 +85,10 @@
       &.full-width {
         width: 100%;
       }
+
+      &.rounded {
+        border-radius: calc(var(--button-height) / 2);
+      }
     }
 
     &.mat-icon-button {

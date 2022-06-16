@@ -28,9 +28,12 @@
       <td mat-cell *matCellDef="let element">
         <div class="table__button-group">
           <ng-container *ngIf="mode === ModeType.edit">
-            <button (click)="openAlbum(element.id)" mat-icon-button class="table__button table__button_arrow">
-              <mat-icon  [svgIcon]="'arrow-right'" class="nav__icon"></mat-icon>
-            </button>
+<!--            <button (click)="openAlbum(element.id)" mat-icon-button class="table__button table__button_arrow">-->
+<!--              <mat-icon  [svgIcon]="'arrow-right'" class="nav__icon"></mat-icon>-->
+<!--            </button>-->
+            <a [routerLink]="[element.id]" mat-icon-button>
+              <mat-icon [svgIcon]="'arrow-right'" class="nav__icon"></mat-icon>
+            </a>
             <button (click)="deleteItem(element.id)" mat-icon-button class="table__button table__button_delete">
               <mat-icon class="nav__icon">delete_forever</mat-icon>
             </button>

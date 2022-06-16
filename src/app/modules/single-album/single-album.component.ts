@@ -16,6 +16,9 @@ import {IMessageModal} from "@models/interfaces/modal/message-modal.inteface";
 import {filter} from "rxjs/operators";
 import {ModeType} from "@models/enums/mode-type";
 import { Location } from '@angular/common'
+import {BreadcrumbsService} from "@services/breadcrumbs/breadcrumbs.service";
+import {IUser} from "@models/interfaces/user.interface";
+import {UserApiService} from "@services/api/user-api/user-api.service";
 
 @Component({
   selector: 'single-album',
@@ -31,10 +34,12 @@ export class SingleAlbumComponent implements OnInit, AfterViewInit {
   photos: IPhoto[];
   isLoadingAlbum: boolean = true;
   isLoadingPhotos: boolean = true;
-
+  user: IUser;
+  userId: number;
   startPhoto: number;
   numberOfPhotos: number = 10;
   showedPhotos: IPhoto[];
+  fullBreadCrumbs: boolean = true;
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
   constructor(
@@ -43,12 +48,21 @@ export class SingleAlbumComponent implements OnInit, AfterViewInit {
     private _photoApi: PhotoApiService,
     private _user: UserService,
     protected dialog: MatDialog,
-    private location: Location
+    private _location: Location,
+    private _breadcrumbs: BreadcrumbsService,
+    private _userApi: UserApiService,
+    private _route: ActivatedRoute,
   ) {
     this.route.params.subscribe(params => this.albumId = parseInt(params['id']));
   }
 
   ngOnInit(): void {
+    this.userId = this._route?.parent?.snapshot.params['id'];
+    if (!this.userId) {
+      this.fullBreadCrumbs = false;
+      this.userId = this._user.getUserId();
+    }
+
     this.getAlbum();
     this.getPhotos();
   }
@@ -56,7 +70,13 @@ export class SingleAlbumComponent implements OnInit, AfterViewInit {
   getAlbum(): void {
     this._albumApi.getItem(this.albumId).subscribe((album) => {
       this.album = album;
-      this.isLoadingAlbum = false;
+
+      this._userApi.getItem(this.userId).subscribe((user: IUser): void => {
+        this.user = user;
+        this._setBreadcrumbs();
+        this.isLoadingAlbum = false;
+      }, error => this.errorAlbumAction(error));
+
     }, (error: Error) => this.errorAlbumAction(error));
   }
 
@@ -165,7 +185,7 @@ export class SingleAlbumComponent implements OnInit, AfterViewInit {
   }
 
   getBack(): void {
-    this.location.back()
+    this._location.back()
   }
 
   showAlbumList() {
@@ -180,5 +200,39 @@ export class SingleAlbumComponent implements OnInit, AfterViewInit {
   errorAlbumAction(error: Error): void {
     console.log('Error: ', error);
     this.isLoadingAlbum = false;
+  }
+
+  private _setBreadcrumbs(): void {
+    if (!this._breadcrumbs.breadcrumbs$.value?.length) {
+
+      if (this.fullBreadCrumbs) {
+        this._breadcrumbs.add({
+          name: 'Users',
+          url: `/users`
+        });
+        this._breadcrumbs.add({
+          name: this.user.name,
+          url: `/users/${this.user.id}`
+        });
+        this._breadcrumbs.add({
+          name: 'Albums',
+          url: `/users/${this.album.userId}/albums`
+        });
+        this._breadcrumbs.add({
+          name: this.album?.title,
+          url: ''
+        });
+
+      } else {
+        this._breadcrumbs.add({
+          name: 'Albums',
+          url: `/albums`
+        });
+        this._breadcrumbs.add({
+          name: this.album?.title,
+          url: ''
+        });
+      }
+    }
   }
 }

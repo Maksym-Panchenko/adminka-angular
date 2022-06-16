@@ -5,7 +5,7 @@ import {IUser} from "@models/interfaces/user.interface";
   providedIn: 'root'
 })
 export class UserService {
-  constructor() { }
+  private _selectedUser: IUser;
 
   setUser(user: IUser): void {
     localStorage.setItem('currentUser', JSON.stringify(user));
