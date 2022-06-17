@@ -39,7 +39,7 @@ export class SingleUserComponent implements OnInit {
     {
       icon: 'users',
       title: 'User data',
-      // link: './users'
+      link: './user-data'
     },
     {
       icon: 'posts',

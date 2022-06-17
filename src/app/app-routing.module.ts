@@ -15,6 +15,8 @@ import {TodosModule} from "./modules/todos/todos.module";
 import {SingleUserComponent} from "./modules/single-user/single-user.component";
 import {SingleUserModule} from "./modules/single-user/single-user.module";
 import {NotFoundPageComponent} from "./modules/not-found-page/not-found-page.component";
+import {UserDataComponent} from "./modules/user-data/user-data.component";
+import {UserDataModule} from "./modules/user-data/user-data.module";
 
 const routes: Routes = [
   {
@@ -28,11 +30,15 @@ const routes: Routes = [
       {
         path: '',
         pathMatch: 'full',
-        redirectTo: 'posts'
+        redirectTo: 'user-data'
       },
       {
         path: 'posts',
         component: PostsComponent
+      },
+      {
+        path: 'user-data',
+        component: UserDataComponent
       },
       {
         path: 'posts/:id',
@@ -95,7 +101,8 @@ const routes: Routes = [
     AlbumsModule,
     SingleAlbumModule,
     TodosModule,
-    SingleUserModule
+    SingleUserModule,
+    UserDataModule
   ],
   exports: [RouterModule]
 })

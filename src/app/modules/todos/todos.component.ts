@@ -68,7 +68,7 @@ export class TodosComponent implements OnInit {
       this._userApi.getItem(this.userId).subscribe((user: IUser): void => {
         this.user = user;
         this._setBreadcrumbs();
-        this.isLoading = false
+        this.isLoading = false;
       }, (error) => this.errorAction(error));
 
     }, (error) => this.errorAction(error));
