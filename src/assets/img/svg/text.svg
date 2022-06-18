@@ -1,12 +1,12 @@
-<svg width="18.104492" height="14.292847" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg">
+<svg xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
   <defs>
-    <clipPath id="b13">
-      <use xlink:href="#a13"/>
+    <clipPath id="b14">
+      <use xlink:href="#a14" width="100%" height="100%"/>
     </clipPath>
-    <path d="M0 0v2.85857h4.76429V14.2929h2.85857V2.85857h4.76424V0H0Zm18.1045 4.76428H9.52881v2.85857h2.85859v6.67005h2.8586V7.62285h2.8585V4.76428Z" id="a13"/>
+    <path d="M0 0v2.85857h4.76429V14.2929h2.85857V2.85857h4.76424V0Zm18.1045 4.76428H9.52881v2.85857h2.85859v6.67005h2.8586V7.62285h2.8585z" id="a14"/>
   </defs>
-  <path d="M0 0v2.85857h4.76429V14.2929h2.85857V2.85857h4.76424V0H0Zm18.1045 4.76428H9.52881v2.85857h2.85859v6.67005h2.8586V7.62285h2.8585V4.76428Z" fill="none"/>
-  <g clip-path="url(#b13)">
-    <path d="M-2.8637695-4.8535767h24v24h-24v-24Z" fill="currentColor" fill-rule="evenodd"/>
+  <path d="M0 0v2.85857h4.76429V14.2929h2.85857V2.85857h4.76424V0Zm18.1045 4.76428H9.52881v2.85857h2.85859v6.67005h2.8586V7.62285h2.8585z" fill="none"/>
+  <g clip-path="url(#b14)" transform="matrix(1.10124 0 0 1.14128 2 3.7375833)">
+    <path d="M-2.8637695-4.8535767H21.13623V19.146423H-2.8637695Z" fill="currentColor" fill-rule="evenodd"/>
   </g>
 </svg>

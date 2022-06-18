@@ -93,10 +93,18 @@
 
     &.mat-icon-button {
       --button-height: 4rem;
+      display: flex;
+      justify-content: center;
+      align-items: center;
       border-radius: 50%;
       padding: 0;
       width: var(--button-height);
       height: var(--button-height);
+
+      &.small {
+        --button-width: 3.2rem;
+        --button-height: 3.2rem;
+      }
 
       .mat-button-wrapper {
         display: flex;

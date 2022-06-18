@@ -45,7 +45,7 @@
       <td mat-cell *matCellDef="let element">
         <div class="table__button-group">
           <ng-container *ngIf="mode === ModeType.edit">
-            <a [routerLink]="[element.id]" mat-icon-button>
+            <a [routerLink]="[element.id]" mat-icon-button class="small">
               <mat-icon [svgIcon]="'arrow-right'" class="nav__icon"></mat-icon>
             </a>
             <button mat-icon-button class="table__button table__button_delete">

@@ -125,7 +125,7 @@ export class SinglePostComponent implements OnInit {
           title: 'Delete comment?',
           type: MessageModalType.confirm,
           buttonsNames: {
-            approve: 'Save',
+            approve: 'Delete',
             decline: 'Cancel'
           }
         } as IMessageModal
