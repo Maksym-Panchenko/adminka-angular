@@ -2,7 +2,7 @@
   <load-spinner [isLoading]="isLoadingPost || isLoadingComments">posts loading</load-spinner>
 
   <div class="items__actions items__actions_left-pos">
-    <button (click)="mode === ModeType.edit ? getBack() : showPostList()" class="items__button" mat-flat-button color="primary">
+    <button (click)="getBack()" class="items__button" mat-flat-button color="primary">
       <mat-icon>arrow_back</mat-icon>
       Back
     </button>

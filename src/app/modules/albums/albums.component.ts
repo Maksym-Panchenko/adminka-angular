@@ -26,8 +26,6 @@ import {UserApiService} from "@services/api/user-api/user-api.service";
 })
 export class AlbumsComponent implements OnInit {
   @Output() showSelectedAlbum: EventEmitter<number> = new EventEmitter();
-  @Input() mode: ModeType = ModeType.edit;
-  // @Input() userId: number;
   readonly ModeType: typeof ModeType = ModeType;
   isLoading: boolean = true;
   pageSizes: number[] = [5];
@@ -37,6 +35,7 @@ export class AlbumsComponent implements OnInit {
   user: IUser;
   userId: number;
   fullBreadCrumbs: boolean = true;
+  mode: ModeType;
 
   constructor(
     private _postsApi: PostApiService,
@@ -55,6 +54,8 @@ export class AlbumsComponent implements OnInit {
       this.fullBreadCrumbs = false;
       this.userId = this._user.getUserId();
     }
+
+    this.mode = this._user.getMode(this.userId);
 
     this.getAlbums();
   }
@@ -96,14 +97,6 @@ export class AlbumsComponent implements OnInit {
           this.isLoading = false;
         }, (error) => this.errorAction(error));
       });
-  }
-
-  openAlbum(id: number): void {
-    this._router.navigate(['albums', id]);
-  }
-
-  showAlbum(id: number): void {
-    this.showSelectedAlbum.emit(id);
   }
 
   createItem(): void {

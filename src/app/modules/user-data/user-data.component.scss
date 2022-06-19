@@ -14,7 +14,7 @@
     color: var(--color-onyx);
   }
 
-  &__block::after {
+  &__block:not(:last-child)::after {
     display: block;
     content: "";
     margin: 1rem -2.4rem 2.4rem;

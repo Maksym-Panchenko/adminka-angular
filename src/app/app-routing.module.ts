@@ -59,6 +59,10 @@ const routes: Routes = [
     ]
   },
   {
+    path: 'user-data',
+    component: UserDataComponent
+  },
+  {
     path: 'posts',
     component: PostsComponent
   },

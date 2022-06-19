@@ -1,32 +1,49 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import { NavItem } from "@models/interfaces/nav-item.interface";
+import { Role } from "@models/enums/roles.enum"
 
 @Component({
   selector: 'nav-list',
   templateUrl: './nav-list.component.html',
   styleUrls: ['./nav-list.component.scss']
 })
-export class NavListComponent {
+export class NavListComponent implements OnInit{
+  @Input() currentRole: Role;
+  navItemsShow: NavItem[];
   navItems: NavItem[] = [
     {
       icon: 'users',
       title: 'Users',
-      link: '/users'
+      link: '/users',
+      roles: [Role.user, Role.admin]
+    },
+    {
+      icon: 'users',
+      title: 'My data',
+      link: '/user-data',
+      roles: [Role.user]
     },
     {
       icon: 'posts',
       title: 'My posts',
-      link: '/posts'
+      link: '/posts',
+      roles: [Role.user]
     },
     {
       icon: 'photo',
       title: 'My albums',
-      link: '/albums'
+      link: '/albums',
+      roles: [Role.user]
     },
     {
       icon: 'text',
       title: 'My todos',
-      link: '/todos'
+      link: '/todos',
+      roles: [Role.user]
     }
   ];
+
+  ngOnInit(): void {
+    this.navItemsShow = this.navItems.filter(el => el.roles?.includes(this.currentRole));
+  }
 }

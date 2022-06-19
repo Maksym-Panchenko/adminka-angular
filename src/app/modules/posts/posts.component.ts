@@ -25,16 +25,14 @@ import {UserApiService} from "@services/api/user-api/user-api.service";
 })
 export class PostsComponent implements OnInit {
   @Output() showSelectedPost: EventEmitter<number> = new EventEmitter();
-  // @Input() userId: number;
-  @Input() mode: ModeType = ModeType.edit;
   readonly ModeType: typeof ModeType = ModeType;
   isLoading: boolean = true;
-  // posts: IPost[];
   pageSizes: number[] = [5];
   maxLengthPostBody: number = 50;
   user: IUser;
   userId: number;
   fullBreadCrumbs: boolean = true;
+  mode: ModeType;
 
   dataSource: MatTableDataSource<IPost>;
 
@@ -50,20 +48,16 @@ export class PostsComponent implements OnInit {
     private _user: UserService,
     private _breadcrumbs: BreadcrumbsService,
     private _userApi: UserApiService
-  ) {
-    // this.userId = this._route?.parent?.snapshot.params['id'];
-  }
+  ) {}
 
   ngOnInit(): void {
     this.userId = this._route?.parent?.snapshot.params['id'];
-
-
-    // this.user = this._user.selectedUser;
-
     if (!this.userId) {
       this.fullBreadCrumbs = false;
       this.userId = this._user.getUserId();
     }
+    this.mode = this._user.getMode(this.userId);
+
     this.getPosts();
   }
 
@@ -105,14 +99,6 @@ export class PostsComponent implements OnInit {
           this.isLoading = false;
         }, (error) => this.errorAction(error));
       });
-  }
-
-  openPost(id: number): void {
-    this._router.navigate(['posts', id]);
-  }
-
-  showPost(id: number): void {
-    this.showSelectedPost.emit(id);
   }
 
   createPost(): void {

@@ -1,4 +1,4 @@
-import {Component, Input, OnInit, ViewChild} from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {MatTableDataSource} from "@angular/material/table";
 import {MatPaginator} from "@angular/material/paginator";
 import {PostApiService} from "@services/api/post-api/post-api.service";
@@ -8,7 +8,7 @@ import {UserService} from "@services/user/user.service";
 import {MessageDialogComponent} from "../../common/modules/modals/message-dialog/message-dialog.component";
 import {MessageModalType} from "@models/enums/message-modal-type.enum";
 import {IMessageModal} from "@models/interfaces/modal/message-modal.inteface";
-import {filter, map} from "rxjs/operators";
+import {filter} from "rxjs/operators";
 import {EntityDialogComponent} from "../../common/modules/modals/entity-dialog/entity-dialog.component";
 import {EntityModalType} from "@models/enums/entity-modal-type";
 import {IEntityModal} from "@models/interfaces/modal/entity-modal.inteface";
@@ -26,8 +26,6 @@ import {UserApiService} from "@services/api/user-api/user-api.service";
 })
 export class TodosComponent implements OnInit {
   @ViewChild('paginator') paginator: MatPaginator;
-  // @Input() userId: number;
-  @Input() mode: ModeType = ModeType.edit;
   readonly ModeType: typeof ModeType = ModeType;
   displayedColumns: string[] = ['id', 'checkbox', 'title', 'actions'];
   dataSource: MatTableDataSource<ITodo>;
@@ -36,6 +34,7 @@ export class TodosComponent implements OnInit {
   isLoading: boolean = true;
   pageSizes: number[] = [10];
   fullBreadCrumbs: boolean = true;
+  mode: ModeType;
 
   constructor(
     private _postsApi: PostApiService,
@@ -49,15 +48,14 @@ export class TodosComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.userId = this._route?.parent?.snapshot.params['id'];
-
+    this.userId = +this._route?.parent?.snapshot.params['id'];
     if (!this.userId) {
       this.fullBreadCrumbs = false;
       this.userId = this._user.getUserId();
     }
+    this.mode = this._user.getMode(this.userId);
 
     this.getTodos();
-    // this._setBreadcrumbs();
   }
 
   getTodos(): void {

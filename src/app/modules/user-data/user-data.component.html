@@ -16,7 +16,7 @@
         ></app-mat-form-field>
       </div>
 
-      <div class="items__actions items__actions_left-pos">
+      <div *ngIf="mode === ModeType.edit" class="items__actions items__actions_left-pos">
         <button type="submit" class="items__button" mat-flat-button [color]="'primary'">Save settings</button>
       </div>
     </form>

@@ -27,7 +27,6 @@ import {UserService} from "@services/user/user.service";
 })
 export class SinglePostComponent implements OnInit {
   @Output() showPosts: EventEmitter<void> = new EventEmitter();
-  @Input() mode: ModeType = ModeType.edit;
   @Input() postId: number;
   readonly ModeType: typeof ModeType = ModeType;
   post: IPost;
@@ -37,6 +36,7 @@ export class SinglePostComponent implements OnInit {
   isLoadingPost: boolean = true;
   isLoadingComments: boolean = true;
   fullBreadCrumbs: boolean = true;
+  mode: ModeType;
 
   constructor(
     private _route: ActivatedRoute,
@@ -57,6 +57,7 @@ export class SinglePostComponent implements OnInit {
       this.fullBreadCrumbs = false;
       this.userId = this._user.getUserId();
     }
+    this.mode = this._user.getMode(this.userId);
 
     this.getPost();
     this.getComments();

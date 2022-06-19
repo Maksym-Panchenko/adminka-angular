@@ -27,7 +27,6 @@ import {UserApiService} from "@services/api/user-api/user-api.service";
 })
 export class SingleAlbumComponent implements OnInit, AfterViewInit {
   @Output() showAlbums: EventEmitter<void> = new EventEmitter();
-  @Input() mode: ModeType = ModeType.edit;
   @Input() albumId: number;
   readonly ModeType: typeof ModeType = ModeType;
   album: IAlbum;
@@ -41,6 +40,7 @@ export class SingleAlbumComponent implements OnInit, AfterViewInit {
   showedPhotos: IPhoto[];
   fullBreadCrumbs: boolean = true;
   @ViewChild(MatPaginator) paginator: MatPaginator;
+  mode: ModeType;
 
   constructor(
     private route: ActivatedRoute,
@@ -62,6 +62,7 @@ export class SingleAlbumComponent implements OnInit, AfterViewInit {
       this.fullBreadCrumbs = false;
       this.userId = this._user.getUserId();
     }
+    this.mode = this._user.getMode(this.userId);
 
     this.getAlbum();
     this.getPhotos();
