@@ -9,6 +9,7 @@ import {MatTableModule} from "@angular/material/table";
 import {MatDialogModule} from "@angular/material/dialog";
 import {MatTabsModule} from "@angular/material/tabs";
 import {MatMenuModule} from "@angular/material/menu";
+import {MatSnackBarModule} from "@angular/material/snack-bar";
 
 @NgModule({
   exports: [
@@ -21,7 +22,8 @@ import {MatMenuModule} from "@angular/material/menu";
     MatTableModule,
     MatDialogModule,
     MatTabsModule,
-    MatMenuModule
+    MatMenuModule,
+    MatSnackBarModule
   ]
 })
 export class MaterialModule {}

@@ -1,0 +1,20 @@
+.mat-snack-bar-container {
+  .mat-simple-snackbar-action {
+    .mat-button {
+      font-size: 2rem;
+      line-height: 100%;
+      height: 4rem;
+      color: var(--color-white);
+    }
+  }
+
+  &.success {
+    color: var(--color-white);
+    background: var(--color-mint);
+  }
+
+  &.error {
+    color: var(--color-white);
+    background: var(--color-carmine-pink);
+  }
+}

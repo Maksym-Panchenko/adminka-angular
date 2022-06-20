@@ -3,6 +3,7 @@
 @use "modules/form-field-theme" as form-field;
 @use "modules/checkbox-theme" as form-checkbox;
 @use "modules/button-theme" as form-button;
+@use "modules/snack-bar";
 @use "palettes/custom-blue" as custom-blue-palette;
 
 @include mat.core();

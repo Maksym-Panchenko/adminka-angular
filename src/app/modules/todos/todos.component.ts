@@ -18,6 +18,8 @@ import {ModeType} from "@models/enums/mode-type";
 import {BreadcrumbsService} from "@services/breadcrumbs/breadcrumbs.service";
 import {IUser} from "@models/interfaces/user.interface";
 import {UserApiService} from "@services/api/user-api/user-api.service";
+import {MatSnackBar} from "@angular/material/snack-bar";
+import {SnackBarNotificationType} from "@models/enums/snack-bar-notification-type.enum";
 
 @Component({
   selector: 'todos',
@@ -44,7 +46,8 @@ export class TodosComponent implements OnInit {
     private _user: UserService,
     private _breadcrumbs: BreadcrumbsService,
     private _route: ActivatedRoute,
-    private _userApi: UserApiService
+    private _userApi: UserApiService,
+    private _snackBar: MatSnackBar
   ) {}
 
   ngOnInit(): void {
@@ -68,7 +71,6 @@ export class TodosComponent implements OnInit {
         this._setBreadcrumbs();
         this.isLoading = false;
       }, (error) => this.errorAction(error));
-
     }, (error) => this.errorAction(error));
   }
 
@@ -94,6 +96,7 @@ export class TodosComponent implements OnInit {
         this._todosApi.deleteItem(id).subscribe(() => {
           this.dataSource.data = this.dataSource.data.filter((e: ITodo): boolean => e.id !== id);
           this.isLoading = false;
+          this.showMessage(SnackBarNotificationType.success, 'Todo has been deleted');
         }, (error) => this.errorAction(error));
       });
   }
@@ -119,6 +122,7 @@ export class TodosComponent implements OnInit {
           this._todosApi.createItem(newTodo).subscribe((addedTodo: ITodo) => {
             this.dataSource.data = [...this.dataSource.data, addedTodo];
             this.isLoading = false;
+            this.showMessage(SnackBarNotificationType.success, 'Todo has been created');
           }, (error) => this.errorAction(error));
         }
       });
@@ -148,6 +152,7 @@ export class TodosComponent implements OnInit {
             this.dataSource.data.splice(index, 1, updatedTodo);
             this.dataSource._updateChangeSubscription();
             this.isLoading = false;
+            this.showMessage(SnackBarNotificationType.success, 'Todo has been edited');
           }, (error) => this.errorAction(error));
         }
       });
@@ -167,6 +172,7 @@ export class TodosComponent implements OnInit {
   errorAction(error: Error): void {
     console.log('Error: ', error);
     this.isLoading = false;
+    this.showMessage(SnackBarNotificationType.error, 'Something wrong...');
   }
 
   private _setBreadcrumbs(): void {
@@ -188,5 +194,14 @@ export class TodosComponent implements OnInit {
         url: ''
       });
     }
+  }
+
+  showMessage(result: SnackBarNotificationType, message: string) {
+    this._snackBar.open(message, undefined, {
+      horizontalPosition: 'right',
+      verticalPosition: 'top',
+      duration: 2000,
+      panelClass: result
+    });
   }
 }
