@@ -32,3 +32,36 @@
     }
   }
 }
+
+.nav {
+  &__list {
+    display: flex;
+    flex-wrap: wrap;
+    padding: 0 2.4rem;
+    gap: 1rem;
+  }
+
+  &__item {
+    list-style-type: none;
+  }
+
+  &__link {
+    color: var(--color-slate-gray);
+    font-size: 1.4rem;
+    letter-spacing: normal;
+    text-transform: capitalize;
+    padding: 0 2rem;
+    line-height: 3.8rem;
+
+    &.active {
+      background-color: var(--color-denim);
+      color: var(--color-white);
+    }
+  }
+
+  &__icon ::ng-deep svg {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+}

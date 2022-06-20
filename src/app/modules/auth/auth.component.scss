@@ -67,6 +67,11 @@
     height: 3rem;
     line-height: 3rem;
     margin: 0.4rem 0;
+
+    &:first-child {
+      background-color: var(--color-carmine-pink-semi-transparent);
+      color: var(--color-white);
+    }
   }
 
   &__message {

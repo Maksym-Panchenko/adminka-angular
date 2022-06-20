@@ -5,7 +5,7 @@ import {ITodo} from "@models/interfaces/todo.interface";
 @Injectable({
   providedIn: 'root'
 })
-export class TodoApiService extends ApiBaseAbstractService<ITodo>{
+export class TodoApiService extends ApiBaseAbstractService<ITodo> {
   readonly entityUrl: string = 'todos';
   readonly parentEntityUrl: string = 'users';
 }

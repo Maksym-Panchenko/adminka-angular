@@ -2,9 +2,10 @@
   <main-header (logOutUser)="logOut()"></main-header>
 
   <div class="content">
-    <side-nav></side-nav>
+    <side-nav [currentRole]="currentRole"></side-nav>
 
     <div class="content__main">
+      <breadcrumbs></breadcrumbs>
       <router-outlet></router-outlet>
     </div>
   </div>

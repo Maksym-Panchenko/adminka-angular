@@ -35,6 +35,7 @@ export class MatFormFieldComponent implements OnInit, OnChanges, OnDestroy {
   @Input() inputType: InputType;
   @Input() placeholder: string;
   @Input() required: boolean = false;
+  @Input() disabled: boolean = false;
   @Input() appearance: MatFormFieldAppearance = 'outline';
   @Input() control: AbstractControl = new FormControl();
   @Input() floatLabel: FormFieldFloatLabelMode = FormFieldFloatLabelMode.never;

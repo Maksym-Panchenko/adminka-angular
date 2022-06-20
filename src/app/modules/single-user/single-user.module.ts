@@ -7,9 +7,20 @@ import {AlbumsModule} from "../albums/albums.module";
 import {SingleAlbumModule} from "../single-album/single-album.module";
 import {PostsModule} from "../posts/posts.module";
 import {SinglePostModule} from "../single-post/single-post.module";
+import {RouterModule} from "@angular/router";
 
 @NgModule({
   declarations: [SingleUserComponent],
-  imports: [CommonModule, SharedModule, TodosModule, AlbumsModule, SingleAlbumModule, PostsModule, SinglePostModule]
+  imports: [
+    CommonModule,
+    SharedModule,
+    TodosModule,
+    AlbumsModule,
+    SingleAlbumModule,
+    PostsModule,
+    SinglePostModule,
+    RouterModule
+  ],
+  exports: [SingleUserComponent]
 })
-export class SingleUserModule { }
+export class SingleUserModule {}

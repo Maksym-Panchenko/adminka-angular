@@ -18,11 +18,11 @@
     font-size: 1.4rem;
     font-weight: var(--fw-medium);
     border-radius: 0.4rem;
+    color: var(--color-slate-gray);
 
     span {
       display: inline-flex;
       align-items: center;
-      color: var(--color-slate-gray);
     }
 
     &:hover {

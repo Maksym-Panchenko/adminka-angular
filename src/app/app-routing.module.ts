@@ -14,6 +14,9 @@ import {TodosComponent} from "./modules/todos/todos.component";
 import {TodosModule} from "./modules/todos/todos.module";
 import {SingleUserComponent} from "./modules/single-user/single-user.component";
 import {SingleUserModule} from "./modules/single-user/single-user.module";
+import {NotFoundPageComponent} from "./modules/not-found-page/not-found-page.component";
+import {UserDataComponent} from "./modules/user-data/user-data.component";
+import {UserDataModule} from "./modules/user-data/user-data.module";
 
 const routes: Routes = [
   {
@@ -22,7 +25,42 @@ const routes: Routes = [
   },
   {
     path: 'users/:id',
-    component: SingleUserComponent
+    component: SingleUserComponent,
+    children: [
+      {
+        path: '',
+        pathMatch: 'full',
+        redirectTo: 'user-data'
+      },
+      {
+        path: 'posts',
+        component: PostsComponent
+      },
+      {
+        path: 'user-data',
+        component: UserDataComponent
+      },
+      {
+        path: 'posts/:id',
+        component: SinglePostComponent
+      },
+      {
+        path: 'albums',
+        component: AlbumsComponent
+      },
+      {
+        path: 'albums/:id',
+        component: SingleAlbumComponent
+      },
+      {
+        path: 'todos',
+        component: TodosComponent
+      },
+    ]
+  },
+  {
+    path: 'user-data',
+    component: UserDataComponent
   },
   {
     path: 'posts',
@@ -44,6 +82,19 @@ const routes: Routes = [
     path: 'todos',
     component: TodosComponent
   },
+  {
+    path: '',
+    pathMatch: 'full',
+    redirectTo: '/users'
+  },
+  {
+    path: '**',
+    redirectTo: '/404'
+  },
+  {
+    path: '404',
+    component: NotFoundPageComponent
+  }
 ];
 
 @NgModule({
@@ -54,7 +105,8 @@ const routes: Routes = [
     AlbumsModule,
     SingleAlbumModule,
     TodosModule,
-    SingleUserModule
+    SingleUserModule,
+    UserDataModule
   ],
   exports: [RouterModule]
 })

@@ -100,6 +100,10 @@
         &::placeholder {
           color: var(--color);
         }
+
+        &:disabled {
+          color: var(--color-denim);
+        }
       }
 
       .mat-form-field-suffix,

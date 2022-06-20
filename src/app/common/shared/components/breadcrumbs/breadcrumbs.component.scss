@@ -1,0 +1,31 @@
+.breadcrumbs {
+  display: flex;
+  height: 40px;
+  padding-left: 2.4rem;
+  margin: 2.4rem 0 0;
+  font-weight: var(--fw-medium);
+
+  &__item {
+    font-size: 1.4rem;
+    display: flex;
+    align-items: center;
+    text-transform: capitalize;
+  }
+
+  &__icon {
+    color: var(--color-slate-gray);
+  }
+
+  &__link {
+    color: var(--color-slate-gray);
+    text-decoration: none;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+
+  &__label {
+    color: var(--color-slate-gray);
+  }
+}

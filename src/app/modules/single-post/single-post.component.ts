@@ -14,6 +14,10 @@ import {MessageDialogComponent} from "../../common/modules/modals/message-dialog
 import {MessageModalType} from "@models/enums/message-modal-type.enum";
 import {IMessageModal} from "@models/interfaces/modal/message-modal.inteface";
 import {filter} from "rxjs/operators";
+import {BreadcrumbsService} from "@services/breadcrumbs/breadcrumbs.service";
+import { UserApiService } from "@services/api/user-api/user-api.service";
+import {IUser} from "@models/interfaces/user.interface";
+import {UserService} from "@services/user/user.service";
 
 
 @Component({
@@ -23,38 +27,56 @@ import {filter} from "rxjs/operators";
 })
 export class SinglePostComponent implements OnInit {
   @Output() showPosts: EventEmitter<void> = new EventEmitter();
-  @Input() mode: ModeType = ModeType.edit;
   @Input() postId: number;
   readonly ModeType: typeof ModeType = ModeType;
   post: IPost;
+  user: IUser;
+  userId: number;
   comments: IComment[];
   isLoadingPost: boolean = true;
   isLoadingComments: boolean = true;
+  fullBreadCrumbs: boolean = true;
+  mode: ModeType;
 
   constructor(
-    private route: ActivatedRoute,
+    private _route: ActivatedRoute,
     private _postApi: PostApiService,
     private _commentApi: CommentApiService,
     protected dialog: MatDialog,
-    private location: Location
+    private location: Location,
+    private _breadcrumbs: BreadcrumbsService,
+    private _userApi: UserApiService,
+    private _user: UserService
   ) {
-    this.route.params.subscribe(params => this.postId = parseInt(params['id']));
+    this._route.params.subscribe(params => this.postId = parseInt(params['id']));
   }
 
   ngOnInit(): void {
+    this.userId = this._route?.parent?.snapshot.params['id'];
+    if (!this.userId) {
+      this.fullBreadCrumbs = false;
+      this.userId = this._user.getUserId();
+    }
+    this.mode = this._user.getMode(this.userId);
+
     this.getPost();
     this.getComments();
   }
 
   getPost(): void {
-    this._postApi.getItem(this.postId).subscribe((post) => {
+    this._postApi.getItem(this.postId).subscribe((post: IPost): void => {
       this.post = post;
-      this.isLoadingPost = false;
+
+      this._userApi.getItem(this.userId).subscribe((user: IUser): void => {
+        this.user = user;
+        this._setBreadcrumbs();
+        this.isLoadingPost = false;
+      }, error => this.errorPostAction(error));
     }, error => this.errorPostAction(error));
   }
 
   getComments(): void {
-    this._commentApi.getItems(this.postId).subscribe((comments: IComment[]) => {
+    this._commentApi.getItems(this.postId).subscribe((comments: IComment[]): void => {
       this.comments = comments;
       this.isLoadingComments = false;
     }, error => this.errorCommentAction(error));
@@ -104,7 +126,7 @@ export class SinglePostComponent implements OnInit {
           title: 'Delete comment?',
           type: MessageModalType.confirm,
           buttonsNames: {
-            approve: 'Save',
+            approve: 'Delete',
             decline: 'Cancel'
           }
         } as IMessageModal
@@ -131,5 +153,39 @@ export class SinglePostComponent implements OnInit {
   errorPostAction(error: Error): void {
     console.log('Error: ', error);
     this.isLoadingPost = false;
+  }
+
+  private _setBreadcrumbs(): void {
+    if (!this._breadcrumbs.breadcrumbs$.value?.length) {
+
+      if (this.fullBreadCrumbs) {
+        this._breadcrumbs.add({
+          name: 'Users',
+          url: `/users`
+        });
+        this._breadcrumbs.add({
+          name: this.user.name,
+          url: `/users/${this.user.id}`
+        });
+        this._breadcrumbs.add({
+          name: 'Posts',
+          url: `/users/${this.post.userId}/posts`
+        });
+        this._breadcrumbs.add({
+          name: this.post?.title,
+          url: `/:id`
+        });
+
+      } else {
+        this._breadcrumbs.add({
+          name: 'Posts',
+          url: `/posts`
+        });
+        this._breadcrumbs.add({
+          name: this.post?.title,
+          url: ''
+        });
+      }
+    }
   }
 }
