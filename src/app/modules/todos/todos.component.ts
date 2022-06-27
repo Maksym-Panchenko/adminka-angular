@@ -21,6 +21,7 @@ import {UserApiService} from "@services/api/user-api/user-api.service";
 import {MatSnackBar} from "@angular/material/snack-bar";
 import {SnackBarNotificationType} from "@models/enums/snack-bar-notification-type.enum";
 import {SNACKBAR_CONFIG} from "@miscconstants/snackbar-config";
+import {Observable} from "rxjs";
 
 @Component({
   selector: 'todos',
@@ -112,18 +113,15 @@ export class TodosComponent implements OnInit {
           buttonsNames: {
             approve: 'Create',
             decline: 'Cancel'
-          }
+          },
+          submitHandler: (item: ITodo): Observable<ITodo> => this._todosApi.createItem(item)
         } as IEntityModal
       })
       .afterClosed()
       .subscribe((newTodo): void => {
         if (newTodo) {
-          this.isLoading = true;
-          this._todosApi.createItem(newTodo).subscribe((addedTodo: ITodo) => {
-            this.dataSource.data = [...this.dataSource.data, addedTodo];
-            this.isLoading = false;
-            this.showMessage(SnackBarNotificationType.success, 'Todo has been created');
-          }, (error) => this.errorAction(error));
+          this.dataSource.data = [...this.dataSource.data, newTodo];
+          this.showMessage(SnackBarNotificationType.success, 'Todo has been created');
         }
       });
   }
@@ -140,20 +138,17 @@ export class TodosComponent implements OnInit {
           buttonsNames: {
             approve: 'Edit',
             decline: 'Cancel'
-          }
+          },
+          submitHandler: (item: ITodo): Observable<ITodo> =>  this._todosApi.updateItem(item)
         } as IEntityModal
       })
       .afterClosed()
       .subscribe((editedTodo): void => {
         if (editedTodo) {
-          this.isLoading = true;
-          this._todosApi.updateItem(editedTodo).subscribe((updatedTodo: ITodo) => {
-            const index = this.dataSource.data.findIndex(e => e.id === updatedTodo.id);
-            this.dataSource.data.splice(index, 1, updatedTodo);
-            this.dataSource._updateChangeSubscription();
-            this.isLoading = false;
-            this.showMessage(SnackBarNotificationType.success, 'Todo has been edited');
-          }, (error) => this.errorAction(error));
+          const index = this.dataSource.data.findIndex(e => e.id === editedTodo.id);
+          this.dataSource.data.splice(index, 1, editedTodo);
+          this.dataSource._updateChangeSubscription();
+          this.showMessage(SnackBarNotificationType.success, 'Todo has been edited');
         }
       });
   }

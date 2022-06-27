@@ -44,6 +44,8 @@ export class MessageDialogComponent {
         this.showMessage(SnackBarNotificationType.error, 'Something wrong...');
         this._dialog.close(false);
       });
+    } else {
+      this._dialog.close(true);
     }
   }
 
