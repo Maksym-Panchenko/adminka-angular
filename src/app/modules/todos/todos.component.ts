@@ -20,6 +20,7 @@ import {IUser} from "@models/interfaces/user.interface";
 import {UserApiService} from "@services/api/user-api/user-api.service";
 import {MatSnackBar} from "@angular/material/snack-bar";
 import {SnackBarNotificationType} from "@models/enums/snack-bar-notification-type.enum";
+import {SNACKBAR_CONFIG} from "@miscconstants/snackbar-config";
 
 @Component({
   selector: 'todos',
@@ -84,20 +85,19 @@ export class TodosComponent implements OnInit {
           buttonsNames: {
             approve: 'Delete',
             decline: 'Cancel'
-          }
+          },
+          submitHandler: () => this._todosApi.deleteItem(id)
         } as IMessageModal
       })
       .afterClosed()
       .pipe(
         filter((res: boolean): boolean => res)
       )
-      .subscribe((): void => {
-        this.isLoading = true;
-        this._todosApi.deleteItem(id).subscribe(() => {
+      .subscribe((answer): void => {
+        if (answer) {
           this.dataSource.data = this.dataSource.data.filter((e: ITodo): boolean => e.id !== id);
-          this.isLoading = false;
           this.showMessage(SnackBarNotificationType.success, 'Todo has been deleted');
-        }, (error) => this.errorAction(error));
+        }
       });
   }
 
@@ -160,11 +160,9 @@ export class TodosComponent implements OnInit {
 
   toggleState(id: number, value: boolean): void {
     if (this.mode === ModeType.edit) {
-      this.isLoading = true;
       this._todosApi.patchItem(id, {completed: !value}).subscribe((value) => {
         const index: number = this.dataSource.data.findIndex(e => e.id === value.id);
         this.dataSource.data[index].completed = value.completed;
-        this.isLoading = false;
       }, (error) => this.errorAction(error));
     }
   }
@@ -197,11 +195,6 @@ export class TodosComponent implements OnInit {
   }
 
   showMessage(result: SnackBarNotificationType, message: string) {
-    this._snackBar.open(message, undefined, {
-      horizontalPosition: 'right',
-      verticalPosition: 'top',
-      duration: 2000,
-      panelClass: result
-    });
+    this._snackBar.open(message, undefined, { ...SNACKBAR_CONFIG, panelClass: result });
   }
 }

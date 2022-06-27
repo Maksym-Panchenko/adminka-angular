@@ -8,4 +8,5 @@ export interface IMessageModal {
     approve?: string;
     decline?: string;
   };
+  submitHandler?: any;
 }
