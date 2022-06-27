@@ -4,6 +4,7 @@ import { UserService } from "./services/user/user.service";
 import { IUser } from "@models/interfaces/user.interface";
 import { Role } from "@models/enums/roles.enum";
 import { Router } from "@angular/router";
+import {SpinnerService} from "@services/spinner/spinner.service";
 
 @Component({
   selector: 'app-root',
@@ -16,10 +17,13 @@ export class AppComponent implements OnInit {
   currentUser: IUser;
   currentRole: Role;
 
+  loading$ = this.spinner.loading$;
+
   constructor(
     icons: IconsService, // for icons register
     private _user: UserService,
-    private _router: Router
+    private _router: Router,
+    public spinner: SpinnerService
   ) {}
 
   ngOnInit(): void {

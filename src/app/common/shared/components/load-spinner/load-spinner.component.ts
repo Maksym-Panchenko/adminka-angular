@@ -1,17 +1,13 @@
-import {Component, Input, OnInit} from '@angular/core';
+import { Component, Input } from '@angular/core';
+import { ProgressSpinnerMode } from "@angular/material/progress-spinner/progress-spinner";
 
 @Component({
   selector: 'load-spinner',
   templateUrl: './load-spinner.component.html',
   styleUrls: ['./load-spinner.component.scss']
 })
-export class LoadSpinnerComponent implements OnInit {
+export class LoadSpinnerComponent {
   @Input() radius: number = 100;
-  @Input() isLoading: boolean = false;
-
-  constructor() { }
-
-  ngOnInit(): void {
-  }
-
+  @Input() isLoading: boolean | null = false;
+  @Input() mode: ProgressSpinnerMode;
 }

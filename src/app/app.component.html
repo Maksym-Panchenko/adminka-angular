@@ -1,3 +1,5 @@
+<load-spinner [mode]="'indeterminate'" [isLoading]="loading$ | async"></load-spinner>
+
 <ng-container *ngIf="isLogined; else login">
   <main-header (logOutUser)="logOut()"></main-header>
 
