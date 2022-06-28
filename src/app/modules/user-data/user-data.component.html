@@ -1,6 +1,4 @@
 <div class="items">
-  <load-spinner [isLoading]="isLoading"></load-spinner>
-
   <div class="items__content" *ngIf="user">
     <form (submit)="submit()">
       <div class="items__block" *ngFor="let block of fields">

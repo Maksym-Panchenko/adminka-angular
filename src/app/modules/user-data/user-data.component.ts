@@ -7,21 +7,18 @@ import {IUser} from "@models/interfaces/user.interface";
 import {InputType} from '@models/enums/input-type.enum';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {ModeType} from "@models/enums/mode-type";
+import {BaseItemAbstractComponent} from "@miscabstracts/base-item.abstract.component";
+import {MatSnackBar} from "@angular/material/snack-bar";
+import {SnackBarNotificationType} from "@models/enums/snack-bar-notification-type.enum";
 
 @Component({
   selector: 'app-user-data',
   templateUrl: './user-data.component.html',
   styleUrls: ['./user-data.component.scss']
 })
-export class UserDataComponent implements OnInit {
-  userId: number;
-  user: IUser;
-  isLoading: boolean = true;
+export class UserDataComponent extends BaseItemAbstractComponent implements OnInit {
   readonly InputType: typeof InputType = InputType;
   formGroup: FormGroup;
-  mode: ModeType;
-  fullBreadCrumbs: boolean = true;
-  readonly ModeType: typeof ModeType = ModeType;
 
   fields = [
     {
@@ -57,21 +54,18 @@ export class UserDataComponent implements OnInit {
   ];
 
   constructor(
-    private _user: UserService,
+    snackBar: MatSnackBar,
+    user: UserService,
+    route: ActivatedRoute,
     private _breadcrumbs: BreadcrumbsService,
-    private _route: ActivatedRoute,
     private _userApi: UserApiService,
     private _fb: FormBuilder
-  ) {}
+  ) {
+    super(snackBar, user, route);
+  }
 
   ngOnInit(): void {
-    this.userId = this._route?.parent?.snapshot.params['id'];
-    if (!this.userId) {
-      this.fullBreadCrumbs = false;
-      this.userId = this._user.getUserId();
-    }
-
-    this.mode = this._user.getMode(this.userId);
+    this.defineParams();
 
     this.getUser();
   }
@@ -106,13 +100,7 @@ export class UserDataComponent implements OnInit {
       this.user = user;
       this.initForm();
       this._setBreadcrumbs();
-      this.isLoading = false;
     }, (error) => this.errorAction(error));
-  }
-
-  errorAction(error: Error): void {
-    console.log('Error: ', error);
-    this.isLoading = false;
   }
 
   private _setBreadcrumbs(): void {
@@ -149,9 +137,10 @@ export class UserDataComponent implements OnInit {
     this.user.address = Object.assign(this.user.address, formData.address); // we are not change object - address.geo
     this.user.company = formData.company;
 
-    this.isLoading = true;
-    this._userApi.patchItem(this.userId, this.user).subscribe(() => {
-      this.isLoading = false;
+    this._userApi.patchItem(this.userId, this.user).subscribe((answer) => {
+      if (answer) {
+        this.showMessage(SnackBarNotificationType.success, 'User data has been edited');
+      }
     }, (error) => this.errorAction(error));
   }
 }
