@@ -164,6 +164,7 @@ export class SingleAlbumComponent extends BaseItemAbstractComponent implements O
         if (answer) {
           this.photos = this.photos.filter((e: IPhoto): boolean => e.id !== id);
           this.showPhotos();
+          this.showMessage(SnackBarNotificationType.success, 'Photo has been deleted');
         }
       });
   }

@@ -20,44 +20,36 @@ import {IUser} from "@models/interfaces/user.interface";
 import {UserApiService} from "@services/api/user-api/user-api.service";
 import {MatSnackBar} from "@angular/material/snack-bar";
 import {SnackBarNotificationType} from "@models/enums/snack-bar-notification-type.enum";
-import {SNACKBAR_CONFIG} from "@miscconstants/snackbar-config";
 import {Observable} from "rxjs";
+import {BaseItemAbstractComponent} from "@miscabstracts/base-item.abstract.component";
 
 @Component({
   selector: 'todos',
   templateUrl: './todos.component.html',
   styleUrls: ['./todos.component.scss']
 })
-export class TodosComponent implements OnInit {
+export class TodosComponent extends BaseItemAbstractComponent implements OnInit {
   @ViewChild('paginator') paginator: MatPaginator;
-  readonly ModeType: typeof ModeType = ModeType;
   displayedColumns: string[] = ['id', 'checkbox', 'title', 'actions'];
   dataSource: MatTableDataSource<ITodo>;
-  userId: number;
-  user: IUser;
   pageSizes: number[] = [10];
-  fullBreadCrumbs: boolean = true;
-  mode: ModeType;
 
   constructor(
+    snackBar: MatSnackBar,
+    user: UserService,
+    route: ActivatedRoute,
     private _postsApi: PostApiService,
     private _todosApi: TodoApiService,
     protected dialog: MatDialog,
     private _router: Router,
-    private _user: UserService,
     private _breadcrumbs: BreadcrumbsService,
-    private _route: ActivatedRoute,
-    private _userApi: UserApiService,
-    private _snackBar: MatSnackBar
-  ) {}
+    private _userApi: UserApiService
+  ) {
+    super(snackBar, user, route);
+  }
 
   ngOnInit(): void {
-    this.userId = +this._route?.parent?.snapshot.params['id'];
-    if (!this.userId) {
-      this.fullBreadCrumbs = false;
-      this.userId = this._user.getUserId();
-    }
-    this.mode = this._user.getMode(this.userId);
+    this.defineParams();
 
     this.getTodos();
   }
@@ -160,11 +152,6 @@ export class TodosComponent implements OnInit {
     }
   }
 
-  errorAction(error: Error): void {
-    console.log('Error: ', error);
-    this.showMessage(SnackBarNotificationType.error, 'Something wrong...');
-  }
-
   private _setBreadcrumbs(): void {
     if (!this._breadcrumbs.breadcrumbs$.value?.length) {
 
@@ -184,9 +171,5 @@ export class TodosComponent implements OnInit {
         url: ''
       });
     }
-  }
-
-  showMessage(result: SnackBarNotificationType, message: string) {
-    this._snackBar.open(message, undefined, { ...SNACKBAR_CONFIG, panelClass: result });
   }
 }
