@@ -14,55 +14,47 @@ import {MessageDialogComponent} from "../../common/modules/modals/message-dialog
 import {MessageModalType} from "@models/enums/message-modal-type.enum";
 import {IMessageModal} from "@models/interfaces/modal/message-modal.inteface";
 import {filter} from "rxjs/operators";
-import {ModeType} from "@models/enums/mode-type";
 import { Location } from '@angular/common'
 import {BreadcrumbsService} from "@services/breadcrumbs/breadcrumbs.service";
 import {IUser} from "@models/interfaces/user.interface";
 import {UserApiService} from "@services/api/user-api/user-api.service";
+import {BaseItemAbstractComponent} from "@miscabstracts/base-item.abstract.component";
+import {MatSnackBar} from "@angular/material/snack-bar";
+import {Observable} from "rxjs";
+import {SnackBarNotificationType} from "@models/enums/snack-bar-notification-type.enum";
 
 @Component({
   selector: 'single-album',
   templateUrl: './single-album.component.html',
   styleUrls: ['./single-album.component.scss']
 })
-export class SingleAlbumComponent implements OnInit, AfterViewInit {
+export class SingleAlbumComponent extends BaseItemAbstractComponent implements OnInit, AfterViewInit {
   @Output() showAlbums: EventEmitter<void> = new EventEmitter();
   @Input() albumId: number;
-  readonly ModeType: typeof ModeType = ModeType;
   album: IAlbum;
   photos: IPhoto[];
-  isLoadingAlbum: boolean = true;
-  isLoadingPhotos: boolean = true;
-  user: IUser;
-  userId: number;
   startPhoto: number;
   numberOfPhotos: number = 10;
   showedPhotos: IPhoto[];
-  fullBreadCrumbs: boolean = true;
   @ViewChild(MatPaginator) paginator: MatPaginator;
-  mode: ModeType;
 
   constructor(
-    private route: ActivatedRoute,
+    snackBar: MatSnackBar,
+    route: ActivatedRoute,
+    user: UserService,
     private _albumApi: AlbumApiService,
     private _photoApi: PhotoApiService,
-    private _user: UserService,
     protected dialog: MatDialog,
     private _location: Location,
     private _breadcrumbs: BreadcrumbsService,
     private _userApi: UserApiService,
-    private _route: ActivatedRoute,
   ) {
-    this.route.params.subscribe(params => this.albumId = parseInt(params['id']));
+    super(snackBar, user, route);
+    route.params.subscribe(params => this.albumId = parseInt(params['id']));
   }
 
   ngOnInit(): void {
-    this.userId = this._route?.parent?.snapshot.params['id'];
-    if (!this.userId) {
-      this.fullBreadCrumbs = false;
-      this.userId = this._user.getUserId();
-    }
-    this.mode = this._user.getMode(this.userId);
+    this.defineParams();
 
     this.getAlbum();
     this.getPhotos();
@@ -75,18 +67,15 @@ export class SingleAlbumComponent implements OnInit, AfterViewInit {
       this._userApi.getItem(this.userId).subscribe((user: IUser): void => {
         this.user = user;
         this._setBreadcrumbs();
-        this.isLoadingAlbum = false;
-      }, error => this.errorAlbumAction(error));
-
-    }, (error: Error) => this.errorAlbumAction(error));
+      }, (error: Error) => this.errorAction(error));
+    }, (error: Error) => this.errorAction(error));
   }
 
   getPhotos(): void {
     this._photoApi.getItems(this.albumId).subscribe((photos) => {
       this.photos = photos;
       this.showPhotos();
-      this.isLoadingPhotos = false;
-    }, (error: Error) => this.errorPhotoAction(error));
+    }, (error: Error) => this.errorAction(error));
   }
 
   editAlbum(): void {
@@ -101,17 +90,15 @@ export class SingleAlbumComponent implements OnInit, AfterViewInit {
           buttonsNames: {
             approve: 'Save',
             decline: 'Cancel'
-          }
+          },
+          submitHandler: (item: IAlbum): Observable<IAlbum> =>  this._albumApi.updateItem(item)
         } as IEntityModal
       })
       .afterClosed()
       .subscribe((editedAlbum): void => {
         if (editedAlbum) {
-          this.isLoadingAlbum = true;
-          this._albumApi.updateItem(editedAlbum).subscribe((updatedAlbum) => {
-            this.album = updatedAlbum;
-            this.isLoadingAlbum = false;
-          }, (error: Error) => this.errorAlbumAction(error));
+          this.album = editedAlbum;
+          this.showMessage(SnackBarNotificationType.success, 'Album has been edited');
         }
       });
   }
@@ -142,18 +129,15 @@ export class SingleAlbumComponent implements OnInit, AfterViewInit {
           buttonsNames: {
             approve: 'Add',
             decline: 'Cancel'
-          }
+          },
+          submitHandler: (item: IPhoto): Observable<IPhoto> => this._photoApi.createItem(item)
         } as IEntityModal
       })
       .afterClosed()
       .subscribe((newPhoto): void => {
         if (newPhoto) {
-          this.isLoadingPhotos = true;
-          this._photoApi.createItem(newPhoto).subscribe((addedPhoto) => {
-            this.photos = [addedPhoto, ...this.photos];
-            this.showPhotos();
-            this.isLoadingPhotos = false;
-          }, (error) => this.errorPhotoAction(error));
+          this.photos = [newPhoto, ...this.photos];
+          this.showPhotos();
         }
       });
   }
@@ -168,39 +152,24 @@ export class SingleAlbumComponent implements OnInit, AfterViewInit {
           buttonsNames: {
             approve: 'Delete',
             decline: 'Cancel'
-          }
+          },
+          submitHandler: (): Observable<object> => this._photoApi.deleteItem(id)
         } as IMessageModal
       })
       .afterClosed()
       .pipe(
         filter((res: boolean): boolean => res)
       )
-      .subscribe((): void => {
-        this.isLoadingPhotos = true;
-        this._photoApi.deleteItem(id).subscribe(() => {
+      .subscribe((answer): void => {
+        if (answer) {
           this.photos = this.photos.filter((e: IPhoto): boolean => e.id !== id);
           this.showPhotos();
-          this.isLoadingPhotos = false;
-        }, (error) => this.errorPhotoAction(error));
+        }
       });
   }
 
   getBack(): void {
     this._location.back()
-  }
-
-  showAlbumList() {
-    this.showAlbums.emit();
-  }
-
-  errorPhotoAction(error: Error): void {
-    console.log('Error: ', error);
-    this.isLoadingPhotos = false;
-  }
-
-  errorAlbumAction(error: Error): void {
-    console.log('Error: ', error);
-    this.isLoadingAlbum = false;
   }
 
   private _setBreadcrumbs(): void {

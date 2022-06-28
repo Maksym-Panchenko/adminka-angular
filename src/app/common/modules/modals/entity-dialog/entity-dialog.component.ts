@@ -74,7 +74,12 @@ export class EntityDialogComponent implements OnInit {
           }
         }
         this.album.title = this.formGroup.controls['title'].value;
-        this._dialog.close(this.album);
+
+        if (this.data.submitHandler) {
+          this.submitHandler(this.album);
+        } else {
+          this._dialog.close(true);
+        }
         break;
 
       case this.EntityModalType.post:
@@ -89,7 +94,12 @@ export class EntityDialogComponent implements OnInit {
         }
         this.post.title = this.formGroup.controls['title'].value;
         this.post.body = this.formGroup.controls['body'].value;
-        this._dialog.close(this.post);
+
+        if (this.data.submitHandler) {
+          this.submitHandler(this.post);
+        } else {
+          this._dialog.close(true);
+        }
         break;
 
       case this.EntityModalType.todo:
@@ -119,7 +129,12 @@ export class EntityDialogComponent implements OnInit {
           url: this.formGroup.controls['url'].value,
           thumbnailUrl: this.formGroup.controls['thumbnailUrl'].value
         };
-        this._dialog.close(this.photo);
+
+        if (this.data.submitHandler) {
+          this.submitHandler(this.photo);
+        } else {
+          this._dialog.close(true);
+        }
         break;
     }
   }
