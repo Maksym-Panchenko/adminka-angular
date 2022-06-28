@@ -8,6 +8,7 @@ import { SharedModule } from "./common/shared/shared.module";
 import { HTTP_INTERCEPTORS, HttpClientModule } from "@angular/common/http";
 import { AuthModule } from "./modules/auth/auth.module";
 import { NetworkInterceptor } from "./interceptors/network/network.interceptor";
+import { LoadSpinnerComponent } from "./common/shared/components/load-spinner/load-spinner.component";
 
 @NgModule({
   declarations: [
@@ -29,6 +30,7 @@ import { NetworkInterceptor } from "./interceptors/network/network.interceptor";
       multi: true,
     },
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents: [LoadSpinnerComponent]
 })
 export class AppModule { }
