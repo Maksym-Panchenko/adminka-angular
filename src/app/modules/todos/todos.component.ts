@@ -35,7 +35,6 @@ export class TodosComponent implements OnInit {
   dataSource: MatTableDataSource<ITodo>;
   userId: number;
   user: IUser;
-  isLoading: boolean = true;
   pageSizes: number[] = [10];
   fullBreadCrumbs: boolean = true;
   mode: ModeType;
@@ -71,7 +70,6 @@ export class TodosComponent implements OnInit {
       this._userApi.getItem(this.userId).subscribe((user: IUser): void => {
         this.user = user;
         this._setBreadcrumbs();
-        this.isLoading = false;
       }, (error) => this.errorAction(error));
     }, (error) => this.errorAction(error));
   }
@@ -87,14 +85,14 @@ export class TodosComponent implements OnInit {
             approve: 'Delete',
             decline: 'Cancel'
           },
-          submitHandler: () => this._todosApi.deleteItem(id)
+          submitHandler: (): Observable<object> => this._todosApi.deleteItem(id)
         } as IMessageModal
       })
       .afterClosed()
       .pipe(
         filter((res: boolean): boolean => res)
       )
-      .subscribe((answer): void => {
+      .subscribe((answer): void => {console.log(answer)
         if (answer) {
           this.dataSource.data = this.dataSource.data.filter((e: ITodo): boolean => e.id !== id);
           this.showMessage(SnackBarNotificationType.success, 'Todo has been deleted');
@@ -118,7 +116,7 @@ export class TodosComponent implements OnInit {
         } as IEntityModal
       })
       .afterClosed()
-      .subscribe((newTodo): void => {
+      .subscribe((newTodo: ITodo): void => {
         if (newTodo) {
           this.dataSource.data = [...this.dataSource.data, newTodo];
           this.showMessage(SnackBarNotificationType.success, 'Todo has been created');
@@ -143,7 +141,7 @@ export class TodosComponent implements OnInit {
         } as IEntityModal
       })
       .afterClosed()
-      .subscribe((editedTodo): void => {
+      .subscribe((editedTodo: ITodo): void => {
         if (editedTodo) {
           const index = this.dataSource.data.findIndex(e => e.id === editedTodo.id);
           this.dataSource.data.splice(index, 1, editedTodo);
@@ -164,7 +162,6 @@ export class TodosComponent implements OnInit {
 
   errorAction(error: Error): void {
     console.log('Error: ', error);
-    this.isLoading = false;
     this.showMessage(SnackBarNotificationType.error, 'Something wrong...');
   }
 
