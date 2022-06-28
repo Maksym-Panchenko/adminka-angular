@@ -92,7 +92,7 @@ export class TodosComponent implements OnInit {
       .pipe(
         filter((res: boolean): boolean => res)
       )
-      .subscribe((answer): void => {console.log(answer)
+      .subscribe((answer): void => {
         if (answer) {
           this.dataSource.data = this.dataSource.data.filter((e: ITodo): boolean => e.id !== id);
           this.showMessage(SnackBarNotificationType.success, 'Todo has been deleted');
