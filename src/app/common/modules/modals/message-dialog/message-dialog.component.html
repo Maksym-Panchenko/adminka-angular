@@ -15,7 +15,7 @@
   </div>
 
   <div *ngIf="isConfirmModal" class="dialog__actions" mat-dialog-actions>
-    <button [mat-dialog-close]="true" class="dialog__button" color="primary" mat-flat-button>
+    <button (click)="approveDialog()" class="dialog__button" color="primary" mat-flat-button>
       {{ approveName }}
     </button>
     <button [mat-dialog-close]="false" class="dialog__button" color="primary" mat-stroked-button>

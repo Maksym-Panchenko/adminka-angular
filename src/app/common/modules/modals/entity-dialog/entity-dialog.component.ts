@@ -9,6 +9,9 @@ import {EntityModalType} from "@models/enums/entity-modal-type";
 import {IAlbum} from "@models/interfaces/album.interface";
 import {ITodo} from "@models/interfaces/todo.interface";
 import {IPhoto} from "@models/interfaces/photo.interface";
+import {SnackBarNotificationType} from "@models/enums/snack-bar-notification-type.enum";
+import {SNACKBAR_CONFIG} from "@miscconstants/snackbar-config";
+import {MatSnackBar} from "@angular/material/snack-bar";
 
 @Component({
   selector: 'entity-dialog',
@@ -28,7 +31,8 @@ export class EntityDialogComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public data: IEntityModal,
     private _formBuilder: FormBuilder,
     private _user: UserService,
-    private _dialog: MatDialogRef<EntityDialogComponent>
+    private _dialog: MatDialogRef<EntityDialogComponent>,
+    private _snackBar: MatSnackBar
   ) {}
 
   ngOnInit(): void {
@@ -70,7 +74,12 @@ export class EntityDialogComponent implements OnInit {
           }
         }
         this.album.title = this.formGroup.controls['title'].value;
-        this._dialog.close(this.album);
+
+        if (this.data.submitHandler) {
+          this.submitHandler(this.album);
+        } else {
+          this._dialog.close(true);
+        }
         break;
 
       case this.EntityModalType.post:
@@ -85,7 +94,12 @@ export class EntityDialogComponent implements OnInit {
         }
         this.post.title = this.formGroup.controls['title'].value;
         this.post.body = this.formGroup.controls['body'].value;
-        this._dialog.close(this.post);
+
+        if (this.data.submitHandler) {
+          this.submitHandler(this.post);
+        } else {
+          this._dialog.close(true);
+        }
         break;
 
       case this.EntityModalType.todo:
@@ -99,7 +113,12 @@ export class EntityDialogComponent implements OnInit {
           }
         }
         this.todo.title = this.formGroup.controls['title'].value;
-        this._dialog.close(this.todo);
+
+        if (this.data.submitHandler) {
+          this.submitHandler(this.todo);
+        } else {
+          this._dialog.close(true);
+        }
         break;
 
       // add only
@@ -110,7 +129,12 @@ export class EntityDialogComponent implements OnInit {
           url: this.formGroup.controls['url'].value,
           thumbnailUrl: this.formGroup.controls['thumbnailUrl'].value
         };
-        this._dialog.close(this.photo);
+
+        if (this.data.submitHandler) {
+          this.submitHandler(this.photo);
+        } else {
+          this._dialog.close(true);
+        }
         break;
     }
   }
@@ -121,5 +145,18 @@ export class EntityDialogComponent implements OnInit {
 
   get declineName(): string {
     return this.data?.buttonsNames?.decline ?? 'Cancel';
+  }
+
+  submitHandler(item: ITodo | IPost | IAlbum | IPhoto): void {
+    this.data.submitHandler(item).subscribe((answer: object): void => {
+      this._dialog.close(answer);
+    }, (error: Error): void => {
+      console.log(error);
+      this.showMessage(SnackBarNotificationType.error, 'Something wrong...');
+    });
+  }
+
+  showMessage(result: SnackBarNotificationType, message: string) {
+    this._snackBar.open(message, undefined, { ...SNACKBAR_CONFIG, panelClass: result });
   }
 }

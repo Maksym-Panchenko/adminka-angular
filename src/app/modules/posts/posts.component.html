@@ -1,6 +1,4 @@
 <div class="items">
-  <load-spinner [isLoading]="isLoading"></load-spinner>
-
   <div *ngIf="mode === ModeType.edit" class="items__actions">
     <button (click)="createPost()" class="items__button" mat-flat-button color="primary">
       <mat-icon>add</mat-icon>

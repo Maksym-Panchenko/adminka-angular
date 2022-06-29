@@ -8,7 +8,6 @@ import {EntityDialogComponent} from "../../common/modules/modals/entity-dialog/e
 import {IEntityModal} from "@models/interfaces/modal/entity-modal.inteface";
 import {MatDialog} from "@angular/material/dialog";
 import {EntityModalType} from "@models/enums/entity-modal-type";
-import {ModeType} from "@models/enums/mode-type";
 import { Location } from '@angular/common'
 import {MessageDialogComponent} from "../../common/modules/modals/message-dialog/message-dialog.component";
 import {MessageModalType} from "@models/enums/message-modal-type.enum";
@@ -18,46 +17,39 @@ import {BreadcrumbsService} from "@services/breadcrumbs/breadcrumbs.service";
 import { UserApiService } from "@services/api/user-api/user-api.service";
 import {IUser} from "@models/interfaces/user.interface";
 import {UserService} from "@services/user/user.service";
-
+import {BaseItemAbstractComponent} from "@miscabstracts/base-item.abstract.component";
+import {MatSnackBar} from "@angular/material/snack-bar";
+import {Observable} from "rxjs";
+import {SnackBarNotificationType} from "@models/enums/snack-bar-notification-type.enum";
 
 @Component({
   selector: 'single-post',
   templateUrl: './single-post.component.html',
   styleUrls: ['./single-post.component.scss']
 })
-export class SinglePostComponent implements OnInit {
+export class SinglePostComponent extends BaseItemAbstractComponent implements OnInit {
   @Output() showPosts: EventEmitter<void> = new EventEmitter();
   @Input() postId: number;
-  readonly ModeType: typeof ModeType = ModeType;
   post: IPost;
-  user: IUser;
-  userId: number;
   comments: IComment[];
-  isLoadingPost: boolean = true;
-  isLoadingComments: boolean = true;
-  fullBreadCrumbs: boolean = true;
-  mode: ModeType;
 
   constructor(
-    private _route: ActivatedRoute,
+    snackBar: MatSnackBar,
+    route: ActivatedRoute,
+    user: UserService,
     private _postApi: PostApiService,
     private _commentApi: CommentApiService,
-    protected dialog: MatDialog,
-    private location: Location,
+    private _dialog: MatDialog,
+    private _location: Location,
     private _breadcrumbs: BreadcrumbsService,
     private _userApi: UserApiService,
-    private _user: UserService
   ) {
-    this._route.params.subscribe(params => this.postId = parseInt(params['id']));
+    super(snackBar, user, route);
+    route.params.subscribe(params => this.postId = parseInt(params['id']));
   }
 
   ngOnInit(): void {
-    this.userId = this._route?.parent?.snapshot.params['id'];
-    if (!this.userId) {
-      this.fullBreadCrumbs = false;
-      this.userId = this._user.getUserId();
-    }
-    this.mode = this._user.getMode(this.userId);
+    this.defineParams();
 
     this.getPost();
     this.getComments();
@@ -70,20 +62,18 @@ export class SinglePostComponent implements OnInit {
       this._userApi.getItem(this.userId).subscribe((user: IUser): void => {
         this.user = user;
         this._setBreadcrumbs();
-        this.isLoadingPost = false;
-      }, error => this.errorPostAction(error));
-    }, error => this.errorPostAction(error));
+      }, error => this.errorAction(error));
+    }, error => this.errorAction(error));
   }
 
   getComments(): void {
     this._commentApi.getItems(this.postId).subscribe((comments: IComment[]): void => {
       this.comments = comments;
-      this.isLoadingComments = false;
-    }, error => this.errorCommentAction(error));
+    }, error => this.errorAction(error));
   }
 
   editPost(): void {
-    this.dialog
+    this._dialog
       .open(EntityDialogComponent, {
         autoFocus: false,
         disableClose: true,
@@ -94,31 +84,25 @@ export class SinglePostComponent implements OnInit {
           buttonsNames: {
             approve: 'Save',
             decline: 'Cancel'
-          }
+          },
+          submitHandler: (item: IPost): Observable<IPost> =>  this._postApi.updateItem(item)
         } as IEntityModal
       })
       .afterClosed()
       .subscribe((editedPost): void => {
         if (editedPost) {
-          this.isLoadingPost = true;
-          this._postApi.updateItem(editedPost).subscribe((updatedPost) => {
-            this.post = updatedPost;
-            this.isLoadingPost = false;
-          }, error => this.errorPostAction(error));
+          this.post = editedPost;
+          this.showMessage(SnackBarNotificationType.success, 'Post has been edited');
         }
       });
   }
 
   getBack(): void {
-    this.location.back()
-  }
-
-  showPostList() {
-    this.showPosts.emit();
+    this._location.back()
   }
 
   deleteComment(id: number): void {
-    this.dialog
+    this._dialog
       .open(MessageDialogComponent, {
         autoFocus: false,
         disableClose: true,
@@ -128,31 +112,21 @@ export class SinglePostComponent implements OnInit {
           buttonsNames: {
             approve: 'Delete',
             decline: 'Cancel'
-          }
+          },
+          submitHandler: (): Observable<object> => this._commentApi.deleteItem(id)
         } as IMessageModal
       })
       .afterClosed()
       .pipe(
         filter((res: boolean): boolean => res)
       )
-      .subscribe((editedPost): void => {
-        this.isLoadingComments= true;
-        this._commentApi.deleteItem(id).subscribe(() => {
+      .subscribe((answer): void => {
+        if (answer) {
           const index = this.comments.findIndex(e => e.id === id);
           this.comments.splice(index, 1);
-          this.isLoadingComments= false;
-        }, error => this.errorCommentAction(error));
+          this.showMessage(SnackBarNotificationType.success, 'Comment has been deleted');
+        }
       });
-  }
-
-  errorCommentAction(error: Error): void {
-    console.log('Error: ', error);
-    this.isLoadingComments = false;
-  }
-
-  errorPostAction(error: Error): void {
-    console.log('Error: ', error);
-    this.isLoadingPost = false;
   }
 
   private _setBreadcrumbs(): void {

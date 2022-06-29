@@ -15,4 +15,5 @@ export interface IEntityModal {
     approve?: string;
     decline?: string;
   };
+  submitHandler?: any;
 }

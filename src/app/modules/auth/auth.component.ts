@@ -15,7 +15,6 @@ export class AuthComponent implements OnInit {
   @Output() login: EventEmitter<string> = new EventEmitter();
   readonly InputType: typeof InputType = InputType;
   formGroup: FormGroup;
-  isLoading: boolean = true;
   wrongMail: boolean = false;
   users: IUser[];
 
@@ -35,7 +34,6 @@ export class AuthComponent implements OnInit {
       this.users = users;
       this.emailList = users.map((e: IUser): string => e.email);
       this.emailList.unshift(this.emailAdmin);
-      this.isLoading = false;
     })
   }
 
