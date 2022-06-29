@@ -5,11 +5,11 @@ import {PostApiService} from "@services/api/post-api/post-api.service";
 import {MatDialog} from "@angular/material/dialog";
 import {ActivatedRoute, Router} from "@angular/router";
 import {UserService} from "@services/user/user.service";
-import {MessageDialogComponent} from "../../common/modules/modals/message-dialog/message-dialog.component";
+import {MessageDialogComponent} from "@modals/message-dialog/message-dialog.component";
 import {MessageModalType} from "@models/enums/message-modal-type.enum";
 import {IMessageModal} from "@models/interfaces/modal/message-modal.inteface";
 import {filter} from "rxjs/operators";
-import {EntityDialogComponent} from "../../common/modules/modals/entity-dialog/entity-dialog.component";
+import {EntityDialogComponent} from "@modals/entity-dialog/entity-dialog.component";
 import {EntityModalType} from "@models/enums/entity-modal-type";
 import {IEntityModal} from "@models/interfaces/modal/entity-modal.inteface";
 import {ITodo} from "@models/interfaces/todo.interface";
@@ -21,7 +21,7 @@ import {UserApiService} from "@services/api/user-api/user-api.service";
 import {MatSnackBar} from "@angular/material/snack-bar";
 import {SnackBarNotificationType} from "@models/enums/snack-bar-notification-type.enum";
 import {Observable} from "rxjs";
-import {BaseItemAbstractComponent} from "@miscabstracts/base-item.abstract.component";
+import {BaseItemAbstractComponent} from "@misc/abstracts/base-item.abstract.component";
 
 @Component({
   selector: 'todos',

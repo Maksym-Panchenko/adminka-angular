@@ -2,7 +2,6 @@ import {AfterViewInit, Component, OnInit, ViewChild} from '@angular/core';
 import {IUser} from "@models/interfaces/user.interface";
 import {MatPaginator} from "@angular/material/paginator";
 import {UserApiService} from "@services/api/user-api/user-api.service";
-import {Route} from "@angular/router";
 import {BreadcrumbsService} from "@services/breadcrumbs/breadcrumbs.service";
 
 @Component({

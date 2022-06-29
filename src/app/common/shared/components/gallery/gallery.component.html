@@ -7,10 +7,14 @@
     [attr.data-lg-size]="item.size"
     class="gallery__item"
   >
-    <button *ngIf="mode === ModeType.edit" mat-icon-button class="gallery__button" (click)="$event.stopPropagation(); $event.preventDefault(); deletePhoto(item.id);">
+    <button
+      *ngIf="mode === ModeType.edit"
+      mat-icon-button
+      class="gallery__button"
+      (click)="deletePhoto($event, item.id);"
+    >
       <mat-icon>delete_forever</mat-icon>
     </button>
     <img alt="img1" [src]="item.thumb" />
   </a>
 </lightgallery>
-

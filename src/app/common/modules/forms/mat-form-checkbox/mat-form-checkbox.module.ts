@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatFormCheckboxComponent } from './mat-form-checkbox.component';
-import {MaterialModule} from "../../../shared/material/material.module";
+import {MaterialModule} from "@shared/material/material.module";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {MatCheckboxModule} from "@angular/material/checkbox";
 
@@ -10,4 +10,4 @@ import {MatCheckboxModule} from "@angular/material/checkbox";
   imports: [CommonModule, MaterialModule, FormsModule, ReactiveFormsModule, MatCheckboxModule],
   exports: [MatFormCheckboxComponent]
 })
-export class MatFormCheckboxModule { }
+export class MatFormCheckboxModule {}

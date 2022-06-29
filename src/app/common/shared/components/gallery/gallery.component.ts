@@ -24,7 +24,7 @@ export class GalleryComponent implements OnInit, OnChanges {
   @Input() mode: ModeType = ModeType.view;
   readonly ModeType: typeof ModeType = ModeType;
   items: IGalleryPhoto[] = [];
-  private lightGallery!: LightGallery;
+  private _lightGallery!: LightGallery;
 
   settings = {
     counter: false,
@@ -46,14 +46,16 @@ export class GalleryComponent implements OnInit, OnChanges {
   }
 
   onInit = (detail: InitDetail): void => {
-    this.lightGallery = detail.instance;
+    this._lightGallery = detail.instance;
   };
 
   ngOnChanges(changes: SimpleChanges): void {
     this.getItemList();
   }
 
-  deletePhoto(id: string): void {
+  deletePhoto(e: Event, id: string): void {
+    e.stopPropagation();
+    e.preventDefault();
     this.removePhoto.emit(parseInt(id));
   }
 }

@@ -10,7 +10,7 @@ import {IAlbum} from "@models/interfaces/album.interface";
 import {ITodo} from "@models/interfaces/todo.interface";
 import {IPhoto} from "@models/interfaces/photo.interface";
 import {SnackBarNotificationType} from "@models/enums/snack-bar-notification-type.enum";
-import {SNACKBAR_CONFIG} from "@miscconstants/snackbar-config";
+import {SNACKBAR_CONFIG} from "@misc/constants/snackbar-config";
 import {MatSnackBar} from "@angular/material/snack-bar";
 
 @Component({

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {ApiBaseAbstractService} from "../../../misc/abstracts/api-base.abstract.service";
+import {ApiBaseAbstractService} from "@misc/abstracts/api-base.abstract.service";
 import {IPhoto} from "@models/interfaces/photo.interface";
 
 @Injectable({

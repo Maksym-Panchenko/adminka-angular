@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject } from "rxjs";
 import { Overlay, OverlayRef } from "@angular/cdk/overlay";
 import { ComponentPortal } from "@angular/cdk/portal";
-import {LoadSpinnerComponent} from "../../common/shared/components/load-spinner/load-spinner.component";
+import {LoadSpinnerComponent} from "@shared/components/load-spinner/load-spinner.component";
 
 @Injectable({
   providedIn: 'root'

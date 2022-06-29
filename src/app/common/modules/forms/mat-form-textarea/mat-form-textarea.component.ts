@@ -3,7 +3,7 @@ import { InputType } from "@models/enums/input-type.enum";
 import { MatFormFieldAppearance } from "@angular/material/form-field";
 import { FormGroup, FormGroupDirective } from "@angular/forms";
 import { CdkTextareaAutosize } from "@angular/cdk/text-field";
-import { BaseFormFieldAbstractComponent, IFormControls } from "@miscabstracts/base-form-field.abstract.component";
+import { BaseFormFieldAbstractComponent, IFormControls } from "@misc/abstracts/base-form-field.abstract.component";
 
 @Component({
   selector: 'app-mat-form-textarea',

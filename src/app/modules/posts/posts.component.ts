@@ -4,19 +4,19 @@ import {IPost} from "@models/interfaces/post.interface";
 import {MatPaginator} from "@angular/material/paginator";
 import {MatTableDataSource} from "@angular/material/table";
 import {MatDialog} from "@angular/material/dialog";
-import {MessageDialogComponent} from "../../common/modules/modals/message-dialog/message-dialog.component";
+import {MessageDialogComponent} from "@modals/message-dialog/message-dialog.component";
 import {MessageModalType} from "@models/enums/message-modal-type.enum";
 import {IMessageModal} from "@models/interfaces/modal/message-modal.inteface";
 import {filter} from "rxjs/operators";
 import {ActivatedRoute, Router} from "@angular/router";
-import {EntityDialogComponent} from "../../common/modules/modals/entity-dialog/entity-dialog.component";
+import {EntityDialogComponent} from "@modals/entity-dialog/entity-dialog.component";
 import {IEntityModal} from "@models/interfaces/modal/entity-modal.inteface";
 import {UserService} from "@services/user/user.service";
 import {EntityModalType} from "@models/enums/entity-modal-type";
 import {BreadcrumbsService} from "@services/breadcrumbs/breadcrumbs.service";
 import {IUser} from "@models/interfaces/user.interface";
 import {UserApiService} from "@services/api/user-api/user-api.service";
-import {BaseItemAbstractComponent} from "@miscabstracts/base-item.abstract.component";
+import {BaseItemAbstractComponent} from "@misc/abstracts/base-item.abstract.component";
 import {MatSnackBar} from "@angular/material/snack-bar";
 import {Observable} from "rxjs";
 import {SnackBarNotificationType} from "@models/enums/snack-bar-notification-type.enum";
@@ -48,7 +48,7 @@ export class PostsComponent extends BaseItemAbstractComponent implements OnInit 
   }
 
   ngOnInit(): void {
-    this.defineParams()
+    this.defineParams();
 
     this.getPosts();
   }

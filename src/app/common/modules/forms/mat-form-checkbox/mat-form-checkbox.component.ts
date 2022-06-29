@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { BaseFormFieldAbstractComponent } from "@miscabstracts/base-form-field.abstract.component";
+import { BaseFormFieldAbstractComponent } from "@misc/abstracts/base-form-field.abstract.component";
 
 @Component({
   selector: 'mat-form-checkbox',

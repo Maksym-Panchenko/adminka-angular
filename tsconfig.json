@@ -25,7 +25,12 @@
     "paths": {
       "@models/*": ["src/app/models/*"],
       "@services/*": ["src/app/services/*"],
-      "@misc*": ["src/app/misc/*"]
+      "@misc/*": ["src/app/misc/*"],
+      "@shared/*": ["src/app/common/shared/*"],
+      "@modules/*": ["src/app/modules/*"],
+      "@forms/*": ["src/app/common/modules/forms/*"],
+      "@layouts/*": ["src/app/common/modules/layouts/*"],
+      "@modals/*": ["src/app/common/modules/modals/*"]
     },
     "strictPropertyInitialization": false
   },

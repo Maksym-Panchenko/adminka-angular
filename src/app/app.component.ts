@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
-import { IconsService } from './services/icons/icons.service'
-import { UserService } from "./services/user/user.service";
+import { IconsService } from '@services/icons/icons.service'
+import { UserService } from "@services/user/user.service";
 import { IUser } from "@models/interfaces/user.interface";
 import { Role } from "@models/enums/roles.enum";
 import { Router } from "@angular/router";
@@ -43,6 +43,4 @@ export class AppComponent implements OnInit {
     this._user.logOut();
     this.isLogined = false;
   }
-
-
 }
