@@ -13,6 +13,11 @@ interface IGalleryPhoto {
   title?:string;
 }
 
+type ZoomSettings = {
+  counter: boolean;
+  plugins: any[];
+}
+
 @Component({
   selector: 'gallery',
   templateUrl: './gallery.component.html',
@@ -24,18 +29,18 @@ export class GalleryComponent implements OnInit, OnChanges {
   @Input() mode: ModeType = ModeType.view;
   readonly ModeType: typeof ModeType = ModeType;
   items: IGalleryPhoto[] = [];
-  private _lightGallery!: LightGallery;
+  private _lightGallery: LightGallery;
 
-  settings = {
+  settings: ZoomSettings = {
     counter: false,
-    plugins: [lgZoom],
+    plugins: [lgZoom]
   };
 
   ngOnInit(): void {
     this.getItemList();
   }
 
-  getItemList() {
+  getItemList(): void {
     this.items = this.photos?.map((e: IPhoto): IGalleryPhoto => ({
       id: e.id?.toString() || '', // TODO - problem with optional param
       size: '150-150',

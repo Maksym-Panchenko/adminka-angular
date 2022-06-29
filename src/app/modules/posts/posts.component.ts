@@ -39,7 +39,7 @@ export class PostsComponent extends BaseItemAbstractComponent implements OnInit 
     route: ActivatedRoute,
     user: UserService,
     private _postApi: PostApiService,
-    protected dialog: MatDialog,
+    private _dialog: MatDialog,
     private _router: Router,
     private _breadcrumbs: BreadcrumbsService,
     private _userApi: UserApiService
@@ -66,7 +66,7 @@ export class PostsComponent extends BaseItemAbstractComponent implements OnInit 
   }
 
   deletePost(id: number): void {
-    this.dialog
+    this._dialog
       .open(MessageDialogComponent, {
         autoFocus: false,
         data: {
@@ -92,7 +92,7 @@ export class PostsComponent extends BaseItemAbstractComponent implements OnInit 
   }
 
   createPost(): void {
-    this.dialog
+    this._dialog
       .open(EntityDialogComponent, {
         autoFocus: false,
         disableClose: true,

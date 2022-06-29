@@ -6,7 +6,7 @@
       [inputType]="InputType.text"
       [required]="true"
       [placeholder]="'Enter Post Title'"
-      [control]="formGroup.controls['title']"
+      [control]="formGroup.get('title')"
     ></app-mat-form-field>
 
     <app-mat-form-textarea
@@ -14,7 +14,7 @@
       [inputType]="InputType.text"
       [required]="true"
       [placeholder]="'Enter Post Body'"
-      [control]="formGroup.controls['body']"
+      [control]="formGroup.get('body')"
     ></app-mat-form-textarea>
 
     <ng-container *ngIf="data.entityType === EntityModalType.photo">
@@ -22,13 +22,13 @@
         [inputType]="InputType.text"
         [required]="true"
         [placeholder]="'Enter Image Url'"
-        [control]="formGroup.controls['url']"
+        [control]="formGroup.get('url')"
       ></app-mat-form-field>
       <app-mat-form-field
         [inputType]="InputType.text"
         [required]="true"
         [placeholder]="'Enter Thumbnail Url'"
-        [control]="formGroup.controls['thumbnailUrl']"
+        [control]="formGroup.get('thumbnailUrl')"
       ></app-mat-form-field>
     </ng-container>
 

@@ -71,7 +71,7 @@ export class SingleUserComponent implements OnInit {
     this.showMessage(SnackBarNotificationType.error, 'Something wrong...');
   }
 
-  showMessage(result: SnackBarNotificationType, message: string) {
+  showMessage(result: SnackBarNotificationType, message: string): void {
     this._snackBar.open(message, undefined, { ...SNACKBAR_CONFIG, panelClass: result });
   }
 

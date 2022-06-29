@@ -39,7 +39,7 @@ export class AlbumsComponent extends BaseItemAbstractComponent implements OnInit
     user: UserService,
     route: ActivatedRoute,
     private _postsApi: PostApiService,
-    protected dialog: MatDialog,
+    private _dialog: MatDialog,
     private _router: Router,
     private _albumApi: AlbumApiService,
     private _breadcrumbs: BreadcrumbsService,
@@ -67,7 +67,7 @@ export class AlbumsComponent extends BaseItemAbstractComponent implements OnInit
   }
 
   deleteItem(id: number): void {
-    this.dialog
+    this._dialog
       .open(MessageDialogComponent, {
         autoFocus: false,
         data: {
@@ -93,7 +93,7 @@ export class AlbumsComponent extends BaseItemAbstractComponent implements OnInit
   }
 
   createItem(): void {
-    this.dialog
+    this._dialog
       .open(EntityDialogComponent, {
         autoFocus: false,
         disableClose: true,

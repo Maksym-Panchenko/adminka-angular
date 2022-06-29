@@ -39,7 +39,7 @@ export class UsersComponent implements OnInit, AfterViewInit {
       });
   }
 
-  showUsers() {
+  showUsers(): void {
     if (this.paginator && this.users?.length) {
       this.startUser = this.paginator.pageIndex * this.paginator.pageSize + 1;
       this.showedUsers = this.users.filter(e => e.id >= this.startUser && e.id < (this.startUser + this.paginator.pageSize));

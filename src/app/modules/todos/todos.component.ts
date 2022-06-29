@@ -40,7 +40,7 @@ export class TodosComponent extends BaseItemAbstractComponent implements OnInit 
     route: ActivatedRoute,
     private _postsApi: PostApiService,
     private _todosApi: TodoApiService,
-    protected dialog: MatDialog,
+    private _dialog: MatDialog,
     private _router: Router,
     private _breadcrumbs: BreadcrumbsService,
     private _userApi: UserApiService
@@ -67,7 +67,7 @@ export class TodosComponent extends BaseItemAbstractComponent implements OnInit 
   }
 
   deleteTodo(id: number): void {
-    this.dialog
+    this._dialog
       .open(MessageDialogComponent, {
         autoFocus: false,
         data: {
@@ -93,7 +93,7 @@ export class TodosComponent extends BaseItemAbstractComponent implements OnInit 
   }
 
   createTodo(): void {
-    this.dialog
+    this._dialog
       .open(EntityDialogComponent, {
         autoFocus: false,
         disableClose: true,
@@ -117,7 +117,7 @@ export class TodosComponent extends BaseItemAbstractComponent implements OnInit 
   }
 
   editTodo(selectedTodo: ITodo): void {
-    this.dialog
+    this._dialog
       .open(EntityDialogComponent, {
         autoFocus: false,
         disableClose: true,

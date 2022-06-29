@@ -26,8 +26,8 @@
     <gallery [photos]="showedPhotos" (removePhoto)="deletePhoto($event)" [mode]="mode"></gallery>
     <mat-paginator
       [length]="photos?.length || 0"
-      [pageSize]="numberOfPhotos"
-      [pageSizeOptions]="[10, 25, 50]"
+      [pageSize]="pageSize"
+      [pageSizeOptions]="pageSizeOptions"
       aria-label="Select page"
       class="album__paginator"
     ></mat-paginator>

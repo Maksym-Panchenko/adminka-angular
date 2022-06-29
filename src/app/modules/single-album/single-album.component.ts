@@ -34,7 +34,8 @@ export class SingleAlbumComponent extends BaseItemAbstractComponent implements O
   album: IAlbum;
   photos: IPhoto[];
   startPhoto: number;
-  numberOfPhotos: number = 10;
+  pageSize: number = 10;
+  pageSizeOptions: number[] = [10, 25, 50];
   showedPhotos: IPhoto[];
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
@@ -44,7 +45,7 @@ export class SingleAlbumComponent extends BaseItemAbstractComponent implements O
     user: UserService,
     private _albumApi: AlbumApiService,
     private _photoApi: PhotoApiService,
-    protected dialog: MatDialog,
+    private _dialog: MatDialog,
     private _location: Location,
     private _breadcrumbs: BreadcrumbsService,
     private _userApi: UserApiService,
@@ -79,7 +80,7 @@ export class SingleAlbumComponent extends BaseItemAbstractComponent implements O
   }
 
   editAlbum(): void {
-    this.dialog
+    this._dialog
       .open(EntityDialogComponent, {
         autoFocus: false,
         disableClose: true,
@@ -118,7 +119,7 @@ export class SingleAlbumComponent extends BaseItemAbstractComponent implements O
   }
 
   addPhoto(): void {
-    this.dialog
+    this._dialog
       .open(EntityDialogComponent, {
         autoFocus: false,
         disableClose: true,
@@ -143,7 +144,7 @@ export class SingleAlbumComponent extends BaseItemAbstractComponent implements O
   }
 
   deletePhoto(id: number): void {
-    this.dialog
+    this._dialog
       .open(MessageDialogComponent, {
         autoFocus: false,
         data: {

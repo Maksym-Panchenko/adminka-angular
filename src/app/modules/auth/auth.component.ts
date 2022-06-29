@@ -52,10 +52,10 @@ export class AuthComponent implements OnInit {
     }
 
     // check email
-    const selectedUser = this.users.find(e => e.email === this.formGroup.controls['email'].value);
-    const isAdmin = this.formGroup.controls['email'].value === this.emailAdmin;
+    const selectedUser = this.users.find(e => e.email === this.formGroup.get('email').value);
+    const isAdmin = this.formGroup.get('email').value === this.emailAdmin;
     if (!selectedUser && !isAdmin) {
-      this.formGroup.controls['email'].setValue('');
+      this.formGroup.get('email').setValue('');
       this.wrongMail = true;
       return;
     }
@@ -73,6 +73,6 @@ export class AuthComponent implements OnInit {
   }
 
   selectEmail(email: string): void {
-    this.formGroup.controls['email'].setValue(email);
+    this.formGroup.get('email').setValue(email);
   }
 }
