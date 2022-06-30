@@ -5,6 +5,7 @@ import { IUser } from "@models/interfaces/user.interface";
 import { Role } from "@models/enums/roles.enum";
 import { Router } from "@angular/router";
 import {SpinnerService} from "@services/spinner/spinner.service";
+import {TranslateService} from "@ngx-translate/core";
 
 @Component({
   selector: 'app-root',
@@ -23,8 +24,12 @@ export class AppComponent implements OnInit {
     icons: IconsService, // for icons register
     private _user: UserService,
     private _router: Router,
-    public spinner: SpinnerService
-  ) {}
+    public spinner: SpinnerService,
+    translate: TranslateService
+  ) {
+    translate.setDefaultLang('en');
+    translate.use('en');
+  }
 
   ngOnInit(): void {
     this.isLogined = this._user.isLogin();

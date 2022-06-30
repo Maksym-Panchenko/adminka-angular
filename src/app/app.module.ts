@@ -5,10 +5,16 @@ import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { LayoutsModule } from "@layouts/layouts.module";
 import { SharedModule } from "@shared/shared.module";
-import { HTTP_INTERCEPTORS, HttpClientModule } from "@angular/common/http";
+import { HTTP_INTERCEPTORS, HttpClient, HttpClientModule } from "@angular/common/http";
 import { AuthModule } from "@modules/auth/auth.module";
 import { NetworkInterceptor } from "./interceptors/network/network.interceptor";
 import { LoadSpinnerComponent } from "@shared/components/load-spinner/load-spinner.component";
+import { TranslateLoader, TranslateModule } from "@ngx-translate/core";
+import { TranslateHttpLoader } from "@ngx-translate/http-loader";
+
+export function HttpLoaderFactory(http: HttpClient) {
+  return new TranslateHttpLoader(http);
+}
 
 @NgModule({
   declarations: [
@@ -21,7 +27,15 @@ import { LoadSpinnerComponent } from "@shared/components/load-spinner/load-spinn
     HttpClientModule,
     LayoutsModule,
     SharedModule,
-    AuthModule
+    AuthModule,
+    TranslateModule.forRoot({
+      defaultLanguage: 'en',
+      loader: {
+        provide: TranslateLoader,
+        useFactory: HttpLoaderFactory,
+        deps: [HttpClient]
+      }
+    })
   ],
   providers: [
     {
