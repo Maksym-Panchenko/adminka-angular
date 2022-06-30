@@ -2,20 +2,22 @@
   <div class="items__content" *ngIf="user">
     <form (submit)="submit()">
       <div class="items__block" *ngFor="let block of fields">
-        <h3 class="items__title">{{ block.groupName }}</h3>
+        <h3 class="items__title">{{ 'USER.' + block.groupName | translate }}</h3>
 
         <app-mat-form-field
           *ngFor="let field of block.values"
           [required]="true"
           [inputType]="InputType.text"
-          [placeholder]="field.name"
+          [placeholder]="'USER.' + field.name | translate"
           [control]="formGroup?.get([block.id, field.id])!"
           class="items__field"
         ></app-mat-form-field>
       </div>
 
       <div *ngIf="mode === ModeType.edit" class="items__actions items__actions_left-pos">
-        <button type="submit" class="items__button" mat-flat-button [color]="'primary'">Save settings</button>
+        <button type="submit" class="items__button" mat-flat-button [color]="'primary'">
+          {{ 'BUTTONS.SAVE_SETTINGS' | translate }}
+        </button>
       </div>
     </form>
   </div>

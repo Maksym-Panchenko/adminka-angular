@@ -120,7 +120,7 @@ export class PostsComponent extends BaseItemAbstractComponent implements OnInit 
 
       if (this.fullBreadCrumbs) {
         this._breadcrumbs.add({
-          name: 'Users',
+          name: 'BREAD_CRUMBS.USERS',
           url: `/users`
         });
         this._breadcrumbs.add({
@@ -130,7 +130,7 @@ export class PostsComponent extends BaseItemAbstractComponent implements OnInit 
       }
 
       this._breadcrumbs.add({
-        name: 'Posts',
+        name: 'BREAD_CRUMBS.POSTS',
         url: ''
       });
     }

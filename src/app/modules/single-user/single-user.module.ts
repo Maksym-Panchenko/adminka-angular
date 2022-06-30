@@ -8,6 +8,7 @@ import {SingleAlbumModule} from "../single-album/single-album.module";
 import {PostsModule} from "../posts/posts.module";
 import {SinglePostModule} from "../single-post/single-post.module";
 import {RouterModule} from "@angular/router";
+import {TranslateModule} from "@ngx-translate/core";
 
 @NgModule({
   declarations: [SingleUserComponent],
@@ -19,7 +20,8 @@ import {RouterModule} from "@angular/router";
     SingleAlbumModule,
     PostsModule,
     SinglePostModule,
-    RouterModule
+    RouterModule,
+    TranslateModule
   ],
   exports: [SingleUserComponent]
 })

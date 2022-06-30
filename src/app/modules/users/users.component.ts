@@ -49,7 +49,7 @@ export class UsersComponent implements OnInit, AfterViewInit {
   private _setBreadcrumbs(): void {
     if (!this._breadcrumbs.breadcrumbs$.value?.length) {
       this._breadcrumbs.add({
-        name: 'Users',
+        name: 'BREAD_CRUMBS.USERS',
         url: `/users`
       });
     }

@@ -134,7 +134,7 @@ export class SinglePostComponent extends BaseItemAbstractComponent implements On
 
       if (this.fullBreadCrumbs) {
         this._breadcrumbs.add({
-          name: 'Users',
+          name: 'BREAD_CRUMBS.USERS',
           url: `/users`
         });
         this._breadcrumbs.add({
@@ -142,7 +142,7 @@ export class SinglePostComponent extends BaseItemAbstractComponent implements On
           url: `/users/${this.user.id}`
         });
         this._breadcrumbs.add({
-          name: 'Posts',
+          name: 'BREAD_CRUMBS.POSTS',
           url: `/users/${this.post.userId}/posts`
         });
         this._breadcrumbs.add({
@@ -152,7 +152,7 @@ export class SinglePostComponent extends BaseItemAbstractComponent implements On
 
       } else {
         this._breadcrumbs.add({
-          name: 'Posts',
+          name: 'BREAD_CRUMBS.POSTS',
           url: `/posts`
         });
         this._breadcrumbs.add({

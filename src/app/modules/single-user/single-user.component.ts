@@ -23,22 +23,22 @@ export class SingleUserComponent implements OnInit {
   navItems: NavItem[] = [
     {
       icon: 'users',
-      title: 'User data',
+      title: 'USER_DATA',
       link: './user-data'
     },
     {
       icon: 'posts',
-      title: 'Posts',
+      title: 'POSTS',
       link: './posts'
     },
     {
       icon: 'photo',
-      title: 'Albums',
+      title: 'ALBUMS',
       link: './albums'
     },
     {
       icon: 'text',
-      title: 'Todos',
+      title: 'TODOS',
       link: './todos'
     }
   ];
@@ -78,7 +78,7 @@ export class SingleUserComponent implements OnInit {
   private _setBreadcrumbs(): void {
     if (!this._breadcrumbs.breadcrumbs$.value?.length) {
       this._breadcrumbs.add({
-        name: 'Users',
+        name: 'BREAD_CRUMBS.USERS',
         url: `/users`
       });
       this._breadcrumbs.add({

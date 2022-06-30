@@ -120,7 +120,7 @@ export class AlbumsComponent extends BaseItemAbstractComponent implements OnInit
     if (!this._breadcrumbs.breadcrumbs$.value?.length) {
       if (this.fullBreadCrumbs) {
         this._breadcrumbs.add({
-          name: 'Users',
+          name: 'BREAD_CRUMBS.USERS',
           url: `/users`
         });
         this._breadcrumbs.add({
@@ -130,7 +130,7 @@ export class AlbumsComponent extends BaseItemAbstractComponent implements OnInit
       }
 
       this._breadcrumbs.add({
-        name: 'Albums',
+        name: 'BREAD_CRUMBS.ALBUMS',
         url: ''
       });
     }

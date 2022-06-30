@@ -2,7 +2,7 @@
   <div class="items__actions items__actions_left-pos">
     <button (click)="getBack()" class="items__button" mat-flat-button color="primary">
       <mat-icon>arrow_back</mat-icon>
-      Back
+      {{ 'BUTTONS.BACK' | translate }}
     </button>
   </div>
 
@@ -12,12 +12,14 @@
     </h2>
     <p class="post__text">{{ post?.body }}</p>
     <div *ngIf="mode === ModeType.edit" class="actions">
-      <button (click)="editPost()" class="post__button" mat-stroked-button [color]="'primary'" >Edit Post</button>
+      <button (click)="editPost()" class="post__button" mat-stroked-button [color]="'primary'" >
+        {{ 'BUTTONS.EDIT_POST' | translate }}
+      </button>
     </div>
   </div>
 
   <div class="post__comments">
-    <h2 class="post__title post__title_underlined">Comments:</h2>
+    <h2 class="post__title post__title_underlined">{{ 'HEADERS.COMMENTS' | translate }}</h2>
     <ul *ngIf="comments?.length; else noComments" class="post__comments-list">
       <li *ngFor="let comment of comments" class="post__comment">
         <h3 class="post__comment-title">
@@ -34,7 +36,7 @@
       </li>
     </ul>
     <ng-template #noComments>
-      <p>No comments yet</p>
+      <p>{{ 'HEADERS.NO_COMMENTS' | translate }}</p>
     </ng-template>
   </div>
 

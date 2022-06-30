@@ -179,7 +179,7 @@ export class SingleAlbumComponent extends BaseItemAbstractComponent implements O
 
       if (this.fullBreadCrumbs) {
         this._breadcrumbs.add({
-          name: 'Users',
+          name: 'BREAD_CRUMBS.USERS',
           url: `/users`
         });
         this._breadcrumbs.add({
@@ -187,7 +187,7 @@ export class SingleAlbumComponent extends BaseItemAbstractComponent implements O
           url: `/users/${this.user.id}`
         });
         this._breadcrumbs.add({
-          name: 'Albums',
+          name: 'BREAD_CRUMBS.ALBUMS',
           url: `/users/${this.album.userId}/albums`
         });
         this._breadcrumbs.add({
@@ -197,7 +197,7 @@ export class SingleAlbumComponent extends BaseItemAbstractComponent implements O
 
       } else {
         this._breadcrumbs.add({
-          name: 'Albums',
+          name: 'BREAD_CRUMBS.ALBUMS',
           url: `/albums`
         });
         this._breadcrumbs.add({

@@ -8,7 +8,7 @@
         [routerLinkActive]="'active'"
       >
         <mat-icon [svgIcon]="item.icon" class="nav__icon"></mat-icon>
-        <span>{{ item.title }}</span>
+        <span>{{ 'NAV.' + item.title | translate }}</span>
       </a>
     </li>
   </ul>

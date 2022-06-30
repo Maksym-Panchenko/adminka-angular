@@ -2,5 +2,66 @@
   "LANG": {
     "UA": "Ukrainian",
     "EN": "English"
+  },
+  "USER": {
+    "NAME": "Name",
+    "USERNAME": "User-name",
+    "EMAIL": "EMail",
+    "PHONE": "Phone",
+    "WEB_SITE": "Web-site",
+    "STREET": "Street",
+    "SUITE": "Suite",
+    "CITY": "City",
+    "ZIP_CODE": "Zip-code",
+    "COMPANY_NAME": "Company name",
+    "CATCH_PHRASE": "Catch phrase",
+    "BS": "Bs",
+    "PERSONAL_INFO": "Personal info",
+    "ADDRESS_INFO": "Address Info",
+    "COMPANY": "Company"
+  },
+  "NAV": {
+    "USERS": "Users",
+    "POSTS": "Posts",
+    "ALBUMS": "Albums",
+    "TODOS": "Todos",
+    "USER_DATA": "User data",
+    "MY_POSTS": "My posts",
+    "MY_ALBUMS": "My albums",
+    "MY_TODOS": "My todos",
+    "MY_DATA": "My data"
+  },
+  "BUTTONS": {
+    "BACK": "Back",
+    "EDIT_ALBUM": "Edit album",
+    "EDIT_POST": "Edit post",
+    "ADD_ALBUM": "Add album",
+    "ADD_PHOTO": "Add photo",
+    "ADD_POST": "Add post",
+    "ADD_TODO": "Add todo",
+    "SAVE_SETTINGS": "Save settings",
+    "SHOW_LESS": "Show less",
+    "SHOW_MORE": "Show more",
+    "EDIT": "Edit",
+    "REMOVE": "Remove"
+  },
+  "TABLE_HEADERS": {
+    "ID": "Id",
+    "STATE": "State",
+    "TITLE": "Title",
+    "ALBUM_TITLE": "Album title",
+    "TEXT": "Text"
+  },
+  "HEADERS": {
+    "PHOTOS": "Photos",
+    "COMMENTS": "Comments",
+    "NO_COMMENTS": "No comments yet"
+  },
+  "BREAD_CRUMBS": {
+    "USERS": "Users",
+    "POSTS": "Posts",
+    "ALBUMS": "Albums",
+    "TODOS": "Todos",
+    "USERS_DATA": "Users data"
   }
 }

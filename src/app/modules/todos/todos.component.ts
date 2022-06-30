@@ -157,7 +157,7 @@ export class TodosComponent extends BaseItemAbstractComponent implements OnInit 
 
       if (this.fullBreadCrumbs) {
         this._breadcrumbs.add({
-          name: 'Users',
+          name: 'BREAD_CRUMBS.USERS',
           url: `/users`
         });
         this._breadcrumbs.add({
@@ -167,7 +167,7 @@ export class TodosComponent extends BaseItemAbstractComponent implements OnInit 
       }
 
       this._breadcrumbs.add({
-        name: 'Todos',
+        name: 'BREAD_CRUMBS.TODOS',
         url: ''
       });
     }
