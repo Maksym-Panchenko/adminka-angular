@@ -1,5 +1,7 @@
-@import url('https://cdn.jsdelivr.net/npm/lightgallery@2.0.0-beta.4/css/lightgallery.css');
-@import url('https://cdn.jsdelivr.net/npm/lightgallery@2.0.0-beta.4/css/lg-zoom.css');
+:host {
+  height: auto;
+  background-color: var(--color-white);
+}
 
 .gallery {
   display: flex;
@@ -26,6 +28,9 @@
       background-color: var(--color-white-semi-transparent);
       color: var(--color-dark-gunmetal);
       transition: 0.3s;
+      font-size: 1.2rem;
+      line-height: 1.2;
+      cursor: pointer;
     }
 
     &::after {

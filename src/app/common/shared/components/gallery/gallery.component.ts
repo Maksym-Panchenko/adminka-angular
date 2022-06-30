@@ -1,22 +1,8 @@
 import {Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges} from '@angular/core';
-import {InitDetail} from "lightgallery/lg-events";
-import {LightGallery} from "lightgallery/lightgallery";
-import lgZoom from 'lightgallery/plugins/zoom';
 import {IPhoto} from "@models/interfaces/photo.interface";
 import {ModeType} from "@models/enums/mode-type";
-
-interface IGalleryPhoto {
-  id: string;
-  size: string;
-  src: string;
-  thumb: string;
-  title?:string;
-}
-
-type ZoomSettings = {
-  counter: boolean;
-  plugins: any[];
-}
+import {Gallery, GalleryItem} from "ng-gallery";
+import {Lightbox} from "ng-gallery/lightbox";
 
 @Component({
   selector: 'gallery',
@@ -24,35 +10,29 @@ type ZoomSettings = {
   styleUrls: ['./gallery.component.scss']
 })
 export class GalleryComponent implements OnInit, OnChanges {
+  items: GalleryItem[] = [];
   @Output() removePhoto: EventEmitter<number> = new EventEmitter()
   @Input() photos: IPhoto[] = [];
   @Input() mode: ModeType = ModeType.view;
   readonly ModeType: typeof ModeType = ModeType;
-  items: IGalleryPhoto[] = [];
-  private _lightGallery: LightGallery;
 
-  settings: ZoomSettings = {
-    counter: false,
-    plugins: [lgZoom]
-  };
+  constructor(public gallery: Gallery, public lightbox: Lightbox) {}
 
-  ngOnInit(): void {
+  ngOnInit() {
     this.getItemList();
   }
 
   getItemList(): void {
-    this.items = this.photos?.map((e: IPhoto): IGalleryPhoto => ({
-      id: e.id?.toString() || '', // TODO - problem with optional param
-      size: '150-150',
-      src: e.url,
-      thumb: e.thumbnailUrl,
-      title: e.title
-    }))
+    this.items = this.photos?.map((e: IPhoto): GalleryItem => ({
+      data: {
+        id: e.id?.toString(),
+        src: e.url,
+        thumb: e.thumbnailUrl,
+        title: e.title
+      }
+    }));
+    this.gallery.ref().load(this.items);
   }
-
-  onInit = (detail: InitDetail): void => {
-    this._lightGallery = detail.instance;
-  };
 
   ngOnChanges(changes: SimpleChanges): void {
     this.getItemList();
@@ -62,5 +42,10 @@ export class GalleryComponent implements OnInit, OnChanges {
     e.stopPropagation();
     e.preventDefault();
     this.removePhoto.emit(parseInt(id));
+  }
+
+  // if user click on ::before (simulate click on img)
+  open(index: number): void {
+    this.lightbox.open(index);
   }
 }
