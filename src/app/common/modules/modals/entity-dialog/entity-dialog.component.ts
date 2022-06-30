@@ -10,7 +10,7 @@ import {IAlbum} from "@models/interfaces/album.interface";
 import {ITodo} from "@models/interfaces/todo.interface";
 import {IPhoto} from "@models/interfaces/photo.interface";
 import {SnackBarNotificationType} from "@models/enums/snack-bar-notification-type.enum";
-import {SNACKBAR_CONFIG} from "@miscconstants/snackbar-config";
+import {SNACKBAR_CONFIG} from "@misc/constants/snackbar-config";
 import {MatSnackBar} from "@angular/material/snack-bar";
 
 @Component({
@@ -39,7 +39,7 @@ export class EntityDialogComponent implements OnInit {
     this.formCreate();
   }
 
-  formCreate() {
+  formCreate(): void {
     const title = this.data.post?.title || this.data.album?.title || this.data.todo?.title || '';
 
     this.formGroup = this._formBuilder.group({
@@ -73,7 +73,7 @@ export class EntityDialogComponent implements OnInit {
             userId: this._user.getUserId()
           }
         }
-        this.album.title = this.formGroup.controls['title'].value;
+        this.album.title = this.formGroup.get('title').value;
 
         if (this.data.submitHandler) {
           this.submitHandler(this.album);
@@ -92,8 +92,8 @@ export class EntityDialogComponent implements OnInit {
             userId: this._user.getUserId()
           }
         }
-        this.post.title = this.formGroup.controls['title'].value;
-        this.post.body = this.formGroup.controls['body'].value;
+        this.post.title = this.formGroup.get('title').value;
+        this.post.body = this.formGroup.get('body').value;
 
         if (this.data.submitHandler) {
           this.submitHandler(this.post);
@@ -112,7 +112,7 @@ export class EntityDialogComponent implements OnInit {
             userId: this._user.getUserId()
           }
         }
-        this.todo.title = this.formGroup.controls['title'].value;
+        this.todo.title = this.formGroup.get('title').value;
 
         if (this.data.submitHandler) {
           this.submitHandler(this.todo);
@@ -124,10 +124,10 @@ export class EntityDialogComponent implements OnInit {
       // add only
       case this.EntityModalType.photo:
         this.photo = {
-          title: this.formGroup.controls['title'].value,
+          title: this.formGroup.get('title').value,
           albumId: this.data.albumId || 0,
-          url: this.formGroup.controls['url'].value,
-          thumbnailUrl: this.formGroup.controls['thumbnailUrl'].value
+          url: this.formGroup.get('url').value,
+          thumbnailUrl: this.formGroup.get('thumbnailUrl').value
         };
 
         if (this.data.submitHandler) {

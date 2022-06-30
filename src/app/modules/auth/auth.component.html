@@ -14,7 +14,7 @@
           [inputType]="InputType.email"
           [required]="true"
           [placeholder]="'Enter your email'"
-          [control]="formGroup.controls['email']"
+          [control]="formGroup.get('email')"
         >
         </app-mat-form-field>
       </div>
@@ -23,7 +23,7 @@
         <mat-form-checkbox
           class="base-boolean-field__field base-boolean-field__field_checkbox"
           color="primary"
-          [control]="formGroup.controls['isAgreed']"
+          [control]="formGroup.get('isAgreed')"
         >
           I agree to Sign In
         </mat-form-checkbox>

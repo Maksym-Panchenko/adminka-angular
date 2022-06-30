@@ -1,7 +1,7 @@
 import {AfterViewInit, Component, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
 import {ActivatedRoute} from "@angular/router";
 import {MatDialog} from "@angular/material/dialog";
-import {EntityDialogComponent} from "../../common/modules/modals/entity-dialog/entity-dialog.component";
+import {EntityDialogComponent} from "@modals/entity-dialog/entity-dialog.component";
 import {EntityModalType} from "@models/enums/entity-modal-type";
 import {IEntityModal} from "@models/interfaces/modal/entity-modal.inteface";
 import {IAlbum} from "@models/interfaces/album.interface";
@@ -10,7 +10,7 @@ import {AlbumApiService} from "@services/api/album-api/album-api.service";
 import {PhotoApiService} from "@services/api/photo-api/photo-api.service";
 import {UserService} from "@services/user/user.service";
 import {MatPaginator} from "@angular/material/paginator";
-import {MessageDialogComponent} from "../../common/modules/modals/message-dialog/message-dialog.component";
+import {MessageDialogComponent} from "@modals/message-dialog/message-dialog.component";
 import {MessageModalType} from "@models/enums/message-modal-type.enum";
 import {IMessageModal} from "@models/interfaces/modal/message-modal.inteface";
 import {filter} from "rxjs/operators";
@@ -18,7 +18,7 @@ import { Location } from '@angular/common'
 import {BreadcrumbsService} from "@services/breadcrumbs/breadcrumbs.service";
 import {IUser} from "@models/interfaces/user.interface";
 import {UserApiService} from "@services/api/user-api/user-api.service";
-import {BaseItemAbstractComponent} from "@miscabstracts/base-item.abstract.component";
+import {BaseItemAbstractComponent} from "@misc/abstracts/base-item.abstract.component";
 import {MatSnackBar} from "@angular/material/snack-bar";
 import {Observable} from "rxjs";
 import {SnackBarNotificationType} from "@models/enums/snack-bar-notification-type.enum";
@@ -34,7 +34,8 @@ export class SingleAlbumComponent extends BaseItemAbstractComponent implements O
   album: IAlbum;
   photos: IPhoto[];
   startPhoto: number;
-  numberOfPhotos: number = 10;
+  pageSize: number = 10;
+  pageSizeOptions: number[] = [10, 25, 50];
   showedPhotos: IPhoto[];
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
@@ -44,7 +45,7 @@ export class SingleAlbumComponent extends BaseItemAbstractComponent implements O
     user: UserService,
     private _albumApi: AlbumApiService,
     private _photoApi: PhotoApiService,
-    protected dialog: MatDialog,
+    private _dialog: MatDialog,
     private _location: Location,
     private _breadcrumbs: BreadcrumbsService,
     private _userApi: UserApiService,
@@ -79,7 +80,7 @@ export class SingleAlbumComponent extends BaseItemAbstractComponent implements O
   }
 
   editAlbum(): void {
-    this.dialog
+    this._dialog
       .open(EntityDialogComponent, {
         autoFocus: false,
         disableClose: true,
@@ -118,7 +119,7 @@ export class SingleAlbumComponent extends BaseItemAbstractComponent implements O
   }
 
   addPhoto(): void {
-    this.dialog
+    this._dialog
       .open(EntityDialogComponent, {
         autoFocus: false,
         disableClose: true,
@@ -143,7 +144,7 @@ export class SingleAlbumComponent extends BaseItemAbstractComponent implements O
   }
 
   deletePhoto(id: number): void {
-    this.dialog
+    this._dialog
       .open(MessageDialogComponent, {
         autoFocus: false,
         data: {

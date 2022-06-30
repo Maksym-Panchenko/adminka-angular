@@ -7,7 +7,7 @@ import {IUser} from "@models/interfaces/user.interface";
 import {InputType} from '@models/enums/input-type.enum';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {ModeType} from "@models/enums/mode-type";
-import {BaseItemAbstractComponent} from "@miscabstracts/base-item.abstract.component";
+import {BaseItemAbstractComponent} from "@misc/abstracts/base-item.abstract.component";
 import {MatSnackBar} from "@angular/material/snack-bar";
 import {SnackBarNotificationType} from "@models/enums/snack-bar-notification-type.enum";
 

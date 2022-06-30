@@ -4,7 +4,7 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { MessageModalType } from "@models/enums/message-modal-type.enum";
 import { SnackBarNotificationType } from "@models/enums/snack-bar-notification-type.enum";
 import { MatSnackBar } from "@angular/material/snack-bar";
-import { SNACKBAR_CONFIG } from "@miscconstants/snackbar-config";
+import { SNACKBAR_CONFIG } from "@misc/constants/snackbar-config";
 
 @Component({
   selector: 'app-message-dialog',

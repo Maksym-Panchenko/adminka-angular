@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { IPost } from "@models/interfaces/post.interface";
-import {ApiBaseAbstractService} from "../../../misc/abstracts/api-base.abstract.service";
+import {ApiBaseAbstractService} from "@misc/abstracts/api-base.abstract.service";
 
 @Injectable({
   providedIn: 'root'

@@ -2,7 +2,6 @@ import {AfterViewInit, Component, OnInit, ViewChild} from '@angular/core';
 import {IUser} from "@models/interfaces/user.interface";
 import {MatPaginator} from "@angular/material/paginator";
 import {UserApiService} from "@services/api/user-api/user-api.service";
-import {Route} from "@angular/router";
 import {BreadcrumbsService} from "@services/breadcrumbs/breadcrumbs.service";
 
 @Component({
@@ -40,7 +39,7 @@ export class UsersComponent implements OnInit, AfterViewInit {
       });
   }
 
-  showUsers() {
+  showUsers(): void {
     if (this.paginator && this.users?.length) {
       this.startUser = this.paginator.pageIndex * this.paginator.pageSize + 1;
       this.showedUsers = this.users.filter(e => e.id >= this.startUser && e.id < (this.startUser + this.paginator.pageSize));

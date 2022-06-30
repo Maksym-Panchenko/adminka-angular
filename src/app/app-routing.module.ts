@@ -1,22 +1,22 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import {UsersModule} from "./modules/users/users.module";
-import {UsersComponent} from "./modules/users/users.component";
-import {PostsComponent} from "./modules/posts/posts.component";
-import {PostsModule} from "./modules/posts/posts.module";
-import {SinglePostComponent} from "./modules/single-post/single-post.component";
-import {SinglePostModule} from "./modules/single-post/single-post.module";
-import {AlbumsComponent} from "./modules/albums/albums.component";
-import {AlbumsModule} from "./modules/albums/albums.module";
-import {SingleAlbumComponent} from "./modules/single-album/single-album.component";
-import {SingleAlbumModule} from "./modules/single-album/single-album.module";
-import {TodosComponent} from "./modules/todos/todos.component";
-import {TodosModule} from "./modules/todos/todos.module";
-import {SingleUserComponent} from "./modules/single-user/single-user.component";
-import {SingleUserModule} from "./modules/single-user/single-user.module";
-import {NotFoundPageComponent} from "./modules/not-found-page/not-found-page.component";
-import {UserDataComponent} from "./modules/user-data/user-data.component";
-import {UserDataModule} from "./modules/user-data/user-data.module";
+import {UsersModule} from "@modules/users/users.module";
+import {UsersComponent} from "@modules/users/users.component";
+import {PostsComponent} from "@modules/posts/posts.component";
+import {PostsModule} from "@modules/posts/posts.module";
+import {SinglePostComponent} from "@modules/single-post/single-post.component";
+import {SinglePostModule} from "@modules/single-post/single-post.module";
+import {AlbumsComponent} from "@modules/albums/albums.component";
+import {AlbumsModule} from "@modules/albums/albums.module";
+import {SingleAlbumComponent} from "@modules/single-album/single-album.component";
+import {SingleAlbumModule} from "@modules/single-album/single-album.module";
+import {TodosComponent} from "@modules/todos/todos.component";
+import {TodosModule} from "@modules/todos/todos.module";
+import {SingleUserComponent} from "@modules/single-user/single-user.component";
+import {SingleUserModule} from "@modules/single-user/single-user.module";
+import {NotFoundPageComponent} from "@modules/not-found-page/not-found-page.component";
+import {UserDataComponent} from "@modules/user-data/user-data.component";
+import {UserDataModule} from "@modules/user-data/user-data.module";
 
 const routes: Routes = [
   {

@@ -4,7 +4,7 @@ import {MatDialog} from "@angular/material/dialog";
 import {ActivatedRoute, Router} from "@angular/router";
 import {UserService} from "@services/user/user.service";
 import {MatTableDataSource} from "@angular/material/table";
-import {MessageDialogComponent} from "../../common/modules/modals/message-dialog/message-dialog.component";
+import {MessageDialogComponent} from "@modals/message-dialog/message-dialog.component";
 import {MessageModalType} from "@models/enums/message-modal-type.enum";
 import {IMessageModal} from "@models/interfaces/modal/message-modal.inteface";
 import {filter} from "rxjs/operators";
@@ -12,14 +12,14 @@ import {MatPaginator} from "@angular/material/paginator";
 import {IAlbum} from "@models/interfaces/album.interface";
 import {AlbumApiService} from "@services/api/album-api/album-api.service";
 import {IEntityModal} from "@models/interfaces/modal/entity-modal.inteface";
-import {EntityDialogComponent} from "../../common/modules/modals/entity-dialog/entity-dialog.component";
+import {EntityDialogComponent} from "@modals/entity-dialog/entity-dialog.component";
 import {EntityModalType} from "@models/enums/entity-modal-type";
 import {BreadcrumbsService} from "@services/breadcrumbs/breadcrumbs.service";
 import {IUser} from "@models/interfaces/user.interface";
 import {UserApiService} from "@services/api/user-api/user-api.service";
 import {Observable} from "rxjs";
 import {SnackBarNotificationType} from "@models/enums/snack-bar-notification-type.enum";
-import {BaseItemAbstractComponent} from "@miscabstracts/base-item.abstract.component";
+import {BaseItemAbstractComponent} from "@misc/abstracts/base-item.abstract.component";
 import {MatSnackBar} from "@angular/material/snack-bar";
 
 @Component({
@@ -39,7 +39,7 @@ export class AlbumsComponent extends BaseItemAbstractComponent implements OnInit
     user: UserService,
     route: ActivatedRoute,
     private _postsApi: PostApiService,
-    protected dialog: MatDialog,
+    private _dialog: MatDialog,
     private _router: Router,
     private _albumApi: AlbumApiService,
     private _breadcrumbs: BreadcrumbsService,
@@ -67,7 +67,7 @@ export class AlbumsComponent extends BaseItemAbstractComponent implements OnInit
   }
 
   deleteItem(id: number): void {
-    this.dialog
+    this._dialog
       .open(MessageDialogComponent, {
         autoFocus: false,
         data: {
@@ -93,7 +93,7 @@ export class AlbumsComponent extends BaseItemAbstractComponent implements OnInit
   }
 
   createItem(): void {
-    this.dialog
+    this._dialog
       .open(EntityDialogComponent, {
         autoFocus: false,
         disableClose: true,

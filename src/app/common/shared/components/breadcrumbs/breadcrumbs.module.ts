@@ -1,9 +1,9 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { BreadcrumbsComponent } from './breadcrumbs.component';
-import {AppFormsModule} from "../../../modules/forms/forms.module";
+import {AppFormsModule} from "@forms/forms.module";
 import {RouterModule} from "@angular/router";
-import {MaterialModule} from "../../material/material.module";
+import {MaterialModule} from "@shared/material/material.module";
 
 @NgModule({
   declarations: [BreadcrumbsComponent],
@@ -11,9 +11,7 @@ import {MaterialModule} from "../../material/material.module";
     CommonModule,
     RouterModule,
     AppFormsModule,
-    MaterialModule,
-    // DirectivesModule,
-    // PipesModule
+    MaterialModule
   ],
   exports: [BreadcrumbsComponent]
 })
