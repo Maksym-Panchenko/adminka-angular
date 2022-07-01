@@ -21,6 +21,7 @@ import {Observable} from "rxjs";
 import {SnackBarNotificationType} from "@models/enums/snack-bar-notification-type.enum";
 import {BaseItemAbstractComponent} from "@misc/abstracts/base-item.abstract.component";
 import {MatSnackBar} from "@angular/material/snack-bar";
+import {TranslateService} from "@ngx-translate/core";
 
 @Component({
   selector: 'albums',
@@ -38,14 +39,15 @@ export class AlbumsComponent extends BaseItemAbstractComponent implements OnInit
     snackBar: MatSnackBar,
     user: UserService,
     route: ActivatedRoute,
+    translate: TranslateService,
     private _postsApi: PostApiService,
     private _dialog: MatDialog,
     private _router: Router,
     private _albumApi: AlbumApiService,
     private _breadcrumbs: BreadcrumbsService,
-    private _userApi: UserApiService
+    private _userApi: UserApiService,
   ) {
-    super(snackBar, user, route);
+    super(snackBar, user, route, translate);
   }
 
   ngOnInit(): void {
@@ -71,11 +73,11 @@ export class AlbumsComponent extends BaseItemAbstractComponent implements OnInit
       .open(MessageDialogComponent, {
         autoFocus: false,
         data: {
-          title: 'Delete this Album?',
+          title: 'MODAL.DELETE_ALBUM',
           type: MessageModalType.confirm,
           buttonsNames: {
-            approve: 'Delete',
-            decline: 'Cancel'
+            approve: 'BUTTONS.DELETE',
+            decline: 'BUTTONS.CANCEL'
           },
           submitHandler: (): Observable<object> => this._albumApi.deleteItem(id)
         } as IMessageModal
@@ -87,7 +89,7 @@ export class AlbumsComponent extends BaseItemAbstractComponent implements OnInit
       .subscribe((answer): void => {
         if (answer) {
           this.dataSource.data = this.dataSource.data.filter((e: IAlbum): boolean => e.id !== id);
-          this.showMessage(SnackBarNotificationType.success, 'Todo has been deleted');
+          this.showMessage(SnackBarNotificationType.success, this._translate.instant('MESSAGES.ALBUM_DELETED'));
         }
       });
   }
@@ -98,11 +100,11 @@ export class AlbumsComponent extends BaseItemAbstractComponent implements OnInit
         autoFocus: false,
         disableClose: true,
         data: {
-          title: 'Create new Album',
+          title: 'MODAL.CREATE_ALBUM',
           entityType: EntityModalType.album,
           buttonsNames: {
-            approve: 'Create',
-            decline: 'Cancel'
+            approve: 'BUTTONS.CREATE',
+            decline: 'BUTTONS.CANCEL'
           },
           submitHandler: (item: IAlbum): Observable<IAlbum> => this._albumApi.createItem(item)
         } as IEntityModal
@@ -111,7 +113,7 @@ export class AlbumsComponent extends BaseItemAbstractComponent implements OnInit
       .subscribe((newAlbum): void => {
         if (newAlbum) {
           this.dataSource.data = [...this.dataSource.data, newAlbum];
-          this.showMessage(SnackBarNotificationType.success, 'Album has been created');
+          this.showMessage(SnackBarNotificationType.success, this._translate.instant('MESSAGES.ALBUM_CREATED'));
         }
       });
   }

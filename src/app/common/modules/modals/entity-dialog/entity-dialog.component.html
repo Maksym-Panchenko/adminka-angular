@@ -1,11 +1,11 @@
 <div class="dialog">
-  <h3 class="dialog__title">{{ data.title }}</h3>
+  <h3 class="dialog__title">{{ data.title | translate }}</h3>
 
   <form (submit)="submit()">
     <app-mat-form-field
       [inputType]="InputType.text"
       [required]="true"
-      [placeholder]="'Enter Post Title'"
+      [placeholder]="'MODAL_FIELDS.TITLE' | translate "
       [control]="formGroup.get('title')"
     ></app-mat-form-field>
 
@@ -13,7 +13,7 @@
       *ngIf="data.entityType === EntityModalType.post"
       [inputType]="InputType.text"
       [required]="true"
-      [placeholder]="'Enter Post Body'"
+      [placeholder]="'MODAL_FIELDS.POST_BODY' | translate "
       [control]="formGroup.get('body')"
     ></app-mat-form-textarea>
 
@@ -21,23 +21,23 @@
       <app-mat-form-field
         [inputType]="InputType.text"
         [required]="true"
-        [placeholder]="'Enter Image Url'"
+        [placeholder]="'MODAL_FIELDS.URL_IMAGE' | translate "
         [control]="formGroup.get('url')"
       ></app-mat-form-field>
       <app-mat-form-field
         [inputType]="InputType.text"
         [required]="true"
-        [placeholder]="'Enter Thumbnail Url'"
+        [placeholder]="'MODAL_FIELDS.URL_THUMB' | translate "
         [control]="formGroup.get('thumbnailUrl')"
       ></app-mat-form-field>
     </ng-container>
 
     <div class="dialog__actions" mat-dialog-actions>
       <button type="submit" class="dialog__button" color="primary" mat-flat-button>
-        {{ approveName }}
+        {{ approveName | translate }}
       </button>
       <button [mat-dialog-close]="false" class="dialog__button" color="primary" mat-stroked-button>
-        {{ declineName }}
+        {{ declineName | translate }}
       </button>
     </div>
   </form>

@@ -6,6 +6,7 @@ import { IUser } from "@models/interfaces/user.interface";
 import { ModeType } from "@models/enums/mode-type";
 import { UserService } from "@services/user/user.service";
 import { ActivatedRoute } from "@angular/router";
+import {TranslateService} from "@ngx-translate/core";
 
 @Component({
   template: ''
@@ -21,6 +22,7 @@ export abstract class BaseItemAbstractComponent {
     private _snackBar: MatSnackBar,
     private _user: UserService,
     private _route: ActivatedRoute,
+    protected _translate: TranslateService
   ) {}
 
   defineParams(): void {
@@ -34,7 +36,7 @@ export abstract class BaseItemAbstractComponent {
 
   errorAction(error: Error): void {
     console.log('Error: ', error);
-    this.showMessage(SnackBarNotificationType.error, 'Something wrong...');
+    this.showMessage(SnackBarNotificationType.error, this._translate.instant('MESSAGES.COMMON_ERROR'));
   }
 
   showMessage(result: SnackBarNotificationType, message: string) {

@@ -10,6 +10,7 @@ import {ModeType} from "@models/enums/mode-type";
 import {BaseItemAbstractComponent} from "@misc/abstracts/base-item.abstract.component";
 import {MatSnackBar} from "@angular/material/snack-bar";
 import {SnackBarNotificationType} from "@models/enums/snack-bar-notification-type.enum";
+import {TranslateService} from "@ngx-translate/core";
 
 @Component({
   selector: 'app-user-data',
@@ -57,11 +58,12 @@ export class UserDataComponent extends BaseItemAbstractComponent implements OnIn
     snackBar: MatSnackBar,
     user: UserService,
     route: ActivatedRoute,
+    translate: TranslateService,
     private _breadcrumbs: BreadcrumbsService,
     private _userApi: UserApiService,
     private _fb: FormBuilder
   ) {
-    super(snackBar, user, route);
+    super(snackBar, user, route, translate);
   }
 
   ngOnInit(): void {
@@ -139,7 +141,7 @@ export class UserDataComponent extends BaseItemAbstractComponent implements OnIn
 
     this._userApi.patchItem(this.userId, this.user).subscribe((answer) => {
       if (answer) {
-        this.showMessage(SnackBarNotificationType.success, 'User data has been edited');
+        this.showMessage(SnackBarNotificationType.success, this._translate.instant('MESSAGES.USER_DATA_EDITED'));
       }
     }, (error) => this.errorAction(error));
   }

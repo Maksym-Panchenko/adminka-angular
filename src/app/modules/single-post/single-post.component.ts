@@ -21,6 +21,7 @@ import {BaseItemAbstractComponent} from "@misc/abstracts/base-item.abstract.comp
 import {MatSnackBar} from "@angular/material/snack-bar";
 import {Observable} from "rxjs";
 import {SnackBarNotificationType} from "@models/enums/snack-bar-notification-type.enum";
+import {TranslateService} from "@ngx-translate/core";
 
 @Component({
   selector: 'single-post',
@@ -37,14 +38,15 @@ export class SinglePostComponent extends BaseItemAbstractComponent implements On
     snackBar: MatSnackBar,
     route: ActivatedRoute,
     user: UserService,
+    translate: TranslateService,
     private _postApi: PostApiService,
     private _commentApi: CommentApiService,
     private _dialog: MatDialog,
     private _location: Location,
     private _breadcrumbs: BreadcrumbsService,
-    private _userApi: UserApiService,
+    private _userApi: UserApiService
   ) {
-    super(snackBar, user, route);
+    super(snackBar, user, route, translate);
     route.params.subscribe(params => this.postId = parseInt(params['id']));
   }
 
@@ -78,12 +80,12 @@ export class SinglePostComponent extends BaseItemAbstractComponent implements On
         autoFocus: false,
         disableClose: true,
         data: {
-          title: 'Edit post',
+          title: 'MODAL.EDIT_POST',
           entityType: EntityModalType.post,
           post: Object.assign({}, this.post),
           buttonsNames: {
-            approve: 'Save',
-            decline: 'Cancel'
+            approve: 'BUTTONS.SAVE',
+            decline: 'BUTTONS.CANCEL'
           },
           submitHandler: (item: IPost): Observable<IPost> =>  this._postApi.updateItem(item)
         } as IEntityModal
@@ -92,7 +94,7 @@ export class SinglePostComponent extends BaseItemAbstractComponent implements On
       .subscribe((editedPost): void => {
         if (editedPost) {
           this.post = editedPost;
-          this.showMessage(SnackBarNotificationType.success, 'Post has been edited');
+          this.showMessage(SnackBarNotificationType.success, this._translate.instant('MESSAGES.POST_EDITED'));
         }
       });
   }
@@ -107,11 +109,11 @@ export class SinglePostComponent extends BaseItemAbstractComponent implements On
         autoFocus: false,
         disableClose: true,
         data: {
-          title: 'Delete comment?',
+          title: 'MODAL.DELETE_COMMENT',
           type: MessageModalType.confirm,
           buttonsNames: {
-            approve: 'Delete',
-            decline: 'Cancel'
+            approve: 'BUTTONS.DELETE',
+            decline: 'BUTTONS.CANCEL'
           },
           submitHandler: (): Observable<object> => this._commentApi.deleteItem(id)
         } as IMessageModal
@@ -124,7 +126,7 @@ export class SinglePostComponent extends BaseItemAbstractComponent implements On
         if (answer) {
           const index = this.comments.findIndex(e => e.id === id);
           this.comments.splice(index, 1);
-          this.showMessage(SnackBarNotificationType.success, 'Comment has been deleted');
+          this.showMessage(SnackBarNotificationType.success, this._translate.instant('MESSAGES.COMMENT_DELETED'));
         }
       });
   }

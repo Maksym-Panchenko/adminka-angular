@@ -70,9 +70,9 @@ export abstract class BaseFormFieldAbstractComponent implements OnInit, OnChange
 
     switch (true) {
       case this.control.hasError('required'):
-        return 'Required field';
+        return 'MODAL_VALIDATION.REQUIRED';
       case this.control.hasError('email'):
-        return 'Wrong email address';
+        return 'MODAL_VALIDATION.EMAIL';
       default:
         return '';
     }

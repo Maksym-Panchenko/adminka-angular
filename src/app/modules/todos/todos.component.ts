@@ -22,6 +22,7 @@ import {MatSnackBar} from "@angular/material/snack-bar";
 import {SnackBarNotificationType} from "@models/enums/snack-bar-notification-type.enum";
 import {Observable} from "rxjs";
 import {BaseItemAbstractComponent} from "@misc/abstracts/base-item.abstract.component";
+import {TranslateService} from "@ngx-translate/core";
 
 @Component({
   selector: 'todos',
@@ -38,6 +39,7 @@ export class TodosComponent extends BaseItemAbstractComponent implements OnInit 
     snackBar: MatSnackBar,
     user: UserService,
     route: ActivatedRoute,
+    translate: TranslateService,
     private _postsApi: PostApiService,
     private _todosApi: TodoApiService,
     private _dialog: MatDialog,
@@ -45,7 +47,7 @@ export class TodosComponent extends BaseItemAbstractComponent implements OnInit 
     private _breadcrumbs: BreadcrumbsService,
     private _userApi: UserApiService
   ) {
-    super(snackBar, user, route);
+    super(snackBar, user, route, translate);
   }
 
   ngOnInit(): void {
@@ -71,11 +73,11 @@ export class TodosComponent extends BaseItemAbstractComponent implements OnInit 
       .open(MessageDialogComponent, {
         autoFocus: false,
         data: {
-          title: 'Delete this todo?',
+          title: 'MODAL.DELETE_TODO',
           type: MessageModalType.confirm,
           buttonsNames: {
-            approve: 'Delete',
-            decline: 'Cancel'
+            approve: 'BUTTONS.DELETE',
+            decline: 'BUTTONS.CANCEL'
           },
           submitHandler: (): Observable<object> => this._todosApi.deleteItem(id)
         } as IMessageModal
@@ -87,7 +89,7 @@ export class TodosComponent extends BaseItemAbstractComponent implements OnInit 
       .subscribe((answer): void => {
         if (answer) {
           this.dataSource.data = this.dataSource.data.filter((e: ITodo): boolean => e.id !== id);
-          this.showMessage(SnackBarNotificationType.success, 'Todo has been deleted');
+          this.showMessage(SnackBarNotificationType.success, this._translate.instant('MESSAGES.TODO_DELETED'));
         }
       });
   }
@@ -98,11 +100,11 @@ export class TodosComponent extends BaseItemAbstractComponent implements OnInit 
         autoFocus: false,
         disableClose: true,
         data: {
-          title: 'Create new todo',
+          title: 'MODAL.CREATE_TODO',
           entityType: EntityModalType.todo,
           buttonsNames: {
-            approve: 'Create',
-            decline: 'Cancel'
+            approve: 'BUTTONS.CREATE',
+            decline: 'BUTTONS.CANCEL'
           },
           submitHandler: (item: ITodo): Observable<ITodo> => this._todosApi.createItem(item)
         } as IEntityModal
@@ -111,7 +113,7 @@ export class TodosComponent extends BaseItemAbstractComponent implements OnInit 
       .subscribe((newTodo: ITodo): void => {
         if (newTodo) {
           this.dataSource.data = [...this.dataSource.data, newTodo];
-          this.showMessage(SnackBarNotificationType.success, 'Todo has been created');
+          this.showMessage(SnackBarNotificationType.success, this._translate.instant('MESSAGES.TODO_CREATED'));
         }
       });
   }
@@ -122,12 +124,12 @@ export class TodosComponent extends BaseItemAbstractComponent implements OnInit 
         autoFocus: false,
         disableClose: true,
         data: {
-          title: 'Edit todo',
+          title: 'MODAL.EDIT_TODO',
           entityType: EntityModalType.todo,
           todo: Object.assign({}, selectedTodo),
           buttonsNames: {
-            approve: 'Edit',
-            decline: 'Cancel'
+            approve: 'BUTTONS.EDIT',
+            decline: 'BUTTONS.CANCEL'
           },
           submitHandler: (item: ITodo): Observable<ITodo> =>  this._todosApi.updateItem(item)
         } as IEntityModal
@@ -138,7 +140,7 @@ export class TodosComponent extends BaseItemAbstractComponent implements OnInit 
           const index = this.dataSource.data.findIndex(e => e.id === editedTodo.id);
           this.dataSource.data.splice(index, 1, editedTodo);
           this.dataSource._updateChangeSubscription();
-          this.showMessage(SnackBarNotificationType.success, 'Todo has been edited');
+          this.showMessage(SnackBarNotificationType.success, this._translate.instant('MESSAGES.TODO_EDITED'));
         }
       });
   }
