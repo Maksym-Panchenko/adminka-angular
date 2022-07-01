@@ -48,7 +48,8 @@
     "CANCEL": "Cancel",
     "DELETE": "Delete",
     "ADD": "Add",
-    "SAVE": "Save"
+    "SAVE": "Save",
+    "SIGN_IN": "Sign In"
   },
   "TABLE_HEADERS": {
     "ID": "Id",
@@ -60,7 +61,15 @@
   "HEADERS": {
     "PHOTOS": "Photos",
     "COMMENTS": "Comments",
-    "NO_COMMENTS": "No comments yet"
+    "NO_COMMENTS": "No comments yet",
+    "PAGE_NOT_FOUND": "Page not found",
+    "SIGN_IN": "Sign in to Adminka",
+    "SIGN_IN_TO_PLATFORM": "Sign in on Adminka Na Kolenke platform",
+    "USER_NOT_EXIST": "This user does not exist in the system"
+  },
+  "FIELDS": {
+    "ENTER_EMAIL": "Enter your email",
+    "AGREE_TO_SIGN": "I agree to Sign In"
   },
   "BREAD_CRUMBS": {
     "USERS": "Users",

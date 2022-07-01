@@ -34,6 +34,21 @@
     }
   }
 
+  &__lang-panel {
+    display: flex;
+    justify-content: flex-end;
+  }
+
+  &__lang {
+    ::ng-deep .trigger-button {
+      color: var(--color-quick-silver);
+      font-size: 1.2rem;
+      padding: 0 1.2rem;
+      height: 3.2rem;
+      line-height: 3.2rem;
+    }
+  }
+
   &__title {
     margin-bottom: 0.4rem;
     color: var(--color-dark-gunmetal);

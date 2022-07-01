@@ -1,6 +1,7 @@
 import { ChangeDetectorRef, Component, EventEmitter, Input, OnChanges, OnDestroy, OnInit, Output, SimpleChanges } from "@angular/core";
 import { AbstractControl, FormControl } from "@angular/forms";
 import { Subject } from "rxjs";
+import { TranslateService } from "@ngx-translate/core";
 
 export enum FormFieldFloatLabelMode {
   auto = 'auto',
@@ -26,7 +27,7 @@ export abstract class BaseFormFieldAbstractComponent implements OnInit, OnChange
   isLinkElement: boolean = false;
   protected destroyed$: Subject<void> = new Subject<void>();
 
-  constructor(protected cdr: ChangeDetectorRef) {}
+  constructor(protected cdr: ChangeDetectorRef, private _translate: TranslateService) {}
 
   ngOnInit(): void {
     if (this.value) {
@@ -70,9 +71,9 @@ export abstract class BaseFormFieldAbstractComponent implements OnInit, OnChange
 
     switch (true) {
       case this.control.hasError('required'):
-        return 'MODAL_VALIDATION.REQUIRED';
+        return this._translate.instant('MODAL_VALIDATION.REQUIRED');
       case this.control.hasError('email'):
-        return 'MODAL_VALIDATION.EMAIL';
+        return this._translate.instant('MODAL_VALIDATION.EMAIL');
       default:
         return '';
     }

@@ -48,7 +48,8 @@
     "CANCEL": "Скасувати",
     "DELETE": "Видалити",
     "ADD": "Додати",
-    "SAVE": "Зберегти"
+    "SAVE": "Зберегти",
+    "SIGN_IN": "Увійти"
   },
   "TABLE_HEADERS": {
     "ID": "Id",
@@ -60,7 +61,15 @@
   "HEADERS": {
     "PHOTOS": "Фотографії",
     "COMMENTS": "Коментарі",
-    "NO_COMMENTS": "Ще немає коментарів"
+    "NO_COMMENTS": "Ще немає коментарів",
+    "PAGE_NOT_FOUND": "Сторінку не знайдено",
+    "SIGN_IN": "Увійдіть в Adminka",
+    "SIGN_IN_TO_PLATFORM": "Увійдіть в платформу Adminka Na Kolenke",
+    "USER_NOT_EXIST": "Цей користувач не існує в системі"
+  },
+  "FIELDS": {
+    "ENTER_EMAIL": "Введіть адресу електронної пошти",
+    "AGREE_TO_SIGN": "Я згоден на вхід"
   },
   "BREAD_CRUMBS": {
     "USERS": "Користувачі",
