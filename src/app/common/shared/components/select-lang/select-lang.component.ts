@@ -1,32 +1,27 @@
-import { Component, OnInit } from '@angular/core';
-import {TranslateService} from "@ngx-translate/core";
+import { Component } from '@angular/core';
+import { LanguageService } from "@services/language/language.service";
 
 @Component({
   selector: 'select-lang',
   templateUrl: './select-lang.component.html',
   styleUrls: ['./select-lang.component.scss']
 })
-export class SelectLangComponent implements OnInit {
+export class SelectLangComponent {
 
-
-  constructor(private translate: TranslateService) { }
-
-  ngOnInit(): void {console.log(this.translate.currentLang)
-  }
+  constructor(private language: LanguageService) { }
 
   currentLang(): string {
-    return 'LANG.' + this.translate.currentLang?.toUpperCase();
+    return 'LANG.' + this.language.currentLang?.toUpperCase();
   }
 
   changeLang(lang: any): void {
-    console.log(this.translate.currentLang)
-    console.log(this.translate.getLangs())
+    this.language.use(lang);
 
-    // this.translate.changeLanguage()
-    this.translate.use(lang);
+    // save new lang to localStorage
+    this.language.saveCurrentLang(lang);
   }
 
   getLangList() {
-    return this.translate.getLangs().filter((lang: string): boolean => lang !== this.translate.currentLang);
+    return this.language.getLangs().filter((lang: string): boolean => lang !== this.language.currentLang);
   }
 }
