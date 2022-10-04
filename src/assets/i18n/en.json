@@ -1,0 +1,120 @@
+{
+  "LANG": {
+    "UA": "Ukrainian",
+    "EN": "English"
+  },
+  "USER": {
+    "NAME": "Name",
+    "USERNAME": "User-name",
+    "EMAIL": "EMail",
+    "PHONE": "Phone",
+    "WEB_SITE": "Web-site",
+    "STREET": "Street",
+    "SUITE": "Suite",
+    "CITY": "City",
+    "ZIP_CODE": "Zip-code",
+    "COMPANY_NAME": "Company name",
+    "CATCH_PHRASE": "Catch phrase",
+    "BS": "Bs",
+    "PERSONAL_INFO": "Personal info",
+    "ADDRESS_INFO": "Address Info",
+    "COMPANY": "Company"
+  },
+  "NAV": {
+    "USERS": "Users",
+    "POSTS": "Posts",
+    "ALBUMS": "Albums",
+    "TODOS": "Todos",
+    "USER_DATA": "User data",
+    "MY_POSTS": "My posts",
+    "MY_ALBUMS": "My albums",
+    "MY_TODOS": "My todos",
+    "MY_DATA": "My data"
+  },
+  "BUTTONS": {
+    "BACK": "Back",
+    "EDIT_ALBUM": "Edit album",
+    "EDIT_POST": "Edit post",
+    "ADD_ALBUM": "Add album",
+    "ADD_PHOTO": "Add photo",
+    "ADD_POST": "Add post",
+    "ADD_TODO": "Add todo",
+    "SAVE_SETTINGS": "Save settings",
+    "SHOW_LESS": "Show less",
+    "SHOW_MORE": "Show more",
+    "EDIT": "Edit",
+    "REMOVE": "Remove",
+    "CREATE": "Create",
+    "CANCEL": "Cancel",
+    "DELETE": "Delete",
+    "ADD": "Add",
+    "SAVE": "Save",
+    "SIGN_IN": "Sign In"
+  },
+  "TABLE_HEADERS": {
+    "ID": "Id",
+    "STATE": "State",
+    "TITLE": "Title",
+    "ALBUM_TITLE": "Album title",
+    "TEXT": "Text"
+  },
+  "HEADERS": {
+    "PHOTOS": "Photos",
+    "COMMENTS": "Comments",
+    "NO_COMMENTS": "No comments yet",
+    "PAGE_NOT_FOUND": "Page not found",
+    "SIGN_IN": "Sign in to Adminka",
+    "SIGN_IN_TO_PLATFORM": "Sign in on Adminka Na Kolenke platform",
+    "USER_NOT_EXIST": "This user does not exist in the system"
+  },
+  "FIELDS": {
+    "ENTER_EMAIL": "Enter your email",
+    "AGREE_TO_SIGN": "I agree to Sign In"
+  },
+  "BREAD_CRUMBS": {
+    "USERS": "Users",
+    "POSTS": "Posts",
+    "ALBUMS": "Albums",
+    "TODOS": "Todos",
+    "USERS_DATA": "Users data"
+  },
+  "MODAL": {
+    "DELETE_ALBUM": "Delete this Album?",
+    "CREATE_ALBUM": "Create new Album",
+    "CREATE_POST": "Create new post",
+    "DELETE_POST": "Delete this post?",
+    "DELETE_PHOTO": "Delete this Photo?",
+    "ADD_PHOTO": "Add photo",
+    "EDIT_ALBUM": "Edit album",
+    "DELETE_COMMENT": "Delete comment?",
+    "EDIT_POST": "Edit post",
+    "EDIT_TODO": "Edit todo",
+    "CREATE_TODO": "Create new todo",
+    "DELETE_TODO": "Delete this todo?"
+  },
+  "MODAL_FIELDS": {
+    "TITLE": "Enter Title",
+    "POST_BODY": "Enter Post Body",
+    "URL_IMAGE": "Enter Image Url",
+    "URL_THUMB": "Enter Thumbnail Url"
+  },
+  "MODAL_VALIDATION": {
+    "REQUIRED": "Required field",
+    "EMAIL": "Wrong email address"
+  },
+  "MESSAGES": {
+    "TODO_DELETED": "Todo has been deleted",
+    "TODO_CREATED": "Todo has been created",
+    "TODO_EDITED": "Todo has been edited",
+    "ALBUM_DELETED": "Album has been deleted",
+    "ALBUM_CREATED": "Album has been created",
+    "POST_DELETED": "Post has been deleted",
+    "POST_CREATED": "Post has been created",
+    "ALBUM_EDITED": "Album has been edited",
+    "PHOTO_DELETED": "Photo has been deleted",
+    "POST_EDITED": "Post has been edited",
+    "COMMENT_DELETED": "Comment has been deleted",
+    "USER_DATA_EDITED": "User data has been edited",
+    "COMMON_ERROR": "Something wrong..."
+  }
+}

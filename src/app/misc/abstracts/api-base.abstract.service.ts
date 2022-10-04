@@ -50,7 +50,7 @@ export abstract class ApiBaseAbstractService<T> {
   }
 
   updateItem(item: Partial<T> & IEntity): Observable<T> {
-    return this.http.put<T>(this.getFullPath(ApiOperation.update, item['id']), item);
+    return this.http.put<T>(this.getFullPath(ApiOperation.update, item.id), item);
   }
   // partial
   patchItem(id: number, item: Partial<T>): Observable<T> {

@@ -9,6 +9,7 @@ import {NavItem} from "@models/interfaces/nav-item.interface";
 import {SnackBarNotificationType} from "@models/enums/snack-bar-notification-type.enum";
 import {SNACKBAR_CONFIG} from "@misc/constants/snackbar-config";
 import {MatSnackBar} from "@angular/material/snack-bar";
+import {TranslateService} from "@ngx-translate/core";
 
 @Component({
   selector: 'app-single-user',
@@ -23,22 +24,22 @@ export class SingleUserComponent implements OnInit {
   navItems: NavItem[] = [
     {
       icon: 'users',
-      title: 'User data',
+      title: 'USER_DATA',
       link: './user-data'
     },
     {
       icon: 'posts',
-      title: 'Posts',
+      title: 'POSTS',
       link: './posts'
     },
     {
       icon: 'photo',
-      title: 'Albums',
+      title: 'ALBUMS',
       link: './albums'
     },
     {
       icon: 'text',
-      title: 'Todos',
+      title: 'TODOS',
       link: './todos'
     }
   ];
@@ -47,7 +48,8 @@ export class SingleUserComponent implements OnInit {
     private _route: ActivatedRoute,
     private _breadcrumbs: BreadcrumbsService,
     private _userApi: UserApiService,
-    private _snackBar: MatSnackBar
+    private _snackBar: MatSnackBar,
+    private _translate: TranslateService
   ) {}
 
   ngOnInit(): void {
@@ -68,7 +70,7 @@ export class SingleUserComponent implements OnInit {
 
   errorAction(error: Error): void {
     console.log('Error: ', error);
-    this.showMessage(SnackBarNotificationType.error, 'Something wrong...');
+    this.showMessage(SnackBarNotificationType.error, this._translate.instant('MESSAGES.COMMON_ERROR'));
   }
 
   showMessage(result: SnackBarNotificationType, message: string): void {
@@ -78,7 +80,7 @@ export class SingleUserComponent implements OnInit {
   private _setBreadcrumbs(): void {
     if (!this._breadcrumbs.breadcrumbs$.value?.length) {
       this._breadcrumbs.add({
-        name: 'Users',
+        name: 'BREAD_CRUMBS.USERS',
         url: `/users`
       });
       this._breadcrumbs.add({

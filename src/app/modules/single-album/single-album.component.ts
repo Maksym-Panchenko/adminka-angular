@@ -22,6 +22,7 @@ import {BaseItemAbstractComponent} from "@misc/abstracts/base-item.abstract.comp
 import {MatSnackBar} from "@angular/material/snack-bar";
 import {Observable} from "rxjs";
 import {SnackBarNotificationType} from "@models/enums/snack-bar-notification-type.enum";
+import {TranslateService} from "@ngx-translate/core";
 
 @Component({
   selector: 'single-album',
@@ -43,14 +44,15 @@ export class SingleAlbumComponent extends BaseItemAbstractComponent implements O
     snackBar: MatSnackBar,
     route: ActivatedRoute,
     user: UserService,
+    translate: TranslateService,
     private _albumApi: AlbumApiService,
     private _photoApi: PhotoApiService,
     private _dialog: MatDialog,
     private _location: Location,
     private _breadcrumbs: BreadcrumbsService,
-    private _userApi: UserApiService,
+    private _userApi: UserApiService
   ) {
-    super(snackBar, user, route);
+    super(snackBar, user, route, translate);
     route.params.subscribe(params => this.albumId = parseInt(params['id']));
   }
 
@@ -85,12 +87,12 @@ export class SingleAlbumComponent extends BaseItemAbstractComponent implements O
         autoFocus: false,
         disableClose: true,
         data: {
-          title: 'Edit album',
+          title: 'MODAL.EDIT_ALBUM',
           entityType: EntityModalType.album,
           album: Object.assign({}, this.album),
           buttonsNames: {
-            approve: 'Save',
-            decline: 'Cancel'
+            approve: 'BUTTONS.SAVE',
+            decline: 'BUTTONS.CANCEL'
           },
           submitHandler: (item: IAlbum): Observable<IAlbum> =>  this._albumApi.updateItem(item)
         } as IEntityModal
@@ -99,7 +101,7 @@ export class SingleAlbumComponent extends BaseItemAbstractComponent implements O
       .subscribe((editedAlbum): void => {
         if (editedAlbum) {
           this.album = editedAlbum;
-          this.showMessage(SnackBarNotificationType.success, 'Album has been edited');
+          this.showMessage(SnackBarNotificationType.success, this._translate.instant('MESSAGES.ALBUM_EDITED'));
         }
       });
   }
@@ -124,12 +126,12 @@ export class SingleAlbumComponent extends BaseItemAbstractComponent implements O
         autoFocus: false,
         disableClose: true,
         data: {
-          title: 'Add photo',
+          title: 'MODAL.ADD_PHOTO',
           entityType: EntityModalType.photo,
           albumId: this.albumId,
           buttonsNames: {
-            approve: 'Add',
-            decline: 'Cancel'
+            approve: 'BUTTONS.ADD',
+            decline: 'BUTTONS.CANCEL'
           },
           submitHandler: (item: IPhoto): Observable<IPhoto> => this._photoApi.createItem(item)
         } as IEntityModal
@@ -148,11 +150,11 @@ export class SingleAlbumComponent extends BaseItemAbstractComponent implements O
       .open(MessageDialogComponent, {
         autoFocus: false,
         data: {
-          title: 'Delete this Photo?',
+          title: 'MODAL.DELETE_PHOTO',
           type: MessageModalType.confirm,
           buttonsNames: {
-            approve: 'Delete',
-            decline: 'Cancel'
+            approve: 'BUTTONS.DELETE',
+            decline: 'BUTTONS.CANCEL'
           },
           submitHandler: (): Observable<object> => this._photoApi.deleteItem(id)
         } as IMessageModal
@@ -165,7 +167,7 @@ export class SingleAlbumComponent extends BaseItemAbstractComponent implements O
         if (answer) {
           this.photos = this.photos.filter((e: IPhoto): boolean => e.id !== id);
           this.showPhotos();
-          this.showMessage(SnackBarNotificationType.success, 'Photo has been deleted');
+          this.showMessage(SnackBarNotificationType.success, this._translate.instant('MESSAGES.PHOTO_DELETED'));
         }
       });
   }
@@ -179,7 +181,7 @@ export class SingleAlbumComponent extends BaseItemAbstractComponent implements O
 
       if (this.fullBreadCrumbs) {
         this._breadcrumbs.add({
-          name: 'Users',
+          name: 'BREAD_CRUMBS.USERS',
           url: `/users`
         });
         this._breadcrumbs.add({
@@ -187,7 +189,7 @@ export class SingleAlbumComponent extends BaseItemAbstractComponent implements O
           url: `/users/${this.user.id}`
         });
         this._breadcrumbs.add({
-          name: 'Albums',
+          name: 'BREAD_CRUMBS.ALBUMS',
           url: `/users/${this.album.userId}/albums`
         });
         this._breadcrumbs.add({
@@ -197,7 +199,7 @@ export class SingleAlbumComponent extends BaseItemAbstractComponent implements O
 
       } else {
         this._breadcrumbs.add({
-          name: 'Albums',
+          name: 'BREAD_CRUMBS.ALBUMS',
           url: `/albums`
         });
         this._breadcrumbs.add({

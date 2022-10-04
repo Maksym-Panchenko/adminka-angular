@@ -10,6 +10,7 @@ import {ModeType} from "@models/enums/mode-type";
 import {BaseItemAbstractComponent} from "@misc/abstracts/base-item.abstract.component";
 import {MatSnackBar} from "@angular/material/snack-bar";
 import {SnackBarNotificationType} from "@models/enums/snack-bar-notification-type.enum";
+import {TranslateService} from "@ngx-translate/core";
 
 @Component({
   selector: 'app-user-data',
@@ -22,33 +23,33 @@ export class UserDataComponent extends BaseItemAbstractComponent implements OnIn
 
   fields = [
     {
-      groupName: 'Personal info',
+      groupName: 'PERSONAL_INFO',
       id: 'personal',
       values: [
-        { id: 'name', name: 'Name' },
-        { id: 'username', name: 'Username' },
-        { id: 'phone', name: 'Phone' },
-        { id: 'email', name: 'Email' },
-        { id: 'website', name: 'Web-site' }
+        { id: 'name', name: 'NAME' },
+        { id: 'username', name: 'USERNAME' },
+        { id: 'phone', name: 'PHONE' },
+        { id: 'email', name: 'EMAIL' },
+        { id: 'website', name: 'WEB_SITE' }
       ],
     },
     {
-      groupName: 'Address info',
+      groupName: 'ADDRESS_INFO',
       id: 'address',
       values: [
-        { id: 'street', name: 'Street' },
-        { id: 'suite', name: 'Suite' },
-        { id: 'city', name: 'City' },
-        { id: 'zipcode', name: 'Zip-code' }
+        { id: 'street', name: 'STREET' },
+        { id: 'suite', name: 'SUITE' },
+        { id: 'city', name: 'CITY' },
+        { id: 'zipcode', name: 'ZIP_CODE' }
       ]
     },
     {
-      groupName: 'Company',
+      groupName: 'COMPANY',
       id: 'company',
       values: [
-        {id: 'name', name: 'Name' },
-        {id: 'catchPhrase', name: 'Catch Phrase' },
-        {id: 'bs', name: 'Bs' }
+        {id: 'name', name: 'COMPANY_NAME' },
+        {id: 'catchPhrase', name: 'CATCH_PHRASE' },
+        {id: 'bs', name: 'BS' }
       ]
     }
   ];
@@ -57,11 +58,12 @@ export class UserDataComponent extends BaseItemAbstractComponent implements OnIn
     snackBar: MatSnackBar,
     user: UserService,
     route: ActivatedRoute,
+    translate: TranslateService,
     private _breadcrumbs: BreadcrumbsService,
     private _userApi: UserApiService,
     private _fb: FormBuilder
   ) {
-    super(snackBar, user, route);
+    super(snackBar, user, route, translate);
   }
 
   ngOnInit(): void {
@@ -108,7 +110,7 @@ export class UserDataComponent extends BaseItemAbstractComponent implements OnIn
 
       if (this.fullBreadCrumbs) {
         this._breadcrumbs.add({
-          name: 'Users',
+          name: 'BREAD_CRUMBS.USERS',
           url: `/users`
         });
         this._breadcrumbs.add({
@@ -118,7 +120,7 @@ export class UserDataComponent extends BaseItemAbstractComponent implements OnIn
       }
 
       this._breadcrumbs.add({
-        name: 'Users data',
+        name: 'BREAD_CRUMBS.USERS_DATA',
         url: ''
       });
     }
@@ -139,7 +141,7 @@ export class UserDataComponent extends BaseItemAbstractComponent implements OnIn
 
     this._userApi.patchItem(this.userId, this.user).subscribe((answer) => {
       if (answer) {
-        this.showMessage(SnackBarNotificationType.success, 'User data has been edited');
+        this.showMessage(SnackBarNotificationType.success, this._translate.instant('MESSAGES.USER_DATA_EDITED'));
       }
     }, (error) => this.errorAction(error));
   }

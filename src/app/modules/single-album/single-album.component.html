@@ -2,7 +2,7 @@
   <div class="items__actions items__actions_left-pos">
     <button (click)="getBack()" class="items__button" mat-flat-button color="primary">
       <mat-icon>arrow_back</mat-icon>
-      Back
+      {{ 'BUTTONS.BACK' | translate }}
     </button>
   </div>
 
@@ -11,15 +11,17 @@
       ({{ album?.id }}) {{ album?.title }}
     </h2>
     <div *ngIf="mode === ModeType.edit" class="actions">
-      <button (click)="editAlbum()" class="album__button" mat-stroked-button [color]="'primary'" >Edit Album</button>
+      <button (click)="editAlbum()" class="album__button" mat-stroked-button [color]="'primary'" >
+        {{ 'BUTTONS.EDIT_ALBUM' | translate }}
+      </button>
     </div>
   </div>
 
   <div class="album__photos">
     <h2 class="album__title album__title_underlined">
-      Photos:
+      {{ 'HEADERS.PHOTOS' | translate }}:
       <button *ngIf="mode === ModeType.edit" class="album__button" mat-stroked-button [color]="'primary'" (click)="addPhoto()">
-        <mat-icon>add</mat-icon> add photo
+        <mat-icon>add</mat-icon> {{ 'BUTTONS.ADD_PHOTO' | translate }}
       </button>
     </h2>
 

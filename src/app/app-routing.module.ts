@@ -17,6 +17,7 @@ import {SingleUserModule} from "@modules/single-user/single-user.module";
 import {NotFoundPageComponent} from "@modules/not-found-page/not-found-page.component";
 import {UserDataComponent} from "@modules/user-data/user-data.component";
 import {UserDataModule} from "@modules/user-data/user-data.module";
+import {NotFoundPageModule} from "@modules/not-found-page/not-found-page.module";
 
 const routes: Routes = [
   {
@@ -106,7 +107,8 @@ const routes: Routes = [
     SingleAlbumModule,
     TodosModule,
     SingleUserModule,
-    UserDataModule
+    UserDataModule,
+    NotFoundPageModule
   ],
   exports: [RouterModule]
 })

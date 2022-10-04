@@ -20,6 +20,7 @@ import {BaseItemAbstractComponent} from "@misc/abstracts/base-item.abstract.comp
 import {MatSnackBar} from "@angular/material/snack-bar";
 import {Observable} from "rxjs";
 import {SnackBarNotificationType} from "@models/enums/snack-bar-notification-type.enum";
+import {TranslateService} from "@ngx-translate/core";
 
 @Component({
   selector: 'posts',
@@ -38,13 +39,14 @@ export class PostsComponent extends BaseItemAbstractComponent implements OnInit 
     snackBar: MatSnackBar,
     route: ActivatedRoute,
     user: UserService,
+    translate: TranslateService,
     private _postApi: PostApiService,
     private _dialog: MatDialog,
     private _router: Router,
     private _breadcrumbs: BreadcrumbsService,
     private _userApi: UserApiService
   ) {
-    super(snackBar, user, route);
+    super(snackBar, user, route, translate);
   }
 
   ngOnInit(): void {
@@ -70,11 +72,11 @@ export class PostsComponent extends BaseItemAbstractComponent implements OnInit 
       .open(MessageDialogComponent, {
         autoFocus: false,
         data: {
-          title: 'Delete this post?',
+          title: 'MODAL.DELETE_POST',
           type: MessageModalType.confirm,
           buttonsNames: {
-            approve: 'Delete',
-            decline: 'Cancel'
+            approve: 'BUTTONS.DELETE',
+            decline: 'BUTTONS.CANCEL'
           },
           submitHandler: (): Observable<object> => this._postApi.deleteItem(id)
         } as IMessageModal
@@ -86,7 +88,7 @@ export class PostsComponent extends BaseItemAbstractComponent implements OnInit 
       .subscribe((answer): void => {
         if (answer) {
           this.dataSource.data = this.dataSource.data.filter((e: IPost): boolean => e.id !== id);
-          this.showMessage(SnackBarNotificationType.success, 'Post has been deleted');
+          this.showMessage(SnackBarNotificationType.success, this._translate.instant('MESSAGES.POST_DELETED'));
         }
       });
   }
@@ -97,11 +99,11 @@ export class PostsComponent extends BaseItemAbstractComponent implements OnInit 
         autoFocus: false,
         disableClose: true,
         data: {
-          title: 'Create new post',
+          title: 'MODAL.CREATE_POST',
           entityType: EntityModalType.post,
           buttonsNames: {
-            approve: 'Create',
-            decline: 'Cancel'
+            approve: 'BUTTONS.CREATE',
+            decline: 'BUTTONS.CANCEL'
           },
           submitHandler: (item: IPost): Observable<IPost> => this._postApi.createItem(item)
         } as IEntityModal
@@ -110,7 +112,7 @@ export class PostsComponent extends BaseItemAbstractComponent implements OnInit 
       .subscribe((newPost): void => {
         if (newPost) {
           this.dataSource.data = [...this.dataSource.data, newPost];
-          this.showMessage(SnackBarNotificationType.success, 'Post has been created');
+          this.showMessage(SnackBarNotificationType.success, this._translate.instant('MESSAGES.POST_CREATED'));
         }
       });
   }
@@ -120,7 +122,7 @@ export class PostsComponent extends BaseItemAbstractComponent implements OnInit 
 
       if (this.fullBreadCrumbs) {
         this._breadcrumbs.add({
-          name: 'Users',
+          name: 'BREAD_CRUMBS.USERS',
           url: `/users`
         });
         this._breadcrumbs.add({
@@ -130,7 +132,7 @@ export class PostsComponent extends BaseItemAbstractComponent implements OnInit 
       }
 
       this._breadcrumbs.add({
-        name: 'Posts',
+        name: 'BREAD_CRUMBS.POSTS',
         url: ''
       });
     }

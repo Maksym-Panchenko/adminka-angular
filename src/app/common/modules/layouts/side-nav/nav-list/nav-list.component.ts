@@ -13,31 +13,31 @@ export class NavListComponent implements OnInit{
   navItems: NavItem[] = [
     {
       icon: 'users',
-      title: 'Users',
+      title: 'USERS',
       link: '/users',
       roles: [Role.user, Role.admin]
     },
     {
       icon: 'users',
-      title: 'My data',
+      title: 'MY_DATA',
       link: '/user-data',
       roles: [Role.user]
     },
     {
       icon: 'posts',
-      title: 'My posts',
+      title: 'MY_POSTS',
       link: '/posts',
       roles: [Role.user]
     },
     {
       icon: 'photo',
-      title: 'My albums',
+      title: 'MY_ALBUMS',
       link: '/albums',
       roles: [Role.user]
     },
     {
       icon: 'text',
-      title: 'My todos',
+      title: 'MY_TODOS',
       link: '/todos',
       roles: [Role.user]
     }

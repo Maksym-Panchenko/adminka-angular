@@ -4,6 +4,7 @@ import { BreadcrumbsComponent } from './breadcrumbs.component';
 import {AppFormsModule} from "@forms/forms.module";
 import {RouterModule} from "@angular/router";
 import {MaterialModule} from "@shared/material/material.module";
+import {TranslateModule} from "@ngx-translate/core";
 
 @NgModule({
   declarations: [BreadcrumbsComponent],
@@ -11,7 +12,8 @@ import {MaterialModule} from "@shared/material/material.module";
     CommonModule,
     RouterModule,
     AppFormsModule,
-    MaterialModule
+    MaterialModule,
+    TranslateModule
   ],
   exports: [BreadcrumbsComponent]
 })
