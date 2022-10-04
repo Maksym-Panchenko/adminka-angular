@@ -6,6 +6,7 @@ import { Role } from '@models/enums/roles.enum';
 import { Router } from '@angular/router';
 import { SpinnerService } from '@services/spinner/spinner.service';
 import { LanguageService } from '@services/language/language.service';
+import { ThemeService } from '@services/theme/theme.service';
 
 @Component({
   selector: 'app-root',
@@ -26,7 +27,8 @@ export class AppComponent implements OnInit {
     private _user: UserService,
     private _router: Router,
     public spinner: SpinnerService,
-    language: LanguageService
+    private language: LanguageService,
+    private theme: ThemeService
   ) {
     language.setDefaultLang('en');
     language.addLangs(['en', 'ua']);
@@ -38,6 +40,7 @@ export class AppComponent implements OnInit {
     if (this.isLogined) {
       this.currentRole = this._user.getRole();
     }
+    this.darkMode = this.theme.load();
   }
 
   loggedIn(): void {

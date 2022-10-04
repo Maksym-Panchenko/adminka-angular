@@ -107,3 +107,10 @@
     align-items: center;
   }
 }
+
+.darkMode .mat-table {
+  .mat-cell,
+  .mat-header-cell {
+    color: var(--color-platinum);
+  }
+}
