@@ -19,6 +19,7 @@ export class AppComponent implements OnInit {
   currentRole: Role;
 
   loading$ = this.spinner.loading$;
+  darkMode: boolean = false;
 
   constructor(
     icons: IconsService, // for icons register
@@ -48,5 +49,9 @@ export class AppComponent implements OnInit {
   logOut(): void {
     this._user.logOut();
     this.isLogined = false;
+  }
+
+  changeMode(value: boolean): void {
+    this.darkMode = value;
   }
 }

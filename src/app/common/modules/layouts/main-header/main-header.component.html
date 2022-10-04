@@ -6,6 +6,8 @@
     </a>
 
     <div class="header__button-group">
+      <light-mode-switcher (changeMode)="changeMode.emit($event)"></light-mode-switcher>
+
       <select-lang></select-lang>
 
       <button class="header__button" mat-icon-button>
