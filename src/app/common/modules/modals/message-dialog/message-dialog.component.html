@@ -4,12 +4,7 @@
   <div *ngIf="data?.message" [innerHTML]="data?.message | translate" class="dialog__text"></div>
 
   <div *ngIf="isAlertModal" class="dialog__actions" mat-dialog-actions>
-    <button
-      [mat-dialog-close]="true"
-      class="dialog__button"
-      color="primary"
-      mat-flat-button
-    >
+    <button [mat-dialog-close]="true" class="dialog__button" color="primary" mat-flat-button>
       {{ approveName | translate }}
     </button>
   </div>

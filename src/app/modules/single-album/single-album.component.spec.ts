@@ -8,9 +8,8 @@ describe('SingleAlbumComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ SingleAlbumComponent ]
-    })
-    .compileComponents();
+      declarations: [SingleAlbumComponent]
+    }).compileComponents();
   });
 
   beforeEach(() => {

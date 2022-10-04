@@ -6,18 +6,8 @@
     class="gallery__item"
     (click)="open(i)"
   >
-    <img
-      [src]="item.data.thumb"
-      [attr.imageSrc]="item.data.src"
-      [attr.thumbSrc]="item.data.thumb"
-      (click)="$event.stopPropagation();"
-    >
-    <button
-      *ngIf="mode === ModeType.edit"
-      (click)="deletePhoto($event, item.data.id);"
-      mat-icon-button
-      class="gallery__button"
-    >
+    <img [src]="item.data.thumb" [attr.imageSrc]="item.data.src" [attr.thumbSrc]="item.data.thumb" (click)="$event.stopPropagation()" />
+    <button *ngIf="mode === ModeType.edit" (click)="deletePhoto($event, item.data.id)" mat-icon-button class="gallery__button">
       <mat-icon>delete_forever</mat-icon>
     </button>
   </div>

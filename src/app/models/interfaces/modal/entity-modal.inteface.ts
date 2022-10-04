@@ -1,7 +1,7 @@
-import {IPost} from "@models/interfaces/post.interface";
-import {IAlbum} from "@models/interfaces/album.interface";
-import {ITodo} from "@models/interfaces/todo.interface";
-import {EntityModalType} from "@models/enums/entity-modal-type";
+import { IPost } from '@models/interfaces/post.interface';
+import { IAlbum } from '@models/interfaces/album.interface';
+import { ITodo } from '@models/interfaces/todo.interface';
+import { EntityModalType } from '@models/enums/entity-modal-type';
 
 export interface IEntityModal {
   title: string;

@@ -1,4 +1,4 @@
-import {MessageModalType} from "@models/enums/message-modal-type.enum";
+import { MessageModalType } from '@models/enums/message-modal-type.enum';
 
 export interface IMessageModal {
   title?: string;

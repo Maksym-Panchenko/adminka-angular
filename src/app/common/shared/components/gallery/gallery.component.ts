@@ -1,8 +1,8 @@
-import {Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges} from '@angular/core';
-import {IPhoto} from "@models/interfaces/photo.interface";
-import {ModeType} from "@models/enums/mode-type";
-import {Gallery, GalleryItem} from "ng-gallery";
-import {Lightbox} from "ng-gallery/lightbox";
+import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
+import { IPhoto } from '@models/interfaces/photo.interface';
+import { ModeType } from '@models/enums/mode-type';
+import { Gallery, GalleryItem } from 'ng-gallery';
+import { Lightbox } from 'ng-gallery/lightbox';
 
 @Component({
   selector: 'gallery',
@@ -11,7 +11,7 @@ import {Lightbox} from "ng-gallery/lightbox";
 })
 export class GalleryComponent implements OnInit, OnChanges {
   items: GalleryItem[] = [];
-  @Output() removePhoto: EventEmitter<number> = new EventEmitter()
+  @Output() removePhoto: EventEmitter<number> = new EventEmitter();
   @Input() photos: IPhoto[] = [];
   @Input() mode: ModeType = ModeType.view;
   readonly ModeType: typeof ModeType = ModeType;
@@ -23,14 +23,16 @@ export class GalleryComponent implements OnInit, OnChanges {
   }
 
   getItemList(): void {
-    this.items = this.photos?.map((e: IPhoto): GalleryItem => ({
-      data: {
-        id: e.id?.toString(),
-        src: e.url,
-        thumb: e.thumbnailUrl,
-        title: e.title
-      }
-    }));
+    this.items = this.photos?.map(
+      (e: IPhoto): GalleryItem => ({
+        data: {
+          id: e.id?.toString(),
+          src: e.url,
+          thumb: e.thumbnailUrl,
+          title: e.title
+        }
+      })
+    );
     this.gallery.ref().load(this.items);
   }
 

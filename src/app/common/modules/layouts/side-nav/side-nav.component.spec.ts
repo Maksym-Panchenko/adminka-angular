@@ -8,9 +8,8 @@ describe('SideNavComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ SideNavComponent ]
-    })
-    .compileComponents();
+      declarations: [SideNavComponent]
+    }).compileComponents();
   });
 
   beforeEach(() => {

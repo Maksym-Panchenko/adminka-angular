@@ -1,27 +1,27 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {ActivatedRoute} from "@angular/router";
-import {IPost} from "@models/interfaces/post.interface";
-import {PostApiService} from "@services/api/post-api/post-api.service";
-import {CommentApiService} from "@services/api/comment-api/comment-api.service";
-import {IComment} from "@models/interfaces/comment.interface";
-import {EntityDialogComponent} from "@modals/entity-dialog/entity-dialog.component";
-import {IEntityModal} from "@models/interfaces/modal/entity-modal.inteface";
-import {MatDialog} from "@angular/material/dialog";
-import {EntityModalType} from "@models/enums/entity-modal-type";
-import { Location } from '@angular/common'
-import {MessageDialogComponent} from "@modals/message-dialog/message-dialog.component";
-import {MessageModalType} from "@models/enums/message-modal-type.enum";
-import {IMessageModal} from "@models/interfaces/modal/message-modal.inteface";
-import {filter} from "rxjs/operators";
-import {BreadcrumbsService} from "@services/breadcrumbs/breadcrumbs.service";
-import { UserApiService } from "@services/api/user-api/user-api.service";
-import {IUser} from "@models/interfaces/user.interface";
-import {UserService} from "@services/user/user.service";
-import {BaseItemAbstractComponent} from "@misc/abstracts/base-item.abstract.component";
-import {MatSnackBar} from "@angular/material/snack-bar";
-import {Observable} from "rxjs";
-import {SnackBarNotificationType} from "@models/enums/snack-bar-notification-type.enum";
-import {TranslateService} from "@ngx-translate/core";
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { IPost } from '@models/interfaces/post.interface';
+import { PostApiService } from '@services/api/post-api/post-api.service';
+import { CommentApiService } from '@services/api/comment-api/comment-api.service';
+import { IComment } from '@models/interfaces/comment.interface';
+import { EntityDialogComponent } from '@modals/entity-dialog/entity-dialog.component';
+import { IEntityModal } from '@models/interfaces/modal/entity-modal.inteface';
+import { MatDialog } from '@angular/material/dialog';
+import { EntityModalType } from '@models/enums/entity-modal-type';
+import { Location } from '@angular/common';
+import { MessageDialogComponent } from '@modals/message-dialog/message-dialog.component';
+import { MessageModalType } from '@models/enums/message-modal-type.enum';
+import { IMessageModal } from '@models/interfaces/modal/message-modal.inteface';
+import { filter } from 'rxjs/operators';
+import { BreadcrumbsService } from '@services/breadcrumbs/breadcrumbs.service';
+import { UserApiService } from '@services/api/user-api/user-api.service';
+import { IUser } from '@models/interfaces/user.interface';
+import { UserService } from '@services/user/user.service';
+import { BaseItemAbstractComponent } from '@misc/abstracts/base-item.abstract.component';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { Observable } from 'rxjs';
+import { SnackBarNotificationType } from '@models/enums/snack-bar-notification-type.enum';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'single-post',
@@ -47,7 +47,7 @@ export class SinglePostComponent extends BaseItemAbstractComponent implements On
     private _userApi: UserApiService
   ) {
     super(snackBar, user, route, translate);
-    route.params.subscribe(params => this.postId = parseInt(params['id']));
+    route.params.subscribe(params => (this.postId = parseInt(params['id'])));
   }
 
   ngOnInit(): void {
@@ -58,20 +58,29 @@ export class SinglePostComponent extends BaseItemAbstractComponent implements On
   }
 
   getPost(): void {
-    this._postApi.getItem(this.postId).subscribe((post: IPost): void => {
-      this.post = post;
+    this._postApi.getItem(this.postId).subscribe(
+      (post: IPost): void => {
+        this.post = post;
 
-      this._userApi.getItem(this.userId).subscribe((user: IUser): void => {
-        this.user = user;
-        this._setBreadcrumbs();
-      }, error => this.errorAction(error));
-    }, error => this.errorAction(error));
+        this._userApi.getItem(this.userId).subscribe(
+          (user: IUser): void => {
+            this.user = user;
+            this._setBreadcrumbs();
+          },
+          error => this.errorAction(error)
+        );
+      },
+      error => this.errorAction(error)
+    );
   }
 
   getComments(): void {
-    this._commentApi.getItems(this.postId).subscribe((comments: IComment[]): void => {
-      this.comments = comments;
-    }, error => this.errorAction(error));
+    this._commentApi.getItems(this.postId).subscribe(
+      (comments: IComment[]): void => {
+        this.comments = comments;
+      },
+      error => this.errorAction(error)
+    );
   }
 
   editPost(): void {
@@ -87,7 +96,7 @@ export class SinglePostComponent extends BaseItemAbstractComponent implements On
             approve: 'BUTTONS.SAVE',
             decline: 'BUTTONS.CANCEL'
           },
-          submitHandler: (item: IPost): Observable<IPost> =>  this._postApi.updateItem(item)
+          submitHandler: (item: IPost): Observable<IPost> => this._postApi.updateItem(item)
         } as IEntityModal
       })
       .afterClosed()
@@ -100,7 +109,7 @@ export class SinglePostComponent extends BaseItemAbstractComponent implements On
   }
 
   getBack(): void {
-    this._location.back()
+    this._location.back();
   }
 
   deleteComment(id: number): void {
@@ -119,9 +128,7 @@ export class SinglePostComponent extends BaseItemAbstractComponent implements On
         } as IMessageModal
       })
       .afterClosed()
-      .pipe(
-        filter((res: boolean): boolean => res)
-      )
+      .pipe(filter((res: boolean): boolean => res))
       .subscribe((answer): void => {
         if (answer) {
           const index = this.comments.findIndex(e => e.id === id);
@@ -133,7 +140,6 @@ export class SinglePostComponent extends BaseItemAbstractComponent implements On
 
   private _setBreadcrumbs(): void {
     if (!this._breadcrumbs.breadcrumbs$.value?.length) {
-
       if (this.fullBreadCrumbs) {
         this._breadcrumbs.add({
           name: 'BREAD_CRUMBS.USERS',
@@ -151,7 +157,6 @@ export class SinglePostComponent extends BaseItemAbstractComponent implements On
           name: this.post?.title,
           url: `/:id`
         });
-
       } else {
         this._breadcrumbs.add({
           name: 'BREAD_CRUMBS.POSTS',

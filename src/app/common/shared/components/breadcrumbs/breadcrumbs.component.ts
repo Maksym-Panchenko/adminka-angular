@@ -1,7 +1,7 @@
-import {Component, Input, OnInit} from '@angular/core';
-import {BehaviorSubject} from "rxjs";
-import {IBreadcrumb} from "@models/interfaces/breadcrumbs/breadcrumbs.interface";
-import {BreadcrumbsService} from "@services/breadcrumbs/breadcrumbs.service";
+import { Component, Input, OnInit } from '@angular/core';
+import { BehaviorSubject } from 'rxjs';
+import { IBreadcrumb } from '@models/interfaces/breadcrumbs/breadcrumbs.interface';
+import { BreadcrumbsService } from '@services/breadcrumbs/breadcrumbs.service';
 
 @Component({
   selector: 'breadcrumbs',
@@ -13,14 +13,14 @@ export class BreadcrumbsComponent implements OnInit {
   @Input() hidden: boolean;
   maxTitleLength: number = 35;
 
-    constructor(private _breadcrumbsService: BreadcrumbsService) {}
+  constructor(private _breadcrumbsService: BreadcrumbsService) {}
 
-    ngOnInit(): void {
-      this.breadcrumbs$ = this._breadcrumbsService.breadcrumbs$;
-    }
+  ngOnInit(): void {
+    this.breadcrumbs$ = this._breadcrumbsService.breadcrumbs$;
+  }
 
-    getShortTitle(title: string): string {
-      if (!title) return '';
-      return title?.length <= this.maxTitleLength ? title : title.slice(0, this.maxTitleLength) + '...';
-    }
+  getShortTitle(title: string): string {
+    if (!title) return '';
+    return title?.length <= this.maxTitleLength ? title : title.slice(0, this.maxTitleLength) + '...';
+  }
 }

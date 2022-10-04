@@ -1,6 +1,6 @@
-import {Injectable} from '@angular/core';
-import {Observable} from "rxjs";
-import {HttpClient} from "@angular/common/http";
+import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
 
 enum ApiOperation {
   delete = 'delete',
@@ -25,7 +25,7 @@ export abstract class ApiBaseAbstractService<T> {
 
   protected constructor(protected http: HttpClient) {}
 
-  getFullPath(operation: ApiOperation, id: number = 0, ): string {
+  getFullPath(operation: ApiOperation, id: number = 0): string {
     switch (operation) {
       case ApiOperation.delete:
       case ApiOperation.update:

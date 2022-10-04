@@ -1,17 +1,17 @@
-import {Component, Inject, OnInit} from '@angular/core';
-import {IPost} from "@models/interfaces/post.interface";
-import {FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {InputType} from '@models/enums/input-type.enum';
-import {UserService} from "@services/user/user.service";
-import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
-import {IEntityModal} from "@models/interfaces/modal/entity-modal.inteface";
-import {EntityModalType} from "@models/enums/entity-modal-type";
-import {IAlbum} from "@models/interfaces/album.interface";
-import {ITodo} from "@models/interfaces/todo.interface";
-import {IPhoto} from "@models/interfaces/photo.interface";
-import {SnackBarNotificationType} from "@models/enums/snack-bar-notification-type.enum";
-import {SNACKBAR_CONFIG} from "@misc/constants/snackbar-config";
-import {MatSnackBar} from "@angular/material/snack-bar";
+import { Component, Inject, OnInit } from '@angular/core';
+import { IPost } from '@models/interfaces/post.interface';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { InputType } from '@models/enums/input-type.enum';
+import { UserService } from '@services/user/user.service';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { IEntityModal } from '@models/interfaces/modal/entity-modal.inteface';
+import { EntityModalType } from '@models/enums/entity-modal-type';
+import { IAlbum } from '@models/interfaces/album.interface';
+import { ITodo } from '@models/interfaces/todo.interface';
+import { IPhoto } from '@models/interfaces/photo.interface';
+import { SnackBarNotificationType } from '@models/enums/snack-bar-notification-type.enum';
+import { SNACKBAR_CONFIG } from '@misc/constants/snackbar-config';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'entity-dialog',
@@ -43,16 +43,16 @@ export class EntityDialogComponent implements OnInit {
     const title = this.data.post?.title || this.data.album?.title || this.data.todo?.title || '';
 
     this.formGroup = this._formBuilder.group({
-      title: [title, Validators.required],
+      title: [title, Validators.required]
     });
 
     if (this.data.entityType === EntityModalType.post) {
-      this.formGroup.addControl('body',this._formBuilder.control(this.data.post?.body || '', Validators.required));
+      this.formGroup.addControl('body', this._formBuilder.control(this.data.post?.body || '', Validators.required));
     }
 
     if (this.data.entityType === EntityModalType.photo) {
-      this.formGroup.addControl('url',this._formBuilder.control('https://via.placeholder.com/600/92c952', Validators.required));
-      this.formGroup.addControl('thumbnailUrl',this._formBuilder.control('https://via.placeholder.com/150/92c952', Validators.required));
+      this.formGroup.addControl('url', this._formBuilder.control('https://via.placeholder.com/600/92c952', Validators.required));
+      this.formGroup.addControl('thumbnailUrl', this._formBuilder.control('https://via.placeholder.com/150/92c952', Validators.required));
     }
   }
 
@@ -71,7 +71,7 @@ export class EntityDialogComponent implements OnInit {
           this.album = {
             title: '',
             userId: this._user.getUserId()
-          }
+          };
         }
         this.album.title = this.formGroup.get('title').value;
 
@@ -90,7 +90,7 @@ export class EntityDialogComponent implements OnInit {
             title: '',
             body: '',
             userId: this._user.getUserId()
-          }
+          };
         }
         this.post.title = this.formGroup.get('title').value;
         this.post.body = this.formGroup.get('body').value;
@@ -110,7 +110,7 @@ export class EntityDialogComponent implements OnInit {
             title: '',
             completed: false,
             userId: this._user.getUserId()
-          }
+          };
         }
         this.todo.title = this.formGroup.get('title').value;
 
@@ -148,12 +148,15 @@ export class EntityDialogComponent implements OnInit {
   }
 
   submitHandler(item: ITodo | IPost | IAlbum | IPhoto): void {
-    this.data.submitHandler(item).subscribe((answer: object): void => {
-      this._dialog.close(answer);
-    }, (error: Error): void => {
-      console.log(error);
-      this.showMessage(SnackBarNotificationType.error, 'Something wrong...');
-    });
+    this.data.submitHandler(item).subscribe(
+      (answer: object): void => {
+        this._dialog.close(answer);
+      },
+      (error: Error): void => {
+        console.log(error);
+        this.showMessage(SnackBarNotificationType.error, 'Something wrong...');
+      }
+    );
   }
 
   showMessage(result: SnackBarNotificationType, message: string) {

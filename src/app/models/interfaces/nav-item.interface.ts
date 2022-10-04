@@ -1,4 +1,4 @@
-import {Role} from "@models/enums/roles.enum";
+import { Role } from '@models/enums/roles.enum';
 
 export interface NavItem {
   icon: string;

@@ -1,7 +1,7 @@
-import { ChangeDetectorRef, Component, EventEmitter, Input, OnChanges, OnDestroy, OnInit, Output, SimpleChanges } from "@angular/core";
-import { AbstractControl, FormControl } from "@angular/forms";
-import { Subject } from "rxjs";
-import { TranslateService } from "@ngx-translate/core";
+import { ChangeDetectorRef, Component, EventEmitter, Input, OnChanges, OnDestroy, OnInit, Output, SimpleChanges } from '@angular/core';
+import { AbstractControl, FormControl } from '@angular/forms';
+import { Subject } from 'rxjs';
+import { TranslateService } from '@ngx-translate/core';
 
 export enum FormFieldFloatLabelMode {
   auto = 'auto',
@@ -68,7 +68,6 @@ export abstract class BaseFormFieldAbstractComponent implements OnInit, OnChange
   }
 
   get errorMessage(): string {
-
     switch (true) {
       case this.control.hasError('required'):
         return this._translate.instant('MODAL_VALIDATION.REQUIRED');

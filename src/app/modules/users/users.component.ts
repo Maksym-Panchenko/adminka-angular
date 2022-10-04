@@ -1,8 +1,8 @@
-import {AfterViewInit, Component, OnInit, ViewChild} from '@angular/core';
-import {IUser} from "@models/interfaces/user.interface";
-import {MatPaginator} from "@angular/material/paginator";
-import {UserApiService} from "@services/api/user-api/user-api.service";
-import {BreadcrumbsService} from "@services/breadcrumbs/breadcrumbs.service";
+import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
+import { IUser } from '@models/interfaces/user.interface';
+import { MatPaginator } from '@angular/material/paginator';
+import { UserApiService } from '@services/api/user-api/user-api.service';
+import { BreadcrumbsService } from '@services/breadcrumbs/breadcrumbs.service';
 
 @Component({
   selector: 'users',
@@ -18,7 +18,7 @@ export class UsersComponent implements OnInit, AfterViewInit {
   showedUsers: IUser[];
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
-  constructor(private _userApi: UserApiService, private _breadcrumbs: BreadcrumbsService) { }
+  constructor(private _userApi: UserApiService, private _breadcrumbs: BreadcrumbsService) {}
 
   ngOnInit(): void {
     this.getUsers();
@@ -28,21 +28,20 @@ export class UsersComponent implements OnInit, AfterViewInit {
   getUsers(): void {
     this._userApi.getUsers().subscribe((users: IUser[]) => {
       this.users = users;
-      this.showUsers()
-    })
+      this.showUsers();
+    });
   }
 
   ngAfterViewInit(): void {
-    this.paginator.page
-      .subscribe(() => {
-        this.showUsers()
-      });
+    this.paginator.page.subscribe(() => {
+      this.showUsers();
+    });
   }
 
   showUsers(): void {
     if (this.paginator && this.users?.length) {
       this.startUser = this.paginator.pageIndex * this.paginator.pageSize + 1;
-      this.showedUsers = this.users.filter(e => e.id >= this.startUser && e.id < (this.startUser + this.paginator.pageSize));
+      this.showedUsers = this.users.filter(e => e.id >= this.startUser && e.id < this.startUser + this.paginator.pageSize);
     }
   }
 

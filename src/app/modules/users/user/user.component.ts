@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { IUser } from "@models/interfaces/user.interface";
+import { IUser } from '@models/interfaces/user.interface';
 
 @Component({
   selector: 'user',

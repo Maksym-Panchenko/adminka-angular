@@ -8,9 +8,8 @@ describe('MatFormTextareaComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ MatFormTextareaComponent ]
-    })
-    .compileComponents();
+      declarations: [MatFormTextareaComponent]
+    }).compileComponents();
   });
 
   beforeEach(() => {
