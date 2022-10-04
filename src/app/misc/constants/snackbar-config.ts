@@ -1,4 +1,4 @@
-import {MatSnackBarConfig} from "@angular/material/snack-bar/snack-bar-config";
+import { MatSnackBarConfig } from '@angular/material/snack-bar/snack-bar-config';
 
 export const SNACKBAR_CONFIG: MatSnackBarConfig = {
   horizontalPosition: 'right',

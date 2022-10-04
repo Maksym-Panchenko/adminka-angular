@@ -1,13 +1,13 @@
-import {Component, Input, OnInit} from '@angular/core';
-import { NavItem } from "@models/interfaces/nav-item.interface";
-import { Role } from "@models/enums/roles.enum"
+import { Component, Input, OnInit } from '@angular/core';
+import { NavItem } from '@models/interfaces/nav-item.interface';
+import { Role } from '@models/enums/roles.enum';
 
 @Component({
   selector: 'nav-list',
   templateUrl: './nav-list.component.html',
   styleUrls: ['./nav-list.component.scss']
 })
-export class NavListComponent implements OnInit{
+export class NavListComponent implements OnInit {
   @Input() currentRole: Role;
   navItemsShow: NavItem[];
   navItems: NavItem[] = [

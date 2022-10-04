@@ -25,5 +25,5 @@ export interface IUser {
   address: IUserAddress;
   phone: string;
   website: string;
-  company: IUserCompany
+  company: IUserCompany;
 }

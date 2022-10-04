@@ -1,8 +1,8 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { InputType } from "@models/enums/input-type.enum";
-import { FormGroup } from "@angular/forms";
-import { MatFormFieldAppearance } from "@angular/material/form-field";
-import { BaseFormFieldAbstractComponent, IFormControls } from "@misc/abstracts/base-form-field.abstract.component";
+import { InputType } from '@models/enums/input-type.enum';
+import { FormGroup } from '@angular/forms';
+import { MatFormFieldAppearance } from '@angular/material/form-field';
+import { BaseFormFieldAbstractComponent, IFormControls } from '@misc/abstracts/base-form-field.abstract.component';
 
 @Component({
   selector: 'app-mat-form-field',

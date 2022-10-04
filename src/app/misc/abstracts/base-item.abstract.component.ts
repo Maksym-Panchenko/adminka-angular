@@ -1,12 +1,12 @@
-import { Component } from "@angular/core";
-import { SnackBarNotificationType } from "@models/enums/snack-bar-notification-type.enum";
-import { SNACKBAR_CONFIG } from "@misc/constants/snackbar-config";
-import { MatSnackBar } from "@angular/material/snack-bar";
-import { IUser } from "@models/interfaces/user.interface";
-import { ModeType } from "@models/enums/mode-type";
-import { UserService } from "@services/user/user.service";
-import { ActivatedRoute } from "@angular/router";
-import {TranslateService} from "@ngx-translate/core";
+import { Component } from '@angular/core';
+import { SnackBarNotificationType } from '@models/enums/snack-bar-notification-type.enum';
+import { SNACKBAR_CONFIG } from '@misc/constants/snackbar-config';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { IUser } from '@models/interfaces/user.interface';
+import { ModeType } from '@models/enums/mode-type';
+import { UserService } from '@services/user/user.service';
+import { ActivatedRoute } from '@angular/router';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   template: ''

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { IUser } from "@models/interfaces/user.interface";
-import { UserService } from "@services/user/user.service";
-import { Role } from "@models/enums/roles.enum";
+import { IUser } from '@models/interfaces/user.interface';
+import { UserService } from '@services/user/user.service';
+import { Role } from '@models/enums/roles.enum';
 
 @Component({
   selector: 'user-data',
@@ -19,7 +19,6 @@ export class UserDataComponent implements OnInit {
       const currentUser: IUser = this._user.getUser();
       this.userCompany = currentUser.company.name;
       this.userName = currentUser.name;
-
     } else {
       this.userCompany = 'Adminka';
       this.userName = 'Admin';

@@ -42,10 +42,7 @@ export class BreadcrumbsService implements OnDestroy {
       )
       .subscribe(({ bcData, id }: IBreadcrumbDataWithId): void => {
         const bcLoadedData: ActivatedRouteSnapshot[] = bcData.filter(({ data }: ActivatedRouteSnapshot): string => data['breadcrumb']);
-        this._collection = bcLoadedData.reduce((rootAcc: IBreadcrumb[], {
-          data,
-          pathFromRoot
-        }: ActivatedRouteSnapshot): IBreadcrumb[] => {
+        this._collection = bcLoadedData.reduce((rootAcc: IBreadcrumb[], { data, pathFromRoot }: ActivatedRouteSnapshot): IBreadcrumb[] => {
           let breadcrumb: IBreadcrumb | undefined;
 
           if (data['breadcrumb'] === this._ID_MASK && id !== undefined) {

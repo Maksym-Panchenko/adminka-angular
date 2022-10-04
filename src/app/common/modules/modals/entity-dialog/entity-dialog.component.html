@@ -5,7 +5,7 @@
     <app-mat-form-field
       [inputType]="InputType.text"
       [required]="true"
-      [placeholder]="'MODAL_FIELDS.TITLE' | translate "
+      [placeholder]="'MODAL_FIELDS.TITLE' | translate"
       [control]="formGroup.get('title')"
     ></app-mat-form-field>
 
@@ -13,7 +13,7 @@
       *ngIf="data.entityType === EntityModalType.post"
       [inputType]="InputType.text"
       [required]="true"
-      [placeholder]="'MODAL_FIELDS.POST_BODY' | translate "
+      [placeholder]="'MODAL_FIELDS.POST_BODY' | translate"
       [control]="formGroup.get('body')"
     ></app-mat-form-textarea>
 
@@ -21,13 +21,13 @@
       <app-mat-form-field
         [inputType]="InputType.text"
         [required]="true"
-        [placeholder]="'MODAL_FIELDS.URL_IMAGE' | translate "
+        [placeholder]="'MODAL_FIELDS.URL_IMAGE' | translate"
         [control]="formGroup.get('url')"
       ></app-mat-form-field>
       <app-mat-form-field
         [inputType]="InputType.text"
         [required]="true"
-        [placeholder]="'MODAL_FIELDS.URL_THUMB' | translate "
+        [placeholder]="'MODAL_FIELDS.URL_THUMB' | translate"
         [control]="formGroup.get('thumbnailUrl')"
       ></app-mat-form-field>
     </ng-container>

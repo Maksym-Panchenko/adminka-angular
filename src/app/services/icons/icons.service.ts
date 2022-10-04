@@ -7,14 +7,10 @@ import { SafeResourceUrlWithIconOptions } from '@angular/material/icon/icon-regi
   providedIn: 'root'
 })
 export class IconsService {
-  constructor(
-    private _iconRegistry: MatIconRegistry,
-    private _sanitizer: DomSanitizer,
-  ) {
+  constructor(private _iconRegistry: MatIconRegistry, private _sanitizer: DomSanitizer) {
     this._iconRegistry.addSvgIconResolver((name: string, namespace: string): SafeResourceUrl | SafeResourceUrlWithIconOptions | null => {
       const path: string = `assets/img/svg/${namespace ? `${namespace}/` : ''}${name}.svg`;
-      return this._sanitizer.bypassSecurityTrustResourceUrl(path
-      );
+      return this._sanitizer.bypassSecurityTrustResourceUrl(path);
     });
   }
 }

@@ -8,9 +8,8 @@ describe('MatFormCheckboxComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ MatFormCheckboxComponent ]
-    })
-    .compileComponents();
+      declarations: [MatFormCheckboxComponent]
+    }).compileComponents();
   });
 
   beforeEach(() => {

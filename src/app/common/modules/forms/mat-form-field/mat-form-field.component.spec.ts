@@ -8,9 +8,8 @@ describe('MatFormFieldComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ MatFormFieldComponent ]
-    })
-    .compileComponents();
+      declarations: [MatFormFieldComponent]
+    }).compileComponents();
   });
 
   beforeEach(() => {

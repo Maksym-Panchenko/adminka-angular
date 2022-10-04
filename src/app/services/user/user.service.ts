@@ -1,13 +1,12 @@
 import { Injectable } from '@angular/core';
-import { IUser } from "@models/interfaces/user.interface";
-import { Role } from "@models/enums/roles.enum";
-import { ModeType } from "@models/enums/mode-type";
+import { IUser } from '@models/interfaces/user.interface';
+import { Role } from '@models/enums/roles.enum';
+import { ModeType } from '@models/enums/mode-type';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
-
   setUser(user: IUser): void {
     localStorage.setItem('currentUser', JSON.stringify(user));
   }
@@ -38,7 +37,7 @@ export class UserService {
   getMode(userId: number): ModeType {
     const isOwner: boolean = +JSON.parse(localStorage.getItem('currentUser')!)?.id === +userId;
     const isAdmin: boolean = JSON.parse(localStorage.getItem('currentUserRole')!) === Role.admin;
-    return (isOwner || isAdmin) ? ModeType.edit : ModeType.view;
+    return isOwner || isAdmin ? ModeType.edit : ModeType.view;
   }
 
   isLogin(): boolean {

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { LanguageService } from "@services/language/language.service";
+import { LanguageService } from '@services/language/language.service';
 
 @Component({
   selector: 'select-lang',
@@ -7,8 +7,7 @@ import { LanguageService } from "@services/language/language.service";
   styleUrls: ['./select-lang.component.scss']
 })
 export class SelectLangComponent {
-
-  constructor(private language: LanguageService) { }
+  constructor(private language: LanguageService) {}
 
   currentLang(): string {
     return 'LANG.' + this.language.currentLang?.toUpperCase();

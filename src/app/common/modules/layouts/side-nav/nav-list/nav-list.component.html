@@ -1,11 +1,7 @@
 <nav class="nav">
   <ul class="nav__list">
     <li *ngFor="let item of navItemsShow" class="nav__list-item">
-      <a
-        class="nav__link"
-        [routerLink]="item.link"
-        [routerLinkActive]="'active'"
-      >
+      <a class="nav__link" [routerLink]="item.link" [routerLinkActive]="'active'">
         <mat-icon [svgIcon]="item.icon" class="nav__icon"></mat-icon>
         <span>{{ 'NAV.' + item.title | translate }}</span>
       </a>

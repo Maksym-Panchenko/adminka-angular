@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { Role } from "@models/enums/roles.enum";
+import { Role } from '@models/enums/roles.enum';
 
 @Component({
   selector: 'side-nav',
