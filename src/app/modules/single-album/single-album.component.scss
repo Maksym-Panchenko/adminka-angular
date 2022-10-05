@@ -1,7 +1,6 @@
 .album {
   position: relative;
   width: 100%;
-  min-height: 100%;
   padding: 2.4rem;
 
   &__content,
@@ -14,7 +13,7 @@
   }
 
   &__title {
-    color: var(--color-title-bg);
+    color: var(--color-common-title);
     font-size: 2.4rem;
     font-weight: var(--fw-medium);
     line-height: 2.8rem;
