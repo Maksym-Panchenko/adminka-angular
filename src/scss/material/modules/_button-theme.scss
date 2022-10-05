@@ -154,4 +154,14 @@
       }
     }
   }
+
+  .darkMode {
+    .mat-button-base {
+      &.mat-stroked-button:not([disabled]) {
+        border-color: var(--color-denim);
+        color: var(--color-white);
+        background-color: var(--color-tundora);
+      }
+    }
+  }
 }

@@ -6,7 +6,7 @@
 
   &__content,
   &__comments {
-    background-color: var(--color-white);
+    background-color: var(--color-common-bg);
     border-radius: 0.4rem;
     padding: 2.4rem;
     box-shadow: var(--shadow-block);
@@ -14,7 +14,7 @@
   }
 
   &__title {
-    color: var(--color-dark-gunmetal);
+    color: var(--color-common-title);
     font-size: 2.4rem;
     font-weight: var(--fw-medium);
     line-height: 2.8rem;
@@ -27,7 +27,7 @@
   }
 
   &__text, &__comment-text {
-    color: var(--color-slate-gray);
+    color: var(--color-common-text);
     font-size: 1.4rem;
     font-weight: var(--fw-light);
   }
@@ -55,7 +55,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    color: var(--color-dark-gunmetal);
+    color: var(--color-common-title);
     font-size: 1.6rem;
     font-weight: var(--fw-medium);
     line-height: 1.8rem;

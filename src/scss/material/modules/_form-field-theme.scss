@@ -128,4 +128,18 @@
       justify-content: center;
     }
   }
+
+  .darkMode {
+    .mat-form-field {
+      &.mat-form-field-appearance-outline {
+        --bg-color: var(--color-common-bg);
+        --bg-color-focus: rgba(var(--color-white--rgba), 0.1);
+        --color: rgba(var(--color-white--rgb), 0.6);
+
+        .mat-input-element {
+          color: var(--color-common-title);
+        }
+      }
+    }
+  }
 }
