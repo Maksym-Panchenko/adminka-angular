@@ -33,6 +33,18 @@ $adminka_na_kolenke-theme: mat.define-light-theme((
 // that you are using.
 @include mat.all-component-themes($adminka_na_kolenke-theme);
 
+$adminka_na_kolenke-dark-theme: mat.define-dark-theme((
+  color: (
+    primary: $adminka_na_kolenke-primary,
+    accent: $adminka_na_kolenke-accent,
+    warn: $adminka_na_kolenke-warn,
+  )
+));
+
+.darkMode {
+  @include mat.all-component-themes($adminka_na_kolenke-dark-theme);
+}
+
 /* You can add global styles to this file, and also import other style files */
 @import "./src/scss/variables";
 @import "./src/scss/base";

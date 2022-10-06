@@ -7,6 +7,7 @@ import { Component, EventEmitter, Output } from '@angular/core';
 })
 export class MainHeaderComponent {
   @Output() logOutUser: EventEmitter<void> = new EventEmitter();
+  @Output() changeMode: EventEmitter<boolean> = new EventEmitter();
 
   logOut(): void {
     this.logOutUser.emit();

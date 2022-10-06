@@ -1,12 +1,11 @@
 .album {
   position: relative;
   width: 100%;
-  min-height: 100%;
   padding: 2.4rem;
 
   &__content,
   &__photos {
-    background-color: var(--color-white);
+    background-color: var(--color-common-bg);
     border-radius: 0.4rem;
     padding: 2.4rem;
     box-shadow: var(--shadow-block);
@@ -14,7 +13,7 @@
   }
 
   &__title {
-    color: var(--color-dark-gunmetal);
+    color: var(--color-common-title);
     font-size: 2.4rem;
     font-weight: var(--fw-medium);
     line-height: 2.8rem;
@@ -60,7 +59,7 @@
   }
 
   &__comment-title {
-    color: var(--color-dark-gunmetal);
+    color: var(--color-common-title);
     font-size: 1.6rem;
     font-weight: var(--fw-medium);
     line-height: 1.8rem;

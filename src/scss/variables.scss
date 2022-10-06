@@ -7,6 +7,7 @@
   --color-spanish-gray: #979797;
   --color-slate-gray: #66788A;
   --color-davis-gray: #56575A;
+  --color-tundora: #424242;
   --color-onyx: #3A3B3F;
   --color-dark-gunmetal: #212529;
   --color-jungle-green: #26A69A;
@@ -31,4 +32,42 @@
   --fw-light: 300;
   --fw-regular: 400;
   --fw-medium: 500;
+
+  // LIGHT
+  --color-common-bg: var(--color-white);
+  --color-common-title: var(--color-dark-gunmetal);
+  --color-common-text: var(--color-slate-gray);
+
+  --nav-border: var(--color-platinum);
+  --nav-title-text: var(--color-onyx);
+  --nav-subtitle-text: var(--color-quick-silver);
+  --nav-link-text: var(--color-slate-gray);
+  --nav-link-active-bg: var(--color-ghost-white);
+  --nav-bg: var(--color-white);
+
+  --color-content-bg: var(--color-ghost-white);
+
+  --color-user-bg: var(--color-white);
+  --color-user-bg-hover: var(--color-ghost-white);
+  --color-user-name: var(--color-dark-gunmetal);
+
+  // DARK
+  .darkMode {
+    --color-common-bg: var(--color-tundora);
+    --color-common-title: var(--color-white);
+    --color-common-text: var(--color-quick-silver);
+
+    --nav-border: var(--color-onyx);
+    --nav-title-text: var(--color-white);
+    --nav-subtitle-text: var(--color-platinum);
+    --nav-link-text: var(--color-platinum);
+    --nav-link-active-bg: var(--color-onyx);
+    --nav-bg: var(--color-dark-gunmetal);
+
+    --color-content-bg: var(--color-dark-gunmetal);
+
+    --color-user-bg: var(--color-tundora);
+    --color-user-bg-hover: var(--color-onyx);
+    --color-user-name: var(--color-white);
+  }
 }

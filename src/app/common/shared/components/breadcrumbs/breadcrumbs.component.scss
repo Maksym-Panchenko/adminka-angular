@@ -13,11 +13,11 @@
   }
 
   &__icon {
-    color: var(--color-slate-gray);
+    color: var(--color-common-text);
   }
 
   &__link {
-    color: var(--color-slate-gray);
+    color: var(--color-common-text);
     text-decoration: none;
 
     &:hover {
@@ -26,6 +26,6 @@
   }
 
   &__label {
-    color: var(--color-slate-gray);
+    color: var(--color-common-text);
   }
 }

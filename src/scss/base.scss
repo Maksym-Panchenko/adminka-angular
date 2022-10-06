@@ -9,7 +9,6 @@
 .items {
   position: relative;
   width: 100%;
-  min-height: 100%;
   padding: 2.4rem;
 
   &__actions {
@@ -105,5 +104,12 @@
     display: flex;
     justify-content: center;
     align-items: center;
+  }
+}
+
+.darkMode .mat-table {
+  .mat-cell,
+  .mat-header-cell {
+    color: var(--color-platinum);
   }
 }

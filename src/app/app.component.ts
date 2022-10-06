@@ -6,6 +6,7 @@ import { Role } from '@models/enums/roles.enum';
 import { Router } from '@angular/router';
 import { SpinnerService } from '@services/spinner/spinner.service';
 import { LanguageService } from '@services/language/language.service';
+import { ThemeService } from '@services/theme/theme.service';
 
 @Component({
   selector: 'app-root',
@@ -19,17 +20,19 @@ export class AppComponent implements OnInit {
   currentRole: Role;
 
   loading$ = this.spinner.loading$;
+  darkMode: boolean = false;
 
   constructor(
     icons: IconsService, // for icons register
     private _user: UserService,
     private _router: Router,
     public spinner: SpinnerService,
-    language: LanguageService
+    private _language: LanguageService,
+    private _theme: ThemeService
   ) {
-    language.setDefaultLang('en');
-    language.addLangs(['en', 'ua']);
-    language.use(language.loadCurrentLang() || 'en');
+    _language.setDefaultLang('en');
+    _language.addLangs(['en', 'ua']);
+    _language.use(_language.loadCurrentLang() || 'en');
   }
 
   ngOnInit(): void {
@@ -37,6 +40,9 @@ export class AppComponent implements OnInit {
     if (this.isLogined) {
       this.currentRole = this._user.getRole();
     }
+    this.darkMode = this._theme.load();
+
+    this._theme.switchModalBg(this.darkMode);
   }
 
   loggedIn(): void {
@@ -48,5 +54,10 @@ export class AppComponent implements OnInit {
   logOut(): void {
     this._user.logOut();
     this.isLogined = false;
+  }
+
+  changeMode(value: boolean): void {
+    this.darkMode = value;
+    this._theme.switchModalBg(value);
   }
 }

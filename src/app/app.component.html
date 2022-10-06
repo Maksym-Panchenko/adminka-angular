@@ -1,7 +1,7 @@
 <ng-container *ngIf="isLogined; else login">
-  <main-header (logOutUser)="logOut()"></main-header>
+  <main-header (logOutUser)="logOut()" (changeMode)="changeMode($event)"></main-header>
 
-  <div class="content">
+  <div [class.darkMode]="darkMode" class="content">
     <side-nav [currentRole]="currentRole"></side-nav>
 
     <div class="content__main">

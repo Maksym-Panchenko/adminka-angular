@@ -18,7 +18,7 @@
     font-size: 1.4rem;
     font-weight: var(--fw-medium);
     border-radius: 0.4rem;
-    color: var(--color-slate-gray);
+    color: var(--nav-link-text);
 
     span {
       display: inline-flex;
@@ -26,11 +26,11 @@
     }
 
     &:hover {
-      background-color: var(--color-ghost-white);
+      background-color: var(--nav-link-active-bg);
     }
 
     &.active {
-      background-color: var(--color-ghost-white);
+      background-color: var(--nav-link-active-bg);
       box-shadow: inset 3px 0 0 var(--color-denim);
     }
   }

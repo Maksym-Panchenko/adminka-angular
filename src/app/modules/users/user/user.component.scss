@@ -1,7 +1,7 @@
 .user {
   padding: 1.6rem;
   box-shadow: var(--shadow-block);
-  background-color: var(--color-white);
+  background-color: var(--color-user-bg);
   border-radius: 0.4rem;
   display: flex;
   align-items: baseline;
@@ -11,7 +11,7 @@
   transition: 0.3s background-color;
 
   &:hover {
-    background-color: var(--color-ghost-white);
+    background-color: var(--color-user-bg-hover);
   }
 
   &__id {
@@ -26,7 +26,7 @@
     font-size: 1.8rem;
     line-height: 1.2;
     font-weight: var(--fw-medium);
-    color: var(--color-dark-gunmetal);
+    color: var(--color-user-name);
     width: 24rem;
   }
 
