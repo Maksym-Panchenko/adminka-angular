@@ -40,6 +40,12 @@ export class NavListComponent implements OnInit {
       title: 'MY_TODOS',
       link: '/todos',
       roles: [Role.user]
+    },
+    {
+      icon: 'chart',
+      title: 'MY_CHART',
+      link: '/statistics',
+      roles: [Role.user]
     }
   ];
 

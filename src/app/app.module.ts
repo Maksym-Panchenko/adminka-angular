@@ -11,6 +11,7 @@ import { NetworkInterceptor } from './interceptors/network/network.interceptor';
 import { LoadSpinnerComponent } from '@shared/components/load-spinner/load-spinner.component';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+import { NgChartsModule } from 'ng2-charts';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
@@ -33,7 +34,8 @@ export function HttpLoaderFactory(http: HttpClient) {
         useFactory: HttpLoaderFactory,
         deps: [HttpClient]
       }
-    })
+    }),
+    NgChartsModule
   ],
   providers: [
     {
