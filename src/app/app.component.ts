@@ -27,12 +27,12 @@ export class AppComponent implements OnInit {
     private _user: UserService,
     private _router: Router,
     public spinner: SpinnerService,
-    private language: LanguageService,
-    private theme: ThemeService
+    private _language: LanguageService,
+    private _theme: ThemeService
   ) {
-    language.setDefaultLang('en');
-    language.addLangs(['en', 'ua']);
-    language.use(language.loadCurrentLang() || 'en');
+    _language.setDefaultLang('en');
+    _language.addLangs(['en', 'ua']);
+    _language.use(_language.loadCurrentLang() || 'en');
   }
 
   ngOnInit(): void {
@@ -40,7 +40,9 @@ export class AppComponent implements OnInit {
     if (this.isLogined) {
       this.currentRole = this._user.getRole();
     }
-    this.darkMode = this.theme.load();
+    this.darkMode = this._theme.load();
+
+    this._theme.switchModalBg(this.darkMode);
   }
 
   loggedIn(): void {
@@ -56,5 +58,6 @@ export class AppComponent implements OnInit {
 
   changeMode(value: boolean): void {
     this.darkMode = value;
+    this._theme.switchModalBg(value);
   }
 }
