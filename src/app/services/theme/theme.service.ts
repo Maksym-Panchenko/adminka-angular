@@ -1,23 +1,19 @@
-import { Injectable } from '@angular/core';
-import { OverlayContainer } from '@angular/cdk/overlay';
+import { Inject, Injectable, PLATFORM_ID } from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ThemeService {
-  constructor(private _overlayContainer: OverlayContainer) {}
+  isDarkMode: boolean = isPlatformBrowser(this.platformId) && !!localStorage.getItem('darkMode');
 
-  load(): boolean {
-    return !!localStorage.getItem('darkMode');
-  }
+  constructor(@Inject(PLATFORM_ID) private platformId: Object) {}
 
-  save(value: boolean): void {
-    localStorage.setItem('darkMode', value ? 'true' : '');
-  }
+  changeMode(value: boolean): void {
+    this.isDarkMode = value;
 
-  switchModalBg(darkMode: boolean): void {
-    const darkModeClass = 'darkMode';
-    const classes = this._overlayContainer.getContainerElement().classList;
-    darkMode ? classes.add(darkModeClass) : classes.remove(darkModeClass);
+    if (isPlatformBrowser(this.platformId)) {
+      localStorage.setItem('darkMode', value ? 'true' : '');
+    }
   }
 }
