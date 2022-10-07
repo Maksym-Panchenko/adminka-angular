@@ -1,17 +1,17 @@
 <header class="header">
   <div class="header__content">
-    <a href="/" class="header__logo">
+    <a class="header__logo" href="/">
       <mat-icon class="header__logo-img" svgIcon="logo"></mat-icon>
       <span class="header__logo-text">Devias Kit</span>
     </a>
 
     <div class="header__button-group">
-      <light-mode-switcher (changeMode)="changeMode.emit($event)"></light-mode-switcher>
+      <light-mode-switcher></light-mode-switcher>
 
       <select-lang></select-lang>
 
       <button class="header__button" mat-icon-button>
-        <mat-icon (click)="logOut()" svgIcon="logout" class="header__button-icon"></mat-icon>
+        <mat-icon (click)="logOut()" class="header__button-icon" svgIcon="logout"></mat-icon>
       </button>
     </div>
   </div>
