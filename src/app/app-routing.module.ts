@@ -18,6 +18,8 @@ import { NotFoundPageComponent } from '@modules/not-found-page/not-found-page.co
 import { UserDataComponent } from '@modules/user-data/user-data.component';
 import { UserDataModule } from '@modules/user-data/user-data.module';
 import { NotFoundPageModule } from '@modules/not-found-page/not-found-page.module';
+import { StatisticsComponent } from '@modules/statistics/statistics.component';
+import { StatisticsModule } from '@modules/statistics/statistics.module';
 
 const routes: Routes = [
   {
@@ -84,6 +86,10 @@ const routes: Routes = [
     component: TodosComponent
   },
   {
+    path: 'statistics',
+    component: StatisticsComponent
+  },
+  {
     path: '',
     pathMatch: 'full',
     redirectTo: '/users'
@@ -109,7 +115,8 @@ const routes: Routes = [
     TodosModule,
     SingleUserModule,
     UserDataModule,
-    NotFoundPageModule
+    NotFoundPageModule,
+    StatisticsModule
   ],
   exports: [RouterModule]
 })

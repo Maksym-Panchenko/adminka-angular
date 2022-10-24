@@ -29,7 +29,8 @@
     "MY_POSTS": "My posts",
     "MY_ALBUMS": "My albums",
     "MY_TODOS": "My todos",
-    "MY_DATA": "My data"
+    "MY_DATA": "My data",
+    "MY_CHART": "Statistic"
   },
   "BUTTONS": {
     "BACK": "Back",
@@ -76,7 +77,8 @@
     "POSTS": "Posts",
     "ALBUMS": "Albums",
     "TODOS": "Todos",
-    "USERS_DATA": "Users data"
+    "USERS_DATA": "Users data",
+    "STATISTICS": "Statistics"
   },
   "MODAL": {
     "DELETE_ALBUM": "Delete this Album?",
@@ -116,5 +118,9 @@
     "COMMENT_DELETED": "Comment has been deleted",
     "USER_DATA_EDITED": "User data has been edited",
     "COMMON_ERROR": "Something wrong..."
+  },
+    "CHART": {
+    "TITLE": "Title length",
+    "BODY": "Text length"
   }
 }
