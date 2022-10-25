@@ -7,6 +7,10 @@
   --max-page-width: 1360px;
 }
 
+body {
+  background-color: var(--color-content-bg);
+}
+
 .items {
   position: relative;
   width: 100%;
